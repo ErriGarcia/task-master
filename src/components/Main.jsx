@@ -2,15 +2,17 @@ import data from '../services/data.json'
 
 const Main = () => {
 
-    const listColumns = data.boards[0].columns.map((column, index) => {
+    const firstBoard = data.boards[0]
+
+    const listColumns = firstBoard.columns.map((column, index) => {
         return (
             <section key={index} className='main-board-section'>
                     <h2 className='main-board-section-title'>{column.name}{`(${column.tasks.length})`}</h2>
                 <ul>
-                    <li>
-                        {column.tasks.map(task => {
+                    <li className='main-board-section-list'>
+                        {column.tasks.map((task, index) => {
                             return (
-                                <article className='main-board-section-article'>
+                                <article className='main-board-section-list-article' key={index}>
                                     <h3>
                                     {task.title}
                                     </h3>
