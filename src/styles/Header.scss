@@ -2,3 +2,43 @@
 @import './core/animations';
 @import './core/mixins';
 @import './core/variables';
+
+.main-header {
+    padding: 1.25rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-container-logo {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        &-container {
+            display: flex;
+            gap: 0.5rem;
+
+            &-title {
+                font-size: 1.125rem;
+            }
+
+            &-button-down {
+                font-size: 0.8rem;
+            }
+        }
+    }
+
+    &-container-buttons {
+        display: flex;
+        gap: 1rem;
+
+        &-button-plus {
+            width: 3rem;
+            height: 2rem;
+            background-color: #635FC7;
+            opacity: 0.5;
+            color: white;
+            border-radius: 1.5rem;
+        }
+    }
+}

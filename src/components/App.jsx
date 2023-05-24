@@ -24,7 +24,7 @@ function App() {
   })
 
   return (
-    <div>
+    <div className='main'>
       <Header></Header>
       <main>
         {listColumns}
