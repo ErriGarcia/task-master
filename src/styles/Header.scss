@@ -41,6 +41,9 @@
             opacity: 0.5;
             color: $color-white;
             border-radius: 1.5rem;
+            &:hover {
+                opacity: 1;
+            }
         }
     }
 }
