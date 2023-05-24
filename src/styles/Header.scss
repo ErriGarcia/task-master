@@ -4,6 +4,8 @@
 @import './core/variables';
 
 .main-header {
+    padding: 1.25rem 1rem;
+    background-color: $color-white;
     display: flex;
     justify-content: space-between;
     align-items: center;

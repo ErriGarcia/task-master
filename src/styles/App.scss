@@ -2,9 +2,12 @@
 @import './core/animations';
 @import './core/mixins';
 @import './core/variables';
+@import './Header.scss';
+@import './Main.scss';
 
 .main {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-weight: 700;
-    padding: 1.25rem 1rem;
+    color: $color-black;
+    background-color: $color-light-grey-light-mode;
 }

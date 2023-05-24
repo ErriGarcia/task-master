@@ -4,18 +4,18 @@ const Main = () => {
 
     const listColumns = data.boards[0].columns.map((column, index) => {
         return (
-            <section key={index}>
-                <h2>{column.name}</h2>
-                <span>{column.tasks.length}</span>
+            <section key={index} className='main-board-section'>
+                    <h2 className='main-board-section-title'>{column.name}{`(${column.tasks.length})`}</h2>
                 <ul>
                     <li>
-                        <article>
-                            <h3>
-                                {column.tasks.map(task => {
-                                return task.title
-                                })}
-                            </h3>
-                        </article>
+                        {column.tasks.map(task => {
+                            return (
+                                <article className='main-board-section-article'>
+                                    <h3>
+                                    {task.title}
+                                    </h3>
+                                </article>)
+                        })}
                     </li>
                 </ul>
             </section>
@@ -23,7 +23,7 @@ const Main = () => {
     })
 
     return (
-        <main>
+        <main className='main-board'>
             {listColumns}
         </main>
     )

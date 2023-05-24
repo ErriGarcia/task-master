@@ -1,0 +1,20 @@
+.main-board {
+    padding: 1.5rem 1rem;
+    display: flex;
+
+    &-section {
+
+        &-title {
+            text-transform: uppercase;
+            color: $color-medium-grey;
+            font-size: 0.75rem;
+            letter-spacing: 0.15rem;
+        }
+
+        &-article {
+            background-color: $color-white;
+            width: 280px;
+            height: 88px;
+        }
+    }
+}
