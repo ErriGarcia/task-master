@@ -21,7 +21,7 @@ const Main = () => {
                         {column.tasks.map((task, index) => {
                             return (
                                 <article className='main-board-section-list-article' key={index} onClick={handleArticleClick}>
-                                    <h3>
+                                    <h3 onClick={handleArticleClick}>
                                     {task.title}
                                     </h3>
                                 </article>)
@@ -33,10 +33,15 @@ const Main = () => {
     })
 
     return (
+        <>
         <main className='main-board'>
             {listColumns}
-            <Modal modal={modal}></Modal>
         </main>
+            {modal && (
+                <Modal modal={modal} setModal={setModal}></Modal>
+                )
+            }
+        </>
     )
 }
 
