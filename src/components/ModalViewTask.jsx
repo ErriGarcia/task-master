@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import data from '../services/data.json'
 
-const Modal = ({modal, setModal}) => {
+const ModalViewTask = ({modal, setModal}) => {
 
     const [check, setCheck] = useState(false)
 
@@ -61,4 +61,4 @@ const Modal = ({modal, setModal}) => {
     )
 }
 
-export default Modal
+export default ModalViewTask

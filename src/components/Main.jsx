@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import data from '../services/data.json'
-import Modal from './Modal'
+import ModalViewTask from './ModalViewTask'
 
 const Main = () => {
 
@@ -38,7 +38,7 @@ const Main = () => {
             {listColumns}
         </main>
             {modal && (
-                <Modal modal={modal} setModal={setModal}></Modal>
+                <ModalViewTask modal={modal} setModal={setModal}></ModalViewTask>
                 )
             }
         </>
