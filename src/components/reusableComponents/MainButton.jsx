@@ -1,6 +1,8 @@
-const MainButton = (props) => {
+import '../../styles/reusableComponents/MainButton.scss'
+
+const MainButton = ({value}) => {
     return (
-        <input type='submit' value={props.value} />
+        <input className='input-submit' type='submit' value={value} />
     )
 }
 
