@@ -1,0 +1,16 @@
+@import '../core/animations';
+@import '../core/mixins';
+@import '../core/variables';
+
+.second-button {
+    background-color: rgba(99, 95, 199, 0.2);
+    padding: 0.5rem 0;
+    color: rgba(99, 95, 199, 1);
+    font-size: 0.8125rem;
+    border-radius: 1.25rem;
+    height: 2.5rem;
+}
+
+.icon-plus {
+    margin-right: 0.25rem;
+}

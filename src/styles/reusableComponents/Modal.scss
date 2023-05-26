@@ -32,25 +32,14 @@
         @include border;
     }
 
+    ::placeholder {
+        color: #949fbabf;
+    }
+
     .textarea {
         @include border;
         line-height: 1.4375rem;
         height: 7rem;
-    }
-
-    .container-subtasks {
-        display: flex;
-        justify-content: space-between;
-        gap: 1rem;
-    }
-
-    .subtask {
-        width: 100%;
-    }
-
-    .button-delete {
-        font-size: 1rem;
-        color: $color-medium-grey;
     }
 }
 

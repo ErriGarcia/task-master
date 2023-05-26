@@ -1,3 +1,5 @@
+import SecondButton from "./SecondButton"
+
 const FieldsetInput = ({labelSubtasks, placeholderSubtask }) => {
     return (
         <fieldset className='fieldset'>
@@ -20,10 +22,7 @@ const FieldsetInput = ({labelSubtasks, placeholderSubtask }) => {
             </div>
 
             {/* Make reusable second button */}
-            <button>
-                <i className='fa-solid fa-plus'></i>
-                Add New Subtask
-            </button>
+            <SecondButton buttonText='Add New Task'></SecondButton>
         </fieldset>
     )
 }
