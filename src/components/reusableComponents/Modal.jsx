@@ -1,6 +1,7 @@
 import '../../styles/reusableComponents/Modal.scss'
 import MainButton from '../reusableComponents/MainButton'
 import Status from './Status'
+import FieldsetInputDelete from './FieldsetInputDelete'
 
 const Modal = ({title, labelTitle, placeholderTitle, labelDescription, placeholderDescription, labelSubtasks, placeholderSubtask}) => {
     return (
@@ -16,33 +17,10 @@ const Modal = ({title, labelTitle, placeholderTitle, labelDescription, placehold
                     <textarea type='text' id='description' name='description' className='textarea' placeholder={placeholderDescription}>
                     </textarea>
                 </fieldset>
-
-                {/* Make reusable whole subtask fieldset */}
-                <fieldset className='fieldset'>
-                    <label htmlFor='subtasks' className='label'>{labelSubtasks}</label>
-                    <div className='container-subtasks'>
-                        <input type='text' id='subtasks' name='subtasks' className='input subtask' placeholder={placeholderSubtask} />
-                        <button className='button-delete'>
-                            <span className='material-symbols-outlined'>
-                                close
-                            </span>
-                        </button>
-                    </div>
-                    <div className='container-subtasks'>
-                        <input type='text' id='subtasks' name='subtasks' className='input subtask' placeholder={placeholderSubtask} />
-                        <button className='button-delete'>
-                            <span className='material-symbols-outlined'>
-                                close
-                            </span>
-                        </button>
-                    </div>
-
-                    {/* Make reusable second button */}
-                    <button>
-                        <i className='fa-solid fa-plus'></i>
-                        Add New Subtask
-                    </button>
-                </fieldset>
+                <FieldsetInputDelete
+                labelSubtasks='Subtasks'
+                placeholderSubtask='e.g. Drink coffee & smile'>
+                </FieldsetInputDelete>
                 <Status></Status>
                 <MainButton value='Create Task'></MainButton>
             </form>
