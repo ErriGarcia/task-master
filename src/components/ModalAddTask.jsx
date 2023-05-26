@@ -1,4 +1,7 @@
+import Status from './reusable components/Status'
+
 const ModalAddTask = () => {
+
     return (
         <div className='container-view-task'>
             <form>
@@ -10,8 +13,24 @@ const ModalAddTask = () => {
                     <fieldset>
                         <label htmlFor='subtasks'>Subtasks</label>
                         <input type='text' placeholder='e.g. Make coffee' />
-                        <button></button>
+                        <button>
+                            <span class="material-symbols-outlined">
+                                close
+                            </span>
+                        </button>
+                        <input type='text' placeholder='e.g. Drink coffee & smile' />
+                        <button>
+                            <span class="material-symbols-outlined">
+                                close
+                            </span>
+                        </button>
+                        <button>
+                            <i className='fa-solid fa-plus'></i>
+                            Add New Subtask
+                        </button>
                     </fieldset>
+                    <Status></Status>
+                    <input type='submit' value='Create Task' />
             </form>
         </div>
     )
