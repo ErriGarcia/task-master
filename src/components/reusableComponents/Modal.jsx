@@ -4,6 +4,7 @@ import Status from './Status'
 import FieldsetInput from './FieldsetInput'
 
 const Modal = ({title, labelTitle, placeholderTitle, labelDescription, placeholderDescription}) => {
+    
     return (
         <div className='container-view-task'>
             <form className='modal-form'>

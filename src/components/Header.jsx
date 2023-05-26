@@ -12,6 +12,12 @@ const Header = () => {
         setModal(true)
     }
 
+    const handleCloseModal = (ev) => {
+        if (ev.target.className === 'modal') {
+            setModal(false)
+        }
+    }
+
     return (
         <>
         <header className='main-header'>
@@ -34,7 +40,7 @@ const Header = () => {
             </div>
       </header>
       {modal && (
-        <div className='modal'>
+        <div className='modal' onClick={handleCloseModal}>
             <ModalAddTask></ModalAddTask>
         </div>
       )}
