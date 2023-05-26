@@ -20,7 +20,8 @@ const Modal = ({title, labelTitle, placeholderTitle, labelDescription, placehold
                 </fieldset>
                 <FieldsetInput
                 labelSubtasks='Subtasks'
-                placeholderSubtask='e.g. Drink coffee & smile'>
+                placeholderSubtask='e.g. Drink coffee & smile'
+                titleIcon='Delete Subtask'>
                 </FieldsetInput>
                 <Status></Status>
                 <MainButton value='Create Task'></MainButton>

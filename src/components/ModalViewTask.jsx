@@ -41,7 +41,7 @@ const ModalViewTask = ({modal, setModal}) => {
                     <form className='container-view-task' onClick={handleEvPreventDefault}>
                         <fieldset className='container-view-task-header'>
                             <h2 className='container-view-task-header-title'>{firstColumn[0].tasks[0].title}</h2>
-                            <button onClick={handleClickMoreActions}>
+                            <button title='Edit Task' onClick={handleClickMoreActions}>
                                 <i className='fa-solid fa-ellipsis-vertical'></i>
                             </button>
                         </fieldset>

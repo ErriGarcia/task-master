@@ -25,13 +25,13 @@ const Header = () => {
                 <img src={logo} alt='logo task master'/>
                 <div className='main-header-container-logo-container'>
                     <h1 className='main-header-container-logo-container-title'>{data.boards[0].name}</h1>
-                    <button className='main-header-container-logo-container-button-down'>
+                    <button title='All Boards' className='main-header-container-logo-container-button-down'>
                         <i className='fa fa-chevron-down'></i>
                     </button>
                 </div>
             </div>
             <div className='main-header-container-buttons'>
-                <button className='main-header-container-buttons-button-plus' onClick={handleAddTask}>
+                <button title='Add New Task' className='main-header-container-buttons-button-plus' onClick={handleAddTask}>
                     <i className='fa-solid fa-plus'></i>
                 </button>
                 <button>

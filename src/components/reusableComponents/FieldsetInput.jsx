@@ -1,12 +1,12 @@
 import SecondButton from "./SecondButton"
 
-const FieldsetInput = ({labelSubtasks, placeholderSubtask }) => {
+const FieldsetInput = ({labelSubtasks, placeholderSubtask, titleIcon}) => {
     return (
         <fieldset className='fieldset'>
             <label htmlFor='subtasks' className='label'>{labelSubtasks}</label>
             <div className='container-subtasks'>
                 <input type='text' id='subtasks' name='subtasks' className='input subtask' placeholder={placeholderSubtask} />
-                <button className='button-delete'>
+                <button title={titleIcon} className='button-delete'>
                     <span className='material-symbols-outlined'>
                         close
                     </span>
@@ -14,7 +14,7 @@ const FieldsetInput = ({labelSubtasks, placeholderSubtask }) => {
             </div>
             <div className='container-subtasks'>
                 <input type='text' id='subtasks' name='subtasks' className='input subtask' placeholder={placeholderSubtask} />
-                <button className='button-delete'>
+                <button title={titleIcon} className='button-delete'>
                     <span className='material-symbols-outlined'>
                         close
                     </span>
