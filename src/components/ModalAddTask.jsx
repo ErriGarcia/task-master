@@ -1,4 +1,4 @@
-import Modal from './reusable components/Modal'
+import Modal from './reusableComponents/Modal'
 
 const ModalAddTask = () => {
 

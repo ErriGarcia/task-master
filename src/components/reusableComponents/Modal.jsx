@@ -1,4 +1,4 @@
-import MainButton from '../reusable components/MainButton'
+import MainButton from '../reusableComponents/MainButton'
 import Status from './Status'
 
 const Modal = ({title, labelTitle, placeholderTitle, labelDescription, placeholderDescription, labelSubtasks, placeholderSubtask}) => {

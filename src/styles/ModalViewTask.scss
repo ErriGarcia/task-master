@@ -39,8 +39,7 @@
     }
 
     &-title-subtasks {
-        color: $color-medium-grey;
-        font-size: 0.75rem;
+        @include label
     }
 
     &-subtasks-list {
@@ -72,8 +71,7 @@
             gap: 0.5rem;
 
         &-status-title {
-            color: $color-medium-grey;
-            font-size: 0.75rem;
+            @include label
         }
 
         &-select {

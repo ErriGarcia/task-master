@@ -13,3 +13,8 @@
         @content;
     }
 }
+
+@mixin label() {
+    color: #828FA3;
+    font-size: 0.75rem;
+}

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import data from '../services/data.json'
-import Status from './reusable components/Status'
+import Status from './reusableComponents/Status'
 
 const ModalViewTask = ({modal, setModal}) => {
 
