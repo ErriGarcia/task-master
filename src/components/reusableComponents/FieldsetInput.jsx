@@ -1,4 +1,4 @@
-const FieldsetInputDelete = ({labelSubtasks, placeholderSubtask }) => {
+const FieldsetInput = ({labelSubtasks, placeholderSubtask }) => {
     return (
         <fieldset className='fieldset'>
             <label htmlFor='subtasks' className='label'>{labelSubtasks}</label>
@@ -28,4 +28,4 @@ const FieldsetInputDelete = ({labelSubtasks, placeholderSubtask }) => {
     )
 }
 
-export default FieldsetInputDelete
+export default FieldsetInput

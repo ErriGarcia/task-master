@@ -1,7 +1,7 @@
 import '../../styles/reusableComponents/Modal.scss'
 import MainButton from '../reusableComponents/MainButton'
 import Status from './Status'
-import FieldsetInputDelete from './FieldsetInputDelete'
+import FieldsetInput from './FieldsetInput'
 
 const Modal = ({title, labelTitle, placeholderTitle, labelDescription, placeholderDescription, labelSubtasks, placeholderSubtask}) => {
     return (
@@ -17,10 +17,10 @@ const Modal = ({title, labelTitle, placeholderTitle, labelDescription, placehold
                     <textarea type='text' id='description' name='description' className='textarea' placeholder={placeholderDescription}>
                     </textarea>
                 </fieldset>
-                <FieldsetInputDelete
+                <FieldsetInput
                 labelSubtasks='Subtasks'
                 placeholderSubtask='e.g. Drink coffee & smile'>
-                </FieldsetInputDelete>
+                </FieldsetInput>
                 <Status></Status>
                 <MainButton value='Create Task'></MainButton>
             </form>
