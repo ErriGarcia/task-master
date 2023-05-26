@@ -1,39 +1,20 @@
-import MainButton from './reusable components/MainButton'
-import Status from './reusable components/Status'
+import Modal from './reusable components/Modal'
 
 const ModalAddTask = () => {
 
     return (
-        <div className='container-view-task'>
-            <form>
-                <h2>Add New Task</h2>
-                    <label htmlFor='title'>Title</label>
-                    <input type='text' placeholder='e.g. Take coffee break' />
-                    <label htmlFor='description'>Desciption</label>
-                    <input type='text' placeholder='e.g. It is alwaus good to take a break. This 15 minutes break will recharge the batteries a little.' />
-                    <fieldset>
-                        <label htmlFor='subtasks'>Subtasks</label>
-                        <input type='text' placeholder='e.g. Make coffee' />
-                        <button>
-                            <span className='material-symbols-outlined'>
-                                close
-                            </span>
-                        </button>
-                        <input type='text' placeholder='e.g. Drink coffee & smile' />
-                        <button>
-                            <span className='material-symbols-outlined'>
-                                close
-                            </span>
-                        </button>
-                        <button>
-                            <i className='fa-solid fa-plus'></i>
-                            Add New Subtask
-                        </button>
-                    </fieldset>
-                    <Status></Status>
-                    <MainButton value='Create Task'></MainButton>
-            </form>
-        </div>
+        <>
+        <Modal 
+            title='Add New Task' 
+            labelTitle='Title' 
+            placeholderTitle='e.g. Take coffee break' 
+            labelDescription='Description' 
+            placeholderDescription='e.g. It is always good to take a break. This 15 minutes break will recharge the batteries a little.'
+            labelSubtasks='Subtasks'
+            placeholderSubtask='e.g. Drink coffee & smile'
+        >
+        </Modal>
+        </>
     )
 }
 
