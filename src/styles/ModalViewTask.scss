@@ -75,12 +75,7 @@
         }
 
         &-select {
-            border: solid 1px $color-lines-light-mode;
-            height: 2.5rem;
-            display: flex;
-            justify-content: center;
-            padding: 0.5rem 1rem;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            @include border;
         }
     }
 }

@@ -18,3 +18,12 @@
     color: #828FA3;
     font-size: 0.75rem;
 }
+
+@mixin border() {
+    border: solid 1px $color-lines-light-mode;
+    padding: 0.5rem 1rem;
+    min-height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
