@@ -1,3 +1,4 @@
+import MainButton from './reusable components/MainButton'
 import Status from './reusable components/Status'
 
 const ModalAddTask = () => {
@@ -14,13 +15,13 @@ const ModalAddTask = () => {
                         <label htmlFor='subtasks'>Subtasks</label>
                         <input type='text' placeholder='e.g. Make coffee' />
                         <button>
-                            <span class="material-symbols-outlined">
+                            <span className='material-symbols-outlined'>
                                 close
                             </span>
                         </button>
                         <input type='text' placeholder='e.g. Drink coffee & smile' />
                         <button>
-                            <span class="material-symbols-outlined">
+                            <span className='material-symbols-outlined'>
                                 close
                             </span>
                         </button>
@@ -30,7 +31,7 @@ const ModalAddTask = () => {
                         </button>
                     </fieldset>
                     <Status></Status>
-                    <input type='submit' value='Create Task' />
+                    <MainButton value='Create Task'></MainButton>
             </form>
         </div>
     )
