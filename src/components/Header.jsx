@@ -1,5 +1,6 @@
 import '../styles/Header.scss'
 import logo from '../images/logo-mobile.svg'
+import kanban from '../images/kanban.svg'
 import data from '../services/data.json'
 import { useState } from 'react'
 import ModalAddTask from './ModalAddTask'
@@ -59,18 +60,21 @@ const Header = () => {
         <header className='main-header'>
             <div className='main-header-container-logo'>
                 <img src={logo} alt='logo task master'/>
+                <img src={kanban} alt='kanban logo' className='main-header-container-logo-kanban'/>
                 <div className='main-header-container-logo-container'>
                     <h1 className='main-header-container-logo-container-title'>{data.boards[0].name}</h1>
                     <button title='All Boards' className='main-header-container-logo-container-button-down' onClick={handleClickSelectBoard}>
                         <i className='fa fa-chevron-down'></i>
                     </button>
                 </div>
+
             </div>
             <div className='main-header-container-buttons'>
                 <button title='Add New Task' className='main-header-container-buttons-button-plus' onClick={handleAddTask}>
                     <i className='fa-solid fa-plus'></i>
+                    Add New Task
                 </button>
-                <button title='More options' onClick={handleClickMoreOptionsBoard}>
+                <button title='More options' onClick={handleClickMoreOptionsBoard} className='main-header-container-buttons-button-more'>
                     <i className='fa-solid fa-ellipsis-vertical'></i>
                 </button>
                 {moreOptionsBoard && (

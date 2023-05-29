@@ -67,9 +67,9 @@ const ModalViewTask = ({modal, setModal}) => {
                                     </button>
                                     <button title='Delete task' className='more-options-container-delete-button'
                                         onClick={handleClickDeleteTask}>
-                                    <i className='fa-regular fa-trash-can more-options-container-delete-button-icon'></i>
-                            Delete Board
-                        </button>
+                                        <i className='fa-regular fa-trash-can more-options-container-delete-button-icon'></i>
+                                        Delete Task
+                                    </button>
                                 </div>
                             )}
                         </fieldset>
