@@ -101,6 +101,12 @@
         align-items: flex-start;
         gap: 0.8rem;
 
+        @include tablet {
+            max-width: 12rem;
+            top: 3rem;
+            left: 36.5rem;
+        }
+
         &-edit-button, &-delete-button, &-add-button {
             display: flex;
             justify-content: center;
@@ -187,6 +193,12 @@
     flex-direction: column;
     gap: 1.5rem;
     color: $color-medium-grey;
+
+    @include tablet {
+        max-width: 24.875rem;
+        margin-top: 3.5rem;
+        margin-left: 21.3rem;
+    }
 
     &-title {
         text-transform: uppercase;

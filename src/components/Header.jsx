@@ -2,10 +2,11 @@ import '../styles/Header.scss'
 import logo from '../images/logo-mobile.svg'
 import kanban from '../images/kanban.svg'
 import data from '../services/data.json'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ModalAddTask from './ModalAddTask'
 import ModalBoard from './reusableComponents/ModalBoard'
 import ModalDelete from './reusableComponents/ModalDelete'
+import api from '../services/api'
 
 const Header = () => {
 
@@ -15,6 +16,13 @@ const Header = () => {
     const [modalDeleteBoard, setModalDeleteBoard] = useState(false)
     const [modalNewBoard, setModalNewBoard] = useState(false)
     const [modalSelectBoard, setModalSelectBoard] = useState(false)
+    const [allBoards, setAllBoards] = useState([])
+
+    useEffect(() => {
+        setAllBoards(api.getBoards())
+    }, [])
+
+    console.log(allBoards)
 
     const handleAddTask = () => {
         setModal(true)
@@ -122,9 +130,16 @@ const Header = () => {
       {modalSelectBoard && (
             <div className='modal' onClick={handleCloseModal}>
                 <div className='modal-select-board'>
-                    <h2 className='modal-select-board-title'>all boards</h2>
+                    <h2 className='modal-select-board-title'>all boards ({allBoards.length})</h2>
                     <div className='modal-select-board-buttons'>
-                        <button className='modal-select-board-buttons-button selected'>
+                        {allBoards.map((board, index) => {
+                            return (
+                            <button className='modal-select-board-buttons-button' key={index}>
+                                <i className='fa-solid fa-table-columns'></i>
+                                {board.name}
+                            </button>)
+                        })}
+                        {/* <button className='modal-select-board-buttons-button selected'>
                             <i className='fa-solid fa-table-columns'></i>
                             Platform Lunch
                         </button>
@@ -135,7 +150,7 @@ const Header = () => {
                         <button className='modal-select-board-buttons-button'>
                             <i className='fa-solid fa-table-columns'></i>
                             Roadmap
-                        </button>
+                        </button> */}
                         <button title='Add new board' className='modal-select-board-buttons-button-create'
                         onClick={handleClickAddNewBoard}>
                             <i className='fa-solid fa-table-columns'></i>
