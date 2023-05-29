@@ -3,7 +3,7 @@ import MainButton from '../reusableComponents/MainButton'
 import Status from './Status'
 import FieldsetInput from './FieldsetInput'
 
-const Modal = ({title, labelTitle, placeholderTitle, labelDescription, placeholderDescription}) => {
+const Modal = ({title, labelTitle, placeholderTitle, labelDescription, placeholderDescription, buttonText}) => {
     
     return (
         <div className='container-view-task'>
@@ -21,7 +21,8 @@ const Modal = ({title, labelTitle, placeholderTitle, labelDescription, placehold
                 <FieldsetInput
                 labelSubtasks='Subtasks'
                 placeholderSubtask='e.g. Drink coffee & smile'
-                titleIcon='Delete Subtask'>
+                titleIcon='Delete Subtask'
+                buttonText='Add New Subtask'>
                 </FieldsetInput>
                 <Status></Status>
                 <MainButton value='Create Task'></MainButton>

@@ -1,10 +1,13 @@
 import { useState } from 'react'
 import data from '../services/data.json'
 import Status from './reusableComponents/Status'
+import Modal from './reusableComponents/Modal'
 
 const ModalViewTask = ({modal, setModal}) => {
 
     const [check, setCheck] = useState(false)
+    const [moreOptions, setMoreOptions] = useState(false)
+    const [modalEditTask, setModalEditTask] = useState(false)
 
     const firstColumn = data.boards[0].columns
 
@@ -22,8 +25,12 @@ const ModalViewTask = ({modal, setModal}) => {
         ev.preventDefault()
     }
 
-    const handleClickMoreActions = () => {
-        //little modal
+    const handleClickMoreOptions = () => {
+        setMoreOptions(true)
+    }
+
+    const handleEditTask = () => {
+        setModalEditTask(true)
     }
 
     const listOfSubtasks = firstColumn[0].tasks[0].subtasks.map((subtask, i) => {
@@ -41,9 +48,21 @@ const ModalViewTask = ({modal, setModal}) => {
                     <form className='container-view-task' onClick={handleEvPreventDefault}>
                         <fieldset className='container-view-task-header'>
                             <h2 className='container-view-task-header-title'>{firstColumn[0].tasks[0].title}</h2>
-                            <button title='Edit Task' onClick={handleClickMoreActions}>
+                            <button title='Edit Task' className='container-view-task-header-more-options-button' onClick={handleClickMoreOptions}>
                                 <i className='fa-solid fa-ellipsis-vertical'></i>
                             </button>
+                            {moreOptions && (
+                                //finish the modal options
+                                // <Modal title='Edit Task' labelTitle='Title' labelDescription='Descritpion'></Modal>
+                                <div className='more-options-container'>
+                                    <button className='more-options-container-edit-button' onClick={handleEditTask}>
+                                        <span className='material-symbols-outlined more-options-container-edit-button-icon'>
+                                            edit
+                                        </span>
+                                        Edit Task
+                                    </button>
+                                </div>
+                            )}
                         </fieldset>
                         <p className='container-view-task-description'>
                             {/* {firstColumn[0].tasks[0].description} */}
@@ -59,6 +78,12 @@ const ModalViewTask = ({modal, setModal}) => {
                         </fieldset>
                         <Status></Status>
                     </form>
+                </div>
+            )}
+
+            {modalEditTask && (
+                <div className='modal' onClick={handleCloseModal}>
+                    <Modal title='Edit Task' labelTitle='Title' labelDescription='Descritpion'></Modal>
                 </div>
             )}
         </>
