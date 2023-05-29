@@ -25,6 +25,7 @@ const Header = () => {
             setModalEditBoard(false)
             setModalDeleteBoard(false)
             setModalNewBoard(false)
+            setModalSelectBoard(false)
         }
     }
 
@@ -44,6 +45,7 @@ const Header = () => {
 
     const handleClickAddNewBoard = () => {
         setMoreOptionsBoard(false)
+        setModalSelectBoard(false)
         setModalNewBoard(true)
     }
 
@@ -115,9 +117,28 @@ const Header = () => {
       )}
       {modalSelectBoard && (
             <div className='modal' onClick={handleCloseModal}>
-                <div>
-                    <h2>all boards</h2>
-                    
+                <div className='modal-select-board'>
+                    <h2 className='modal-select-board-title'>all boards</h2>
+                    <div className='modal-select-board-buttons'>
+                        <button className='modal-select-board-buttons-button selected'>
+                            <i className='fa-solid fa-table-columns'></i>
+                            Platform Lunch
+                        </button>
+                        <button className='modal-select-board-buttons-button'>
+                            <i className='fa-solid fa-table-columns'></i>
+                            Marketing Plan
+                        </button>
+                        <button className='modal-select-board-buttons-button'>
+                            <i className='fa-solid fa-table-columns'></i>
+                            Roadmap
+                        </button>
+                        <button title='Add new board' className='modal-select-board-buttons-button-create'
+                        onClick={handleClickAddNewBoard}>
+                            <i className='fa-solid fa-table-columns'></i>
+                            <i className='fa-solid fa-plus'></i>
+                            Create New Board
+                        </button>
+                    </div>
                 </div>
             </div>
       )}
