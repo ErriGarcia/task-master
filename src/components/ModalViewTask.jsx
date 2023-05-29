@@ -2,12 +2,14 @@ import { useState } from 'react'
 import data from '../services/data.json'
 import Status from './reusableComponents/Status'
 import Modal from './reusableComponents/Modal'
+import ModalDelete from './reusableComponents/ModalDelete'
 
 const ModalViewTask = ({modal, setModal}) => {
 
     const [check, setCheck] = useState(false)
     const [moreOptions, setMoreOptions] = useState(false)
     const [modalEditTask, setModalEditTask] = useState(false)
+    const [modalDeleteTask, setModalDeleteTask] = useState(false)
 
     const firstColumn = data.boards[0].columns
 
@@ -15,13 +17,13 @@ const ModalViewTask = ({modal, setModal}) => {
         setCheck(!check)
     }
 
-    const handleCloseModal = (ev) => {
+    const handleClickCloseModal = (ev) => {
         if (ev.target.className === 'modal') {
             setModal(false)
         }
     }
 
-    const handleEvPreventDefault = (ev) => {
+    const handleClickEvPreventDefault = (ev) => {
         ev.preventDefault()
     }
 
@@ -29,8 +31,12 @@ const ModalViewTask = ({modal, setModal}) => {
         setMoreOptions(true)
     }
 
-    const handleEditTask = () => {
+    const handleClickEditTask = () => {
         setModalEditTask(true)
+    }
+
+    const handleClickDeleteTask = () => {
+        setModalDeleteTask(true)
     }
 
     const listOfSubtasks = firstColumn[0].tasks[0].subtasks.map((subtask, i) => {
@@ -44,8 +50,8 @@ const ModalViewTask = ({modal, setModal}) => {
     return (
         <>
             {modal && (
-                <div className='modal' onClick={handleCloseModal}>
-                    <form className='container-view-task' onClick={handleEvPreventDefault}>
+                <div className='modal' onClick={handleClickCloseModal}>
+                    <form className='container-view-task' onClick={handleClickEvPreventDefault}>
                         <fieldset className='container-view-task-header'>
                             <h2 className='container-view-task-header-title'>{firstColumn[0].tasks[0].title}</h2>
                             <button title='Edit Task' className='container-view-task-header-more-options-button' onClick={handleClickMoreOptions}>
@@ -55,12 +61,15 @@ const ModalViewTask = ({modal, setModal}) => {
                                 //finish the modal options
                                 // <Modal title='Edit Task' labelTitle='Title' labelDescription='Descritpion'></Modal>
                                 <div className='more-options-container'>
-                                    <button className='more-options-container-edit-button' onClick={handleEditTask}>
-                                        <span className='material-symbols-outlined more-options-container-edit-button-icon'>
-                                            edit
-                                        </span>
+                                    <button title='Edit task' className='more-options-container-edit-button' onClick={handleClickEditTask}>
+                                        <i className='fa-regular fa-pen-to-square more-options-container-edit-button-icon'></i>
                                         Edit Task
                                     </button>
+                                    <button title='Delete task' className='more-options-container-delete-button'
+                                        onClick={handleClickDeleteTask}>
+                                    <i className='fa-regular fa-trash-can more-options-container-delete-button-icon'></i>
+                            Delete Board
+                        </button>
                                 </div>
                             )}
                         </fieldset>
@@ -82,8 +91,14 @@ const ModalViewTask = ({modal, setModal}) => {
             )}
 
             {modalEditTask && (
-                <div className='modal' onClick={handleCloseModal}>
+                <div className='modal' onClick={handleClickCloseModal}>
                     <Modal title='Edit Task' labelTitle='Title' labelDescription='Descritpion'></Modal>
+                </div>
+            )}
+
+            {modalDeleteTask && (
+                <div className='modal' onClick={handleClickCloseModal}>
+                    <ModalDelete title='Delete this task?' content='Are you sure you want to delete the "Build settings UI" task and its subtasks? This action cannot be reversed.'></ModalDelete>
                 </div>
             )}
         </>

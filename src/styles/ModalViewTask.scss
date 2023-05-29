@@ -86,26 +86,28 @@
 
     .more-options-container {
         position: absolute;
-        top: 10%;
-        left: 52%;
+        top: 6.5%;
+        left: 55%;
         width: 40%;
         box-shadow: 0 0.25rem 0.375rem #364e7e4a;
-        padding: 0.5rem 0;
-        background-color: $color-white;
+        padding: 0.5rem;
+        background-color: #FFFFFF;
         font-weight: 500;
         font-size: 0.875rem;
         display: flex;
+        flex-direction: column;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
+        gap: 0.8rem;
 
-            &-edit-button {
+            &-edit-button, &-delete-button {
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 gap: 0.5rem;
 
                 &-icon {
-                    font-size: 1.25rem;
+                    font-size: 1rem;
                 }
             }
     }

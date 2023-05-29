@@ -4,13 +4,16 @@ import data from '../services/data.json'
 import { useState } from 'react'
 import ModalAddTask from './ModalAddTask'
 import ModalBoard from './reusableComponents/ModalBoard'
+import ModalDelete from './reusableComponents/ModalDelete'
 
 const Header = () => {
 
     const [modal, setModal] = useState(false)
     const [moreOptionsBoard, setMoreOptionsBoard] = useState(false)
-    const [editBoard, setEditBoard] = useState(false)
-    const [newBoard, setNewBoard] = useState(false)
+    const [modalEditBoard, setModalEditBoard] = useState(false)
+    const [modalDeleteBoard, setModalDeleteBoard] = useState(false)
+    const [modalNewBoard, setModalNewBoard] = useState(false)
+    const [modalSelectBoard, setModalSelectBoard] = useState(false)
 
     const handleAddTask = () => {
         setModal(true)
@@ -19,8 +22,9 @@ const Header = () => {
     const handleCloseModal = (ev) => {
         if (ev.target.className === 'modal') {
             setModal(false)
-            setEditBoard(false)
-            setNewBoard(false)
+            setModalEditBoard(false)
+            setModalDeleteBoard(false)
+            setModalNewBoard(false)
         }
     }
 
@@ -30,12 +34,22 @@ const Header = () => {
 
     const handleClickEditBoard = () => {
         setMoreOptionsBoard(false)
-        setEditBoard(true)
+        setModalEditBoard(true)
+    }
+
+    const handleClickDeleteBoard = () => {
+        setMoreOptionsBoard(false)
+        setModalDeleteBoard(true)
     }
 
     const handleClickAddNewBoard = () => {
         setMoreOptionsBoard(false)
-        setNewBoard(true)
+        setModalNewBoard(true)
+    }
+
+    const handleClickSelectBoard = () => {
+        setMoreOptionsBoard(false)
+        setModalSelectBoard(true)
     }
 
     return (
@@ -45,7 +59,7 @@ const Header = () => {
                 <img src={logo} alt='logo task master'/>
                 <div className='main-header-container-logo-container'>
                     <h1 className='main-header-container-logo-container-title'>{data.boards[0].name}</h1>
-                    <button title='All Boards' className='main-header-container-logo-container-button-down'>
+                    <button title='All Boards' className='main-header-container-logo-container-button-down' onClick={handleClickSelectBoard}>
                         <i className='fa fa-chevron-down'></i>
                     </button>
                 </div>
@@ -61,10 +75,13 @@ const Header = () => {
                     <div className='more-options-board-container'>
                         <button title='Edit board' className='more-options-board-container-edit-button'
                         onClick={handleClickEditBoard}>
-                            <span className='material-symbols-outlined more-options-board-container-edit-button-icon'>
-                                edit
-                            </span>
+                            <i className='fa-regular fa-pen-to-square more-options-board-container-edit-button-icon'></i>
                             Edit Board
+                        </button>
+                        <button title='Delete board' className='more-options-board-container-delete-button'
+                        onClick={handleClickDeleteBoard}>
+                            <i className='fa-regular fa-trash-can more-options-board-container-delete-button-icon'></i>
+                            Delete Board
                         </button>
                         <button title='Add new board' className='more-options-board-container-add-button'
                         onClick={handleClickAddNewBoard}>
@@ -80,16 +97,29 @@ const Header = () => {
             <ModalAddTask></ModalAddTask>
         </div>
       )}
-      {editBoard && (
+      {modalEditBoard && (
         <div className='modal' onClick={handleCloseModal}>
             <ModalBoard title='Edit Board' labelTitle='Board Name' value='Save Changes'></ModalBoard>
         </div>
       )}
-      {newBoard && (
+      {modalDeleteBoard && (
+        <div className='modal' onClick={handleCloseModal}>
+            <ModalDelete title='Delete this board?' content='Are you sure you want to delete the "Platform Launch" board? This action will remove all columns and tasks and cannot be reversed.'></ModalDelete>
+        </div>
+      )}
+      {modalNewBoard && (
         <div className='modal' onClick={handleCloseModal}>
             <ModalBoard title='Add New Board' labelTitle='Board Name' value='Create New Board'></ModalBoard>
             {/* change name main button */}
         </div>
+      )}
+      {modalSelectBoard && (
+            <div className='modal' onClick={handleCloseModal}>
+                <div>
+                    <h2>all boards</h2>
+                    
+                </div>
+            </div>
       )}
       </>
     )
