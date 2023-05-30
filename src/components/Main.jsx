@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import data from '../services/data.json'
 import ModalViewTask from './ModalViewTask'
-import api from '../services/api'
+import api from '../services/api/index'
 
 const Main = () => {
 
@@ -13,7 +13,7 @@ const Main = () => {
     const handleArticleClick = (ev) => {
         const { id } = ev.currentTarget
         setModal(true)
-        setCurrentTask(api.getTaskById(id))
+        setCurrentTask(api.task.getById(id))
     }
 
     const listColumns = firstBoard.columns.map((column, index) => {

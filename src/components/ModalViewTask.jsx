@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Status from './reusableComponents/Status'
 import Modal from './reusableComponents/Modal'
 import ModalDelete from './reusableComponents/ModalDelete'
+import api from '../services/api/index'
 
 const ModalViewTask = ({modal, setModal, currentTask}) => {
 
@@ -9,6 +10,8 @@ const ModalViewTask = ({modal, setModal, currentTask}) => {
     const [moreOptions, setMoreOptions] = useState(false)
     const [modalEditTask, setModalEditTask] = useState(false)
     const [modalDeleteTask, setModalDeleteTask] = useState(false)
+    const [inputTitle, setInputTitle] = useState(currentTask.title)
+    const [textAreaDescription, setTextAreaDescription] = useState(currentTask.description)
 
     const handleSubtaskForm = () => {
         setCheck(!check)
@@ -35,6 +38,20 @@ const ModalViewTask = ({modal, setModal, currentTask}) => {
     const handleClickDeleteTask = () => {
         setModalDeleteTask(true)
     }
+    
+    const handleInputTitleChange = (ev) => {
+        setInputTitle(ev.target.value)
+    }
+
+    const handleTextAreaDescriptionChange = (ev) => {
+        setTextAreaDescription(ev.target.value)
+    }
+
+    const updateTask = (ev) => {
+        ev.preventDefault()
+        api.task.updateById(currentTask.id, inputTitle, textAreaDescription)
+    }
+
 
     const listOfSubtasks = currentTask.subtasks.map((subtask, i) => {
         return ( <div key={i} className='container-view-task-subtasks-list-subtask' onChange={handleSubtaskForm}>
@@ -86,7 +103,15 @@ const ModalViewTask = ({modal, setModal, currentTask}) => {
 
             {modalEditTask && (
                 <div className='modal' onClick={handleClickCloseModal}>
-                    <Modal title='Edit Task' labelTitle='Title' labelDescription='Descritpion'></Modal>
+                    <Modal 
+                        title='Edit Task' 
+                        labelTitle='Title' 
+                        labelDescription='Descritpion' 
+                        buttonText='Update Task' 
+                        handleClickForm={updateTask} 
+                        valueInputTitle={inputTitle} 
+                        handleInputChange={handleInputTitleChange} valueTextAreaDescription={textAreaDescription} handleTextAreaChange={handleTextAreaDescriptionChange}>
+                    </Modal>
                 </div>
             )}
 

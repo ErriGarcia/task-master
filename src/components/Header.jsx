@@ -17,12 +17,11 @@ const Header = () => {
     const [modalNewBoard, setModalNewBoard] = useState(false)
     const [modalSelectBoard, setModalSelectBoard] = useState(false)
     const [allBoards, setAllBoards] = useState([])
+    const [isActive, setIsActive] = useState(false)
 
     useEffect(() => {
         setAllBoards(api.getBoards())
     }, [])
-
-    console.log(allBoards)
 
     const handleAddTask = () => {
         setModal(true)
@@ -31,6 +30,7 @@ const Header = () => {
     const handleCloseModal = (ev) => {
         if (ev.target.className === 'modal') {
             setModal(false)
+            setMoreOptionsBoard(false)
             setModalEditBoard(false)
             setModalDeleteBoard(false)
             setModalNewBoard(false)
@@ -63,6 +63,24 @@ const Header = () => {
         setModalSelectBoard(true)
     }
 
+    const handleClickBoard = (ev, index) => {
+        // ev.target.className = 'selected'
+        const buttons = document.getElementsByClassName('modal-select-board-buttons-button')
+        console.log(buttons)
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].className = 'selected'
+        }
+        // setIsActive(current => !current)
+    }
+
+    const buttonBoardName = allBoards.map((board, index) => {
+        return (
+        <button className={`modal-select-board-buttons-button ${isActive ? 'selected' : null}`} key={index} onClick={handleClickBoard}>
+            <i className='fa-solid fa-table-columns'></i>
+            {board.name}
+        </button>)
+    })
+
     return (
         <>
         <header className='main-header'>
@@ -86,22 +104,24 @@ const Header = () => {
                     <i className='fa-solid fa-ellipsis-vertical'></i>
                 </button>
                 {moreOptionsBoard && (
-                    <div className='more-options-board-container'>
-                        <button title='Edit board' className='more-options-board-container-edit-button'
-                        onClick={handleClickEditBoard}>
-                            <i className='fa-regular fa-pen-to-square more-options-board-container-edit-button-icon'></i>
-                            Edit Board
-                        </button>
-                        <button title='Delete board' className='more-options-board-container-delete-button'
-                        onClick={handleClickDeleteBoard}>
-                            <i className='fa-regular fa-trash-can more-options-board-container-delete-button-icon'></i>
-                            Delete Board
-                        </button>
-                        <button title='Add new board' className='more-options-board-container-add-button'
-                        onClick={handleClickAddNewBoard}>
-                            <i className='fa-solid fa-plus more-options-board-container-add-button-icon'></i>
-                            Add New Board
-                        </button>
+                    <div className='modal' onClick={handleCloseModal}>
+                        <div className='more-options-board-container'>
+                            <button title='Edit board' className='more-options-board-container-edit-button'
+                            onClick={handleClickEditBoard}>
+                                <i className='fa-regular fa-pen-to-square more-options-board-container-edit-button-icon'></i>
+                                Edit Board
+                            </button>
+                            <button title='Delete board' className='more-options-board-container-delete-button'
+                            onClick={handleClickDeleteBoard}>
+                                <i className='fa-regular fa-trash-can more-options-board-container-delete-button-icon'></i>
+                                Delete Board
+                            </button>
+                            <button title='Add new board' className='more-options-board-container-add-button'
+                            onClick={handleClickAddNewBoard}>
+                                <i className='fa-solid fa-plus more-options-board-container-add-button-icon'></i>
+                                Add New Board
+                            </button>
+                        </div>
                     </div>
                 )}
             </div>
@@ -132,25 +152,7 @@ const Header = () => {
                 <div className='modal-select-board'>
                     <h2 className='modal-select-board-title'>all boards ({allBoards.length})</h2>
                     <div className='modal-select-board-buttons'>
-                        {allBoards.map((board, index) => {
-                            return (
-                            <button className='modal-select-board-buttons-button' key={index}>
-                                <i className='fa-solid fa-table-columns'></i>
-                                {board.name}
-                            </button>)
-                        })}
-                        {/* <button className='modal-select-board-buttons-button selected'>
-                            <i className='fa-solid fa-table-columns'></i>
-                            Platform Lunch
-                        </button>
-                        <button className='modal-select-board-buttons-button'>
-                            <i className='fa-solid fa-table-columns'></i>
-                            Marketing Plan
-                        </button>
-                        <button className='modal-select-board-buttons-button'>
-                            <i className='fa-solid fa-table-columns'></i>
-                            Roadmap
-                        </button> */}
+                        {buttonBoardName}
                         <button title='Add new board' className='modal-select-board-buttons-button-create'
                         onClick={handleClickAddNewBoard}>
                             <i className='fa-solid fa-table-columns'></i>

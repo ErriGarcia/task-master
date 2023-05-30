@@ -1,4 +1,4 @@
-const FieldsetInput = ({labelSubtasks, placeholderSubtask, titleIcon, buttonText}) => {
+const FieldsetInput = ({labelSubtasks, placeholderSubtask, titleIcon, buttonText, secondPlaceholderSubtask}) => {
     return (
         <fieldset className='fieldset'>
             <label htmlFor='subtasks' className='label'>{labelSubtasks}</label>
@@ -11,7 +11,7 @@ const FieldsetInput = ({labelSubtasks, placeholderSubtask, titleIcon, buttonText
                 </button>
             </div>
             <div className='container-subtasks'>
-                <input type='text' id='subtasks' name='subtasks' className='input subtask' placeholder={placeholderSubtask} />
+                <input type='text' id='subtasks' name='subtasks' className='input subtask' placeholder={secondPlaceholderSubtask} />
                 <button title={titleIcon} className='button-delete'>
                     <span className='material-symbols-outlined'>
                         close

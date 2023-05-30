@@ -9,7 +9,8 @@ const ModalAddTask = () => {
             labelTitle='Title' 
             placeholderTitle='e.g. Take coffee break' 
             labelDescription='Description' 
-            placeholderDescription='e.g. It is always good to take a break. This 15 minutes break will recharge the batteries a little.'>
+            placeholderDescription='e.g. It is always good to take a break. This 15 minutes break will recharge the batteries a little.'
+            buttonText='Create Task'>
         </Modal>
         </>
     )
