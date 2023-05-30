@@ -2,6 +2,7 @@
   "boards": [
     {
       "name": "Platform Launch",
+      "id": "d76c13df-ed29-4b17-bdce-362a03b5c414",
       "columns": [
         {
           "name": "Todo",
@@ -304,6 +305,7 @@
     },
     {
       "name": "Marketing Plan",
+      "id": "7da1bf31-d992-4bc1-963d-90b1a9ec4242",
       "columns": [
         {
           "name": "Todo",
@@ -398,6 +400,7 @@
     },
     {
       "name": "Roadmap",
+      "id": "05f64f34-d6c0-4d3f-8a9e-fa6fb09868ac",
       "columns": [
         {
           "name": "Now",
