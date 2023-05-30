@@ -1,9 +1,5 @@
 import data from '../data.json'
 
-// const getAll = () => {
-
-// }
-
 /**
  * This function searches a task by id
  * @param {*} id number 
@@ -32,12 +28,23 @@ const updateById = (id, title, description) => {
     taskToUpdate.description = description
 }
 
-const deleteById = () => {
+const deleteById = (id) => {
+    const taskToDelete = getById(id)
 
+    if (!taskToDelete) {
+        console.error(`task with this id: ${id} not found`)
+        return
+    }
+
+    for (const board of data.boards) {
+        for (const column of board.columns) {
+            const indexTask = column.tasks.indexOf(taskToDelete)
+            return column.tasks.splice(indexTask, 1)
+        }
+    }
 }
 
 const apiTask = {
-    // getAll,
     getById,
     updateById,
     deleteById

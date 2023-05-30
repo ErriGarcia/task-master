@@ -3,7 +3,7 @@ import logo from '../images/logo-mobile.svg'
 import kanban from '../images/kanban.svg'
 import data from '../services/data.json'
 import { useEffect, useState } from 'react'
-import ModalAddTask from './ModalAddTask'
+import Modal from '../components/reusableComponents/Modal'
 import ModalBoard from './reusableComponents/ModalBoard'
 import ModalDelete from './reusableComponents/ModalDelete'
 import api from '../services/api'
@@ -128,7 +128,20 @@ const Header = () => {
       </header>
       {modal && (
         <div className='modal' onClick={handleCloseModal}>
-            <ModalAddTask></ModalAddTask>
+            <Modal 
+                title='Add New Task' 
+                labelTitle='Title' 
+                placeholderTitle='e.g. Take coffee break' 
+                labelDescription='Description' 
+                placeholderDescription='e.g. It is always good to take a break. This 15 minutes break will recharge the batteries a little.'
+                buttonText='Create Task'
+                // handleClickForm={addTask} 
+                valueInputTitle=''
+                // handleInputChange={handleInputTitleChange} 
+                // valueTextAreaDescription={textAreaDescription} 
+                // handleTextAreaChange={handleTextAreaDescriptionChange}
+                subtasks={[]}>
+            </Modal>
         </div>
       )}
       {modalEditBoard && (

@@ -12,6 +12,7 @@ const ModalViewTask = ({modal, setModal, currentTask}) => {
     const [modalDeleteTask, setModalDeleteTask] = useState(false)
     const [inputTitle, setInputTitle] = useState(currentTask.title)
     const [textAreaDescription, setTextAreaDescription] = useState(currentTask.description)
+    const [subtasks, setSubtasks] = useState(currentTask.subtasks || [])
 
     const handleSubtaskForm = () => {
         setCheck(!check)
@@ -54,12 +55,16 @@ const ModalViewTask = ({modal, setModal, currentTask}) => {
 
 
     const listOfSubtasks = currentTask.subtasks.map((subtask, i) => {
-        return ( <div key={i} className='container-view-task-subtasks-list-subtask' onChange={handleSubtaskForm}>
-            <input type='checkbox' id={subtask.title} name={subtask.title} checked={subtask.isCompleted ? 'checked' : check}></input>
+        return ( <li key={i} className='container-view-task-subtasks-list-subtask' onChange={handleSubtaskForm}>
+            <input type='checkbox' id={subtask.title} name={subtask.title}></input>
             <label htmlFor={subtask.title} className={subtask.isCompleted ? 'checked' : null}>
             {subtask.title}</label>
-            </div>)
+            </li>)
     })
+
+    // const titlesSubtask = currentTask.subtasks.map((subtask => {
+    //     return subtask.title
+    // }))
 
     return (
         <>
@@ -90,10 +95,8 @@ const ModalViewTask = ({modal, setModal, currentTask}) => {
                         </p>
                         <fieldset>
                             <h3 className='container-view-task-title-subtasks'>Subtasks</h3>
-                            <ul>
-                                <li className='container-view-task-subtasks-list'>
+                            <ul className='container-view-task-subtasks-list'>
                                     {listOfSubtasks}
-                                </li>
                             </ul>
                         </fieldset>
                         <Status></Status>
@@ -110,14 +113,19 @@ const ModalViewTask = ({modal, setModal, currentTask}) => {
                         buttonText='Update Task' 
                         handleClickForm={updateTask} 
                         valueInputTitle={inputTitle} 
-                        handleInputChange={handleInputTitleChange} valueTextAreaDescription={textAreaDescription} handleTextAreaChange={handleTextAreaDescriptionChange}>
+                        handleInputChange={handleInputTitleChange} valueTextAreaDescription={textAreaDescription} handleTextAreaChange={handleTextAreaDescriptionChange}
+                        // titleSubtask={titlesSubtask}
+                        subtasks={subtasks}>
                     </Modal>
                 </div>
             )}
 
             {modalDeleteTask && (
                 <div className='modal' onClick={handleClickCloseModal}>
-                    <ModalDelete title='Delete this task?' content='Are you sure you want to delete the "Build settings UI" task and its subtasks? This action cannot be reversed.'></ModalDelete>
+                    <ModalDelete 
+                    title='Delete this task?' 
+                    content='Are you sure you want to delete the "Build settings UI" task and its subtasks? This action cannot be reversed.'>
+                    </ModalDelete>
                 </div>
             )}
         </>

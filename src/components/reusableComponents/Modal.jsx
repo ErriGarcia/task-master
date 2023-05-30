@@ -1,9 +1,28 @@
 import '../../styles/reusableComponents/Modal.scss'
 import MainButton from '../reusableComponents/MainButton'
 import Status from './Status'
-import FieldsetInput from './FieldsetInput'
 
-const Modal = ({title, labelTitle, placeholderTitle, valueInputTitle, labelDescription, placeholderDescription, buttonText, handleClickForm, handleInputChange, valueTextAreaDescription, handleTextAreaChange}) => {
+const Modal = ({title, labelTitle, placeholderTitle, valueInputTitle, labelDescription, placeholderDescription, buttonText, handleClickForm, handleInputChange, valueTextAreaDescription, handleTextAreaChange, subtasks}) => {
+
+    const inputSubtasks = subtasks.map(subtask => {
+        return (
+            <li className='container-subtasks'>
+                <input 
+                    type='text' 
+                    id={subtask.title} 
+                    name='subtasks' 
+                    className='input subtask' 
+                    placeholder='e.g. Make Coffee' 
+                    value={subtask.title}
+                />
+                <button title='Delete Subtask' className='button-delete'>
+                    <span className='material-symbols-outlined'>
+                        close
+                    </span>
+                </button>
+            </li>
+        )
+    }) 
     
     return (
         <div className='container-view-task'>
@@ -18,13 +37,40 @@ const Modal = ({title, labelTitle, placeholderTitle, valueInputTitle, labelDescr
                     <textarea type='text' id='description' name='description' className='textarea' placeholder={placeholderDescription} value={valueTextAreaDescription} onChange={handleTextAreaChange}>
                     </textarea>
                 </fieldset>
-                <FieldsetInput
-                labelSubtasks='Subtasks'
-                placeholderSubtask='e.g. Make Coffee'
-                secondPlaceholderSubtask='e.g. Drink coffee & smile'
-                titleIcon='Delete Subtask'
-                buttonText='Add New Subtask'>
-                </FieldsetInput>
+
+                <fieldset className='fieldset'>
+                    <label htmlFor='subtasks' className='label'>Subtasks</label>
+                        <ul>
+                           {inputSubtasks}
+                           <li className='container-subtasks'>
+                                <input 
+                                    type='text' 
+                                    id='Add new subtask' 
+                                    name='subtasks' 
+                                    className='input subtask' 
+                                    placeholder='e.g. Make Coffee' 
+                                    value=''
+                                />
+                                <button title='Delete Subtask' className='button-delete'>
+                                    <span className='material-symbols-outlined'>
+                                        close
+                                    </span>
+                                </button>
+                            </li>
+                        </ul>
+                    <button className='second-button'>
+                        <i className='fa-solid fa-plus icon-plus'></i>
+                        {buttonText}
+                    </button>
+                </fieldset>
+
+                {/* <FieldsetInput
+                    labelSubtasks='Subtasks'
+                    placeholderSubtask='e.g. Make Coffee'
+                    titleIcon='Delete Subtask'
+                    buttonText='Add New Subtask'
+                    valueInputSubtask={titleSubtask}>
+                </FieldsetInput> */}
                 <Status></Status>
                 <MainButton value={buttonText}></MainButton>
             </form>
