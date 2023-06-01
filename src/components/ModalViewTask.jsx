@@ -53,7 +53,10 @@ const ModalViewTask = ({modal, setModal, currentTask}) => {
         api.task.updateById(currentTask.id, inputTitleTask, textAreaDescription)
     }
 
-    console.log(currentTask)
+    const handleDeleteTask = (ev) => {
+        ev.preventDefault()
+        api.task.deleteById(currentTask.id)
+    }
 
     const listOfSubtasks = currentTask.subtasks.map((subtask, i) => {
         return ( <li key={i} className='container-view-task-subtasks-list-subtask' onChange={handleSubtaskForm}>
@@ -123,8 +126,10 @@ const ModalViewTask = ({modal, setModal, currentTask}) => {
             {modalDeleteTask && (
                 <div className='modal' onClick={handleClickCloseModal}>
                     <ModalDelete 
-                    title='Delete this task?' 
-                    content={`Are you sure you want to delete the "${currentTask.title}" task and its subtasks? This action cannot be reversed.`}>
+                        title='Delete this task?' 
+                        content={`Are you sure you want to delete the "${currentTask.title}" task and its subtasks? This action cannot be reversed.`}
+                        handleDeleteClick={handleDeleteTask}
+                    >
                     </ModalDelete>
                 </div>
             )}

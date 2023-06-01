@@ -6,6 +6,7 @@
       "columns": [
         {
           "name": "Todo",
+          "id": "978e4d2d-fe2d-4ac2-a963-a82a48daaefc",
           "tasks": [
             {
               "id": "c9e94eb1-db5f-4d13-ace5-e7129cfbb822",
@@ -79,8 +80,7 @@
                 }
               ]
             }
-          ],
-          "id": "978e4d2d-fe2d-4ac2-a963-a82a48daaefc"
+          ]
         },
         {
           "name": "Doing",
@@ -218,6 +218,7 @@
         },
         {
           "name": "Done",
+          "id": "6722d5f4-c9e6-4b5a-a865-e7395a6056d3",
           "tasks": [
             {
               "id": "1d768f64-04e0-4c2e-a774-d52c251b0ceb",
@@ -335,8 +336,7 @@
                 }
               ]
             }
-          ],
-          "id": "6722d5f4-c9e6-4b5a-a865-e7395a6056d3"
+          ]
         }
       ]
     },
@@ -346,6 +346,7 @@
       "columns": [
         {
           "name": "Todo",
+          "id": "a9b70735-c458-4f1f-b119-875b947448a0",
           "tasks": [
             {
               "id": "28702990-8365-42b7-909e-cebefe9ec86e",
@@ -436,18 +437,17 @@
                 }
               ]
             }
-          ],
-          "id": "a9b70735-c458-4f1f-b119-875b947448a0"
+          ]
         },
         {
           "name": "Doing",
-          "tasks": [],
-          "id": "5a2081c0-4331-4557-a7c3-d4d35056c159"
+          "id": "5a2081c0-4331-4557-a7c3-d4d35056c159",
+          "tasks": []
         },
         {
           "name": "Done",
-          "tasks": [],
-          "id": "071d7876-0c85-4f70-a4c5-59affdadd25c"
+          "id": "071d7876-0c85-4f70-a4c5-59affdadd25c",
+          "tasks": []
         }
       ]
     },
@@ -457,6 +457,7 @@
       "columns": [
         {
           "name": "Now",
+          "id": "28fa48ec-91a9-477d-9113-e4ba47b34deb",
           "tasks": [
             {
               "id": "fb95f32a-6374-46e9-8977-e015c92f5fa7",
@@ -499,18 +500,17 @@
                 }
               ]
             }
-          ],
-          "id": "28fa48ec-91a9-477d-9113-e4ba47b34deb"
+          ]
         },
         {
           "name": "Next",
-          "tasks": [],
-          "id": "2a04ed2f-0d0a-429d-9f30-15295abd1153"
+          "id": "2a04ed2f-0d0a-429d-9f30-15295abd1153",
+          "tasks": []
         },
         {
           "name": "Later",
-          "tasks": [],
-          "id": "8ab35fa1-8dbc-464c-89d1-3fa0ca4635e1"
+           "id": "8ab35fa1-8dbc-464c-89d1-3fa0ca4635e1",
+          "tasks": []
         }
       ]
     }

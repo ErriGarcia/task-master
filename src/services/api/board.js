@@ -35,18 +35,27 @@ const getById = (id) => {
  * @param {*} id string
  * @param {*} title string
  */
-const updateById = (id, title) => {
+const updateById = (id, name) => {
     const boardToUpdate = getById(id)
 
     if (!boardToUpdate) {
         console.error(`board with this id: ${id} not found`)
     }
 
-    boardToUpdate.title = title
+    boardToUpdate.name = name
 }
 
-const deleteById = () => {
-    
+const deleteById = (id) => {
+    const boards = getAll()
+    const boardToDelete = getById(id)
+
+    if (!boardToDelete) {
+        console.error(`board with this id: ${id} not found`)
+        return
+    }
+
+    const indexBoard = boards.indexOf(boardToDelete)
+    return boards.splice(indexBoard, 1)
 }
 
 const api = {

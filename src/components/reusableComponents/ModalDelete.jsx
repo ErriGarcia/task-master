@@ -1,13 +1,6 @@
 import '../../styles/reusableComponents/ModalDelete.scss'
-import api from '../../services/api/index'
 
-const ModalDelete = ({title, content}) => {
-
-    const handleDeleteClick = (ev) => {
-        ev.preventDefault()
-        console.log('delete')
-        api.task.deleteById(1)
-    }
+const ModalDelete = ({title, content, handleDeleteClick}) => {
 
     return (
         <div className='container-delete'>

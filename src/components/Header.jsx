@@ -111,6 +111,16 @@ const Header = ({currentBoard, handleClickBoard}) => {
         setInputTitleBoard(ev.target.value)
     }
 
+    const updateBoard = (ev) => {
+        ev.preventDefault()
+        api.board.updateById(currentBoard.id, inputTitleBoard)
+    }
+
+    const handleDeleteBoard = (ev) => {
+        ev.preventDefault()
+        api.board.deleteById(currentBoard.id)
+    }
+
     const buttonBoardName = allBoards.map((board, index) => {
         return (
             <button className='modal-select-board-buttons-button' key={index} onClick={handleClickBoard} id={board.id}>
@@ -195,7 +205,7 @@ const Header = ({currentBoard, handleClickBoard}) => {
                 value='Save Changes'
                 valueTitle={inputTitleBoard}
                 handleTitleChange={handleInputTitleChange}
-                handleFormClick={handleFormClick}
+                handleFormClick={updateBoard}
             >
             </ModalBoard>
         </div>
@@ -205,6 +215,7 @@ const Header = ({currentBoard, handleClickBoard}) => {
             <ModalDelete 
                 title='Delete this board?' 
                 content={`Are you sure you want to delete the "${currentBoard.name}" board? This action will remove all columns and tasks and cannot be reversed.`}
+                handleDeleteClick={handleDeleteBoard}
             >
             </ModalDelete>
         </div>
