@@ -2,7 +2,7 @@ import '../../styles/reusableComponents/Modal.scss'
 import MainButton from '../reusableComponents/MainButton'
 import Status from './Status'
 
-const Modal = ({title, labelTitle, placeholderTitle, valueInputTitle, labelDescription, placeholderDescription, buttonText, handleClickForm, handleInputChange, valueTextAreaDescription, handleTextAreaChange, subtasks}) => {
+const Modal = ({title, labelTitle, placeholderTitle, valueInputTitle, labelDescription, placeholderDescription, buttonText, handleClickForm, handleInputChange, valueTextAreaDescription, handleTextAreaChange, subtasks, columnName, handleChangeSelect, handleSubmitClick}) => {
 
     const inputSubtasks = subtasks.map(subtask => {
         return (
@@ -60,7 +60,7 @@ const Modal = ({title, labelTitle, placeholderTitle, valueInputTitle, labelDescr
                         </ul>
                     <button className='second-button'>
                         <i className='fa-solid fa-plus icon-plus'></i>
-                        {buttonText}
+                        Add New Subtask
                     </button>
                 </fieldset>
 
@@ -71,8 +71,16 @@ const Modal = ({title, labelTitle, placeholderTitle, valueInputTitle, labelDescr
                     buttonText='Add New Subtask'
                     valueInputSubtask={titleSubtask}>
                 </FieldsetInput> */}
-                <Status></Status>
-                <MainButton value={buttonText}></MainButton>
+                <Status
+                    columnName={columnName}
+                    handleChangeSelect={handleChangeSelect}
+                >
+                </Status>
+                <MainButton 
+                    value={buttonText}
+                    handleSubmitClick={handleSubmitClick}
+                >
+                </MainButton>
             </form>
         </div>
     )

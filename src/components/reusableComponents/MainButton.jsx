@@ -1,8 +1,8 @@
 import '../../styles/reusableComponents/MainButton.scss'
 
-const MainButton = ({value}) => {
+const MainButton = ({value, handleSubmitClick}) => {
     return (
-        <input className='input-submit' type='submit' value={value} />
+        <input className='input-submit' type='submit' value={value} onClick={handleSubmitClick} />
     )
 }
 

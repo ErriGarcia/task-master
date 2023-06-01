@@ -1,4 +1,22 @@
 import data from '../data.json'
+import { v4 } from 'uuid'
+
+/**
+ * 
+ * @param {*} board : board selected, for now it's just board [0]
+ * @param {*} title : title value write by user
+ * @param {*} description : description value write by user
+ * @param {*} status : column selected, for now it's just column [0]
+ * @returns 
+ */
+const create = (board, titleTask, descriptionTask, statusTask) => {
+    return board.columns[0].tasks.push({
+        id: v4(),
+        title: titleTask, 
+        description: descriptionTask, 
+        status: statusTask
+    })
+}
 
 /**
  * This function searches a task by id
@@ -7,7 +25,7 @@ import data from '../data.json'
 const getById = (id) => {
     for (const board of data.boards) {
         for (const column of board.columns) {
-            const searchingTask = column.tasks.find(task => parseInt(task.id) === parseInt(id))
+            const searchingTask = column.tasks.find(task => task.id === id)
 
             if (searchingTask) {
                 return searchingTask
@@ -16,6 +34,13 @@ const getById = (id) => {
     }
 }
 
+/**
+ * 
+ * @param {*} id 
+ * @param {*} title 
+ * @param {*} description 
+ * @returns 
+ */
 const updateById = (id, title, description) => {
     const taskToUpdate = getById(id)
 
@@ -28,6 +53,11 @@ const updateById = (id, title, description) => {
     taskToUpdate.description = description
 }
 
+/**
+ * 
+ * @param {*} id 
+ * @returns 
+ */
 const deleteById = (id) => {
     const taskToDelete = getById(id)
 
@@ -45,6 +75,7 @@ const deleteById = (id) => {
 }
 
 const apiTask = {
+    create,
     getById,
     updateById,
     deleteById

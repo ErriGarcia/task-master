@@ -1,3 +1,4 @@
 import task from './task'
+import board from './board'
 
-export default { task }
+export default {task, board}

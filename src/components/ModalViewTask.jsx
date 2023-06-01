@@ -10,7 +10,7 @@ const ModalViewTask = ({modal, setModal, currentTask}) => {
     const [moreOptions, setMoreOptions] = useState(false)
     const [modalEditTask, setModalEditTask] = useState(false)
     const [modalDeleteTask, setModalDeleteTask] = useState(false)
-    const [inputTitle, setInputTitle] = useState(currentTask.title)
+    const [inputTitleTask, setInputTitleTask] = useState(currentTask.title)
     const [textAreaDescription, setTextAreaDescription] = useState(currentTask.description)
     const [subtasks, setSubtasks] = useState(currentTask.subtasks || [])
 
@@ -41,7 +41,7 @@ const ModalViewTask = ({modal, setModal, currentTask}) => {
     }
     
     const handleInputTitleChange = (ev) => {
-        setInputTitle(ev.target.value)
+        setInputTitleTask(ev.target.value)
     }
 
     const handleTextAreaDescriptionChange = (ev) => {
@@ -50,9 +50,10 @@ const ModalViewTask = ({modal, setModal, currentTask}) => {
 
     const updateTask = (ev) => {
         ev.preventDefault()
-        api.task.updateById(currentTask.id, inputTitle, textAreaDescription)
+        api.task.updateById(currentTask.id, inputTitleTask, textAreaDescription)
     }
 
+    console.log(currentTask)
 
     const listOfSubtasks = currentTask.subtasks.map((subtask, i) => {
         return ( <li key={i} className='container-view-task-subtasks-list-subtask' onChange={handleSubtaskForm}>
@@ -61,10 +62,6 @@ const ModalViewTask = ({modal, setModal, currentTask}) => {
             {subtask.title}</label>
             </li>)
     })
-
-    // const titlesSubtask = currentTask.subtasks.map((subtask => {
-    //     return subtask.title
-    // }))
 
     return (
         <>
@@ -112,10 +109,13 @@ const ModalViewTask = ({modal, setModal, currentTask}) => {
                         labelDescription='Descritpion' 
                         buttonText='Update Task' 
                         handleClickForm={updateTask} 
-                        valueInputTitle={inputTitle} 
-                        handleInputChange={handleInputTitleChange} valueTextAreaDescription={textAreaDescription} handleTextAreaChange={handleTextAreaDescriptionChange}
+                        valueInputTitle={inputTitleTask} 
+                        handleInputChange={handleInputTitleChange} 
+                        valueTextAreaDescription={textAreaDescription} 
+                        handleTextAreaChange={handleTextAreaDescriptionChange}
                         // titleSubtask={titlesSubtask}
-                        subtasks={subtasks}>
+                        subtasks={subtasks}
+                    >
                     </Modal>
                 </div>
             )}
@@ -124,7 +124,7 @@ const ModalViewTask = ({modal, setModal, currentTask}) => {
                 <div className='modal' onClick={handleClickCloseModal}>
                     <ModalDelete 
                     title='Delete this task?' 
-                    content='Are you sure you want to delete the "Build settings UI" task and its subtasks? This action cannot be reversed.'>
+                    content={`Are you sure you want to delete the "${currentTask.title}" task and its subtasks? This action cannot be reversed.`}>
                     </ModalDelete>
                 </div>
             )}

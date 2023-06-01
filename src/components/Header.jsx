@@ -6,30 +6,37 @@ import { useEffect, useState } from 'react'
 import Modal from '../components/reusableComponents/Modal'
 import ModalBoard from './reusableComponents/ModalBoard'
 import ModalDelete from './reusableComponents/ModalDelete'
-import api from '../services/api'
+import api from '../services/api/index'
 
-const Header = () => {
+const Header = ({currentBoard, handleClickBoard}) => {
 
-    const [modal, setModal] = useState(false)
+    const [modalNewTask, setModalNewStask] = useState(false)
     const [moreOptionsBoard, setMoreOptionsBoard] = useState(false)
     const [modalEditBoard, setModalEditBoard] = useState(false)
     const [modalDeleteBoard, setModalDeleteBoard] = useState(false)
     const [modalNewBoard, setModalNewBoard] = useState(false)
     const [modalSelectBoard, setModalSelectBoard] = useState(false)
-    const [allBoards, setAllBoards] = useState([])
-    const [isActive, setIsActive] = useState(false)
+    const [allBoards, setAllBoards] = useState([api.board.getAll()])
+    // const [isActive, setIsActive] = useState(false)
+    const [newTitleTask, setNewTitleTask] = useState('')
+    const [newDescriptionTask, setNewDescriptionTask] = useState('')
+    const [column, setColumn] = useState('Todo')
+    // const [currentBoard, setCurrentBoard] = useState(api.board.getAll()[0])
+    const [newNameBoard, setNewNameBoard] = useState('')
+    const [inputTitleBoard, setInputTitleBoard] = useState(currentBoard.name)
+    const [inputColumnName, setInputColumnName] = useState('')
 
     useEffect(() => {
-        setAllBoards(api.getBoards())
+        setAllBoards(api.board.getAll())
     }, [])
 
     const handleAddTask = () => {
-        setModal(true)
+        setModalNewStask(true)
     }
 
     const handleCloseModal = (ev) => {
         if (ev.target.className === 'modal') {
-            setModal(false)
+            setModalNewStask(false)
             setMoreOptionsBoard(false)
             setModalEditBoard(false)
             setModalDeleteBoard(false)
@@ -63,23 +70,56 @@ const Header = () => {
         setModalSelectBoard(true)
     }
 
-    const handleClickBoard = (ev, index) => {
-        // ev.target.className = 'selected'
-        const buttons = document.getElementsByClassName('modal-select-board-buttons-button')
-        console.log(buttons)
-        for (let i = 0; i < buttons.length; i++) {
-            buttons[i].className = 'selected'
-        }
-        // setIsActive(current => !current)
+    const handlTitleChange = (ev) => {
+        setNewTitleTask(ev.target.value)
+    }
+
+    const handleDescriptionChange = (ev) => {
+        setNewDescriptionTask(ev.target.value)
+    }
+
+    const handleFormClick = (ev) => {
+        ev.preventDefault()
+    }
+
+    const handleChangeColumn = (ev) => {
+        setColumn(ev.target.value)
+    }
+
+    const handleCreateTaskClick = () => {
+        api.task.create(data.boards[0], newTitleTask, newDescriptionTask, column)
+    }
+
+    const handleCreateTitleBoardClick = (ev) => {
+        setNewNameBoard(ev.target.value)
+    }
+
+    const handleCreateBoardClick = () => {
+        api.board.create(newNameBoard)
+    }
+
+    const handleInputBoardColumn = (ev) => {
+        setInputColumnName(ev.target.value)
+    }
+    
+    // const handleClickBoard = (ev) => {
+    //     const { id } = ev.currentTarget
+    //     setCurrentBoard(api.board.getById(id))
+    // }
+
+    const handleInputTitleChange = (ev) => {
+        setInputTitleBoard(ev.target.value)
     }
 
     const buttonBoardName = allBoards.map((board, index) => {
         return (
-        <button className={`modal-select-board-buttons-button ${isActive ? 'selected' : null}`} key={index} onClick={handleClickBoard}>
-            <i className='fa-solid fa-table-columns'></i>
-            {board.name}
-        </button>)
-    })
+            <button className='modal-select-board-buttons-button' key={index} onClick={handleClickBoard} id={board.id}>
+                <i className='fa-solid fa-table-columns'></i>
+                {board.name}
+            </button>
+            )
+        }
+    )
 
     return (
         <>
@@ -88,7 +128,7 @@ const Header = () => {
                 <img src={logo} alt='logo task master'/>
                 <img src={kanban} alt='kanban logo' className='main-header-container-logo-kanban'/>
                 <div className='main-header-container-logo-container'>
-                    <h1 className='main-header-container-logo-container-title'>{data.boards[0].name}</h1>
+                    <h1 className='main-header-container-logo-container-title'>{currentBoard.name}</h1>
                     <button title='All Boards' className='main-header-container-logo-container-button-down' onClick={handleClickSelectBoard}>
                         <i className='fa fa-chevron-down'></i>
                     </button>
@@ -126,7 +166,7 @@ const Header = () => {
                 )}
             </div>
       </header>
-      {modal && (
+      {modalNewTask && (
         <div className='modal' onClick={handleCloseModal}>
             <Modal 
                 title='Add New Task' 
@@ -135,29 +175,54 @@ const Header = () => {
                 labelDescription='Description' 
                 placeholderDescription='e.g. It is always good to take a break. This 15 minutes break will recharge the batteries a little.'
                 buttonText='Create Task'
-                // handleClickForm={addTask} 
-                valueInputTitle=''
-                // handleInputChange={handleInputTitleChange} 
-                // valueTextAreaDescription={textAreaDescription} 
-                // handleTextAreaChange={handleTextAreaDescriptionChange}
+                handleClickForm={handleFormClick} 
+                valueInputTitle={newTitleTask}
+                handleInputChange={handlTitleChange} 
+                valueTextAreaDescription={newDescriptionTask} 
+                handleTextAreaChange={handleDescriptionChange}
+                handleChangeSelect={handleChangeColumn}
+                columnName={column}
+                handleSubmitClick={handleCreateTaskClick}
                 subtasks={[]}>
             </Modal>
         </div>
       )}
       {modalEditBoard && (
         <div className='modal' onClick={handleCloseModal}>
-            <ModalBoard title='Edit Board' labelTitle='Board Name' value='Save Changes'></ModalBoard>
+            <ModalBoard 
+                title='Edit Board' 
+                labelTitle='Board Name' 
+                value='Save Changes'
+                valueTitle={inputTitleBoard}
+                handleTitleChange={handleInputTitleChange}
+                handleFormClick={handleFormClick}
+            >
+            </ModalBoard>
         </div>
       )}
       {modalDeleteBoard && (
         <div className='modal' onClick={handleCloseModal}>
-            <ModalDelete title='Delete this board?' content='Are you sure you want to delete the "Platform Launch" board? This action will remove all columns and tasks and cannot be reversed.'></ModalDelete>
+            <ModalDelete 
+                title='Delete this board?' 
+                content={`Are you sure you want to delete the "${currentBoard.name}" board? This action will remove all columns and tasks and cannot be reversed.`}
+            >
+            </ModalDelete>
         </div>
       )}
       {modalNewBoard && (
         <div className='modal' onClick={handleCloseModal}>
-            <ModalBoard title='Add New Board' labelTitle='Board Name' value='Create New Board'></ModalBoard>
-            {/* change name main button */}
+            <ModalBoard 
+                title='Add New Board' 
+                labelTitle='Board Name' 
+                value='Create New Board'
+                valueTitle={newNameBoard}
+                handleTitleChange={handleCreateTitleBoardClick}
+                handleSubmitClick={handleCreateBoardClick}
+                handleFormClick={handleFormClick}
+                inputText={inputColumnName}
+                handleInputChange={handleInputBoardColumn}
+            >
+            </ModalBoard>
         </div>
       )}
       {modalSelectBoard && (

@@ -1,11 +1,9 @@
 import { useState } from 'react'
-import data from '../services/data.json'
 import ModalViewTask from './ModalViewTask'
 import api from '../services/api/index'
 
-const Main = () => {
+const Main = ({currentBoard}) => {
 
-    const firstBoard = data.boards[0]
     const [currentTask, setCurrentTask] = useState()
 
     const [modal, setModal] = useState(false)
@@ -13,13 +11,14 @@ const Main = () => {
     const handleArticleClick = (ev) => {
         const { id } = ev.currentTarget
         setModal(true)
+        console.log(id)
         setCurrentTask(api.task.getById(id))
     }
 
-    const listColumns = firstBoard.columns.map((column, index) => {
+    const listColumns = currentBoard.columns.map((column, index) => {
         return (
             <section key={index} className='main-board-section'>
-                    <h2 className='main-board-section-title'>{column.name}{`(${column.tasks.length})`}</h2>
+                <h2 className='main-board-section-title'>{column.name}{`(${column.tasks.length})`}</h2>
                 <ul>
                         {column.tasks.map((task, index) => {
                             return (
@@ -40,7 +39,12 @@ const Main = () => {
             {listColumns}
         </main>
             {modal && (
-                <ModalViewTask modal={modal} setModal={setModal} currentTask={currentTask}></ModalViewTask>
+                <ModalViewTask 
+                    modal={modal} 
+                    setModal={setModal} 
+                    currentTask={currentTask}
+                >
+                </ModalViewTask>
                 )
             }
         </>
