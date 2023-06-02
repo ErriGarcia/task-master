@@ -4,9 +4,9 @@ import Status from './Status'
 
 const Modal = ({title, labelTitle, placeholderTitle, valueInputTitle, labelDescription, placeholderDescription, buttonText, handleClickForm, handleInputChange, valueTextAreaDescription, handleTextAreaChange, subtasks, columnName, handleChangeSelect, handleSubmitClick}) => {
 
-    const inputSubtasks = subtasks.map(subtask => {
+    const inputSubtasks = subtasks.map((subtask, i) => {
         return (
-            <li className='container-subtasks'>
+            <li className='container-subtasks' key={i}>
                 <input 
                     type='text' 
                     id={subtask.title} 

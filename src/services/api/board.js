@@ -9,12 +9,17 @@ const getAll = () => data.boards
 /**
  * Create a new board
  * @param {*} nameBoard string
+ * @param {*} columnsBoard string
  * @returns object
  */
-const create = (nameBoard) => {
+const create = (nameBoard, columnsBoard) => {
     return data.boards.push({
         name: nameBoard,
-        id: v4()
+        id: v4(),
+        columns: [{
+            name: columnsBoard,
+            id: v4()
+        }]
     })
 }
 
@@ -45,6 +50,11 @@ const updateById = (id, name) => {
     boardToUpdate.name = name
 }
 
+/**
+ * 
+ * @param {*} id string
+ * @returns 
+ */
 const deleteById = (id) => {
     const boards = getAll()
     const boardToDelete = getById(id)
@@ -58,7 +68,7 @@ const deleteById = (id) => {
     return boards.splice(indexBoard, 1)
 }
 
-const api = {
+const apiBoard = {
     getAll,
     create,
     getById,
@@ -66,4 +76,4 @@ const api = {
     deleteById
 }
 
-export default api
+export default apiBoard
