@@ -51,7 +51,7 @@ const updateById = (id, name) => {
 }
 
 /**
- * 
+ * Delete a board by id
  * @param {*} id string
  * @returns 
  */

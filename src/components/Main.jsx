@@ -2,7 +2,8 @@ import { useState } from 'react'
 import ModalViewTask from './ModalViewTask'
 import api from '../services/api/index'
 
-const Main = ({currentBoard}) => {
+const Main = ({currentBoard, currentColumn}) => {
+    console.log(currentColumn, 'currentColumn')
 
     const [currentTask, setCurrentTask] = useState()
 

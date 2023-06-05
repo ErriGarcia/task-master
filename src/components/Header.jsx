@@ -8,7 +8,7 @@ import ModalBoard from './reusableComponents/ModalBoard'
 import ModalDelete from './reusableComponents/ModalDelete'
 import api from '../services/api/index'
 
-const Header = ({currentBoard, handleClickBoard}) => {
+const Header = ({currentBoard, handleClickBoard, currentColumn, handleGetCurrentColumn, updateBoard, inputTitleBoard, setInputTitleBoard, inputColumnNames, setInputColumnNames}) => {
 
     const [modalNewTask, setModalNewStask] = useState(false)
     const [moreOptionsBoard, setMoreOptionsBoard] = useState(false)
@@ -16,14 +16,19 @@ const Header = ({currentBoard, handleClickBoard}) => {
     const [modalDeleteBoard, setModalDeleteBoard] = useState(false)
     const [modalNewBoard, setModalNewBoard] = useState(false)
     const [modalSelectBoard, setModalSelectBoard] = useState(false)
+    
     const [allBoards, setAllBoards] = useState([api.board.getAll()])
     // const [isActive, setIsActive] = useState(false)
     const [newTitleTask, setNewTitleTask] = useState('')
     const [newDescriptionTask, setNewDescriptionTask] = useState('')
     const [column, setColumn] = useState('Todo')
     const [newNameBoard, setNewNameBoard] = useState('')
-    const [inputTitleBoard, setInputTitleBoard] = useState(currentBoard.name)
-    const [inputColumnNames, setInputColumnNames] = useState('')
+    // const [inputTitleBoard, setInputTitleBoard] = useState(currentBoard.name)
+    // const [inputColumnNames, setInputColumnNames] = useState('')
+    // const [currentColumn, setCurrentColumn] = useState('')
+
+    console.log(inputColumnNames[currentColumn.id], 'inputColumnNames[currentColumn.id]')
+    console.log(allBoards, 'allBoards')
     
     useEffect(() => {
         setAllBoards(api.board.getAll())
@@ -91,7 +96,7 @@ const Header = ({currentBoard, handleClickBoard}) => {
     }
 
     const handleCreateTaskClick = () => {
-        api.task.create(data.boards[0], newTitleTask, newDescriptionTask, column)
+        api.task.create(currentBoard, newTitleTask, newDescriptionTask, column)
     }
 
     const handleCreateTitleBoardClick = (ev) => {
@@ -111,10 +116,14 @@ const Header = ({currentBoard, handleClickBoard}) => {
         setInputTitleBoard(ev.target.value)
     }
 
-    const updateBoard = (ev) => {
-        ev.preventDefault()
-        api.board.updateById(currentBoard.id, inputTitleBoard)
-    }
+    /**
+     * Change name function it updates also the names of inputTitleTasks
+     */
+    // const updateBoard = (ev) => {
+    //     ev.preventDefault()
+    //     api.board.updateById(currentBoard.id, inputTitleBoard)
+    //     api.column.updateById(currentColumn.id, inputColumnNames[currentColumn.id])
+    // }
 
     const handleDeleteBoard = (ev) => {
         ev.preventDefault()
@@ -122,30 +131,22 @@ const Header = ({currentBoard, handleClickBoard}) => {
     }
 
     const handleInputColumnName = (ev) => {
-        // console.log(inputColumnNames, 'inputColumnNames')
-        let test
-        
-        for (const inputColumn in inputColumnNames) {
-            // console.log(inputColumn)
-            // test = inputColumn
-            if (ev.target.id === inputColumn) {
-                inputColumn[ev.target.id] = ev.target.value
-            }
-        }
-
-        // const newInputColumnName = {
-        //     test: ev.target.value
-        // }
-
-
-        /*
         const newInputColumnName = {
             ...inputColumnNames,
             [ev.target.id]: ev.target.value
         }
-        */
-
         setInputColumnNames(newInputColumnName)
+    }
+
+    // const handleGetCurrentColumn = (ev) => {
+    //     const { id } = ev.target
+    //     setCurrentColumn(api.column.getById(id))
+    // }
+
+    const handleDeleteColumn = (ev) => {
+        console.log(ev, 'ev')
+        api.column.deleteById(ev.target.id)
+        console.log(allBoards)
     }
 
     const buttonBoardName = allBoards.map((board, index) => {
@@ -168,11 +169,11 @@ const Header = ({currentBoard, handleClickBoard}) => {
                     className='input subtask' 
                     placeholder={column.name} 
                     value={inputColumnNames[column.id]} 
-                    onChange={handleInputColumnName}
+                    onChange={ev => {handleInputColumnName(ev); handleGetCurrentColumn(ev)}}
                 />
-                <button title='Delete Column' className='button-delete'>
+                <button title='Delete Column' className='button-delete' onClick={handleDeleteColumn} id={column.id}>
                     <span className='material-symbols-outlined'>
-                        close
+                        delete
                     </span>
                 </button>
             </li>

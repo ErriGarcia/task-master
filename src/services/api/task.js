@@ -2,8 +2,8 @@ import data from '../data.json'
 import { v4 } from 'uuid'
 
 /**
- * 
- * @param {*} board : board selected, for now it's just board [0]
+ * Create a new task
+ * @param {*} board : board selected
  * @param {*} title : title value write by user
  * @param {*} description : description value write by user
  * @param {*} status : column selected, for now it's just column [0]
@@ -35,7 +35,7 @@ const getById = (id) => {
 }
 
 /**
- * 
+ * This function update a task found by id
  * @param {*} id 
  * @param {*} title 
  * @param {*} description 
@@ -54,7 +54,7 @@ const updateById = (id, title, description) => {
 }
 
 /**
- * 
+ * This function delete a task found by id
  * @param {*} id 
  * @returns 
  */
