@@ -3,16 +3,13 @@ import ModalViewTask from './ModalViewTask'
 import api from '../services/api/index'
 
 const Main = ({currentBoard, currentColumn}) => {
-    console.log(currentColumn, 'currentColumn')
 
     const [currentTask, setCurrentTask] = useState()
-
     const [modal, setModal] = useState(false)
     
     const handleArticleClick = (ev) => {
         const { id } = ev.currentTarget
         setModal(true)
-        console.log(id)
         setCurrentTask(api.task.getById(id))
     }
 

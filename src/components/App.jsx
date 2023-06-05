@@ -32,7 +32,6 @@ function App() {
       <Header 
         currentBoard={currentBoard} 
         handleClickBoard={handleClickBoard}
-        currentColumn={currentColumn}
         handleGetCurrentColumn={handleGetCurrentColumn}
         updateBoard={updateBoard}
         inputTitleBoard={inputTitleBoard}

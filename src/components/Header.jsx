@@ -1,14 +1,13 @@
 import '../styles/Header.scss'
 import logo from '../images/logo-mobile.svg'
 import kanban from '../images/kanban.svg'
-import data from '../services/data.json'
 import { useEffect, useState } from 'react'
 import Modal from '../components/reusableComponents/Modal'
 import ModalBoard from './reusableComponents/ModalBoard'
 import ModalDelete from './reusableComponents/ModalDelete'
 import api from '../services/api/index'
 
-const Header = ({currentBoard, handleClickBoard, currentColumn, handleGetCurrentColumn, updateBoard, inputTitleBoard, setInputTitleBoard, inputColumnNames, setInputColumnNames}) => {
+const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateBoard, inputTitleBoard, setInputTitleBoard, inputColumnNames, setInputColumnNames}) => {
 
     const [modalNewTask, setModalNewStask] = useState(false)
     const [moreOptionsBoard, setMoreOptionsBoard] = useState(false)
@@ -23,12 +22,6 @@ const Header = ({currentBoard, handleClickBoard, currentColumn, handleGetCurrent
     const [newDescriptionTask, setNewDescriptionTask] = useState('')
     const [column, setColumn] = useState('Todo')
     const [newNameBoard, setNewNameBoard] = useState('')
-    // const [inputTitleBoard, setInputTitleBoard] = useState(currentBoard.name)
-    // const [inputColumnNames, setInputColumnNames] = useState('')
-    // const [currentColumn, setCurrentColumn] = useState('')
-
-    console.log(inputColumnNames[currentColumn.id], 'inputColumnNames[currentColumn.id]')
-    console.log(allBoards, 'allBoards')
     
     useEffect(() => {
         setAllBoards(api.board.getAll())
@@ -116,15 +109,6 @@ const Header = ({currentBoard, handleClickBoard, currentColumn, handleGetCurrent
         setInputTitleBoard(ev.target.value)
     }
 
-    /**
-     * Change name function it updates also the names of inputTitleTasks
-     */
-    // const updateBoard = (ev) => {
-    //     ev.preventDefault()
-    //     api.board.updateById(currentBoard.id, inputTitleBoard)
-    //     api.column.updateById(currentColumn.id, inputColumnNames[currentColumn.id])
-    // }
-
     const handleDeleteBoard = (ev) => {
         ev.preventDefault()
         api.board.deleteById(currentBoard.id)
@@ -138,15 +122,32 @@ const Header = ({currentBoard, handleClickBoard, currentColumn, handleGetCurrent
         setInputColumnNames(newInputColumnName)
     }
 
-    // const handleGetCurrentColumn = (ev) => {
-    //     const { id } = ev.target
-    //     setCurrentColumn(api.column.getById(id))
-    // }
-
     const handleDeleteColumn = (ev) => {
         console.log(ev, 'ev')
         api.column.deleteById(ev.target.id)
         console.log(allBoards)
+    }
+
+    const handleAddNewColumn = (ev) => {
+        ev.preventDefault()
+        return (
+            <li className='container-subtasks'>
+                <input 
+                    type='text' 
+                    id='subtasks' 
+                    name='subtasks' 
+                    className='input subtask' 
+                    placeholder={''} 
+                    value={''} 
+                    onChange={() => {}}
+                />
+                <button title={''} className='button-delete'>
+                    <span className='material-symbols-outlined'>
+                        close
+                    </span>
+                </button>
+            </li>
+        )
     }
 
     const buttonBoardName = allBoards.map((board, index) => {
@@ -262,7 +263,7 @@ const Header = ({currentBoard, handleClickBoard, currentColumn, handleGetCurrent
                         handleSecondInputChange={handleInputColumnName}
 
                         titleCloseIcon='Delete Column'
-                        handleAddSecondInputClick={() => {}}
+                        handleAddSecondInputClick={handleAddNewColumn}
                         secondButtonText='Add New Column'
                         valueMainButtonSubmit='Save Changes'
 

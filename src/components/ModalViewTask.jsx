@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Status from './reusableComponents/Status'
 import Modal from './reusableComponents/Modal'
 import ModalDelete from './reusableComponents/ModalDelete'
@@ -12,7 +12,16 @@ const ModalViewTask = ({modal, setModal, currentTask}) => {
     const [modalDeleteTask, setModalDeleteTask] = useState(false)
     const [inputTitleTask, setInputTitleTask] = useState(currentTask.title)
     const [textAreaDescription, setTextAreaDescription] = useState(currentTask.description)
-    const [subtasks, setSubtasks] = useState(currentTask.subtasks || [])
+    const [subtasks] = useState(currentTask.subtasks || [])
+    const [inputSubtasksNames, setInputSubtasksNames] = useState('')
+
+    useEffect(() => {
+        const subtasksDetails = {}
+        for (const subtask of currentTask.subtasks) {
+            subtasksDetails[subtask.id] = subtask.title
+        }
+        setInputSubtasksNames(subtasksDetails)
+    }, [currentTask.subtasks, subtasks.id])
 
     const handleSubtaskForm = () => {
         setCheck(!check)
@@ -58,13 +67,44 @@ const ModalViewTask = ({modal, setModal, currentTask}) => {
         api.task.deleteById(currentTask.id)
     }
 
+    const handleInputSubtaskName = (ev) => {
+        const newInputSubtaskName = {
+            ...inputSubtasksNames,
+            [ev.target.id]: ev.target.value
+        }
+        setInputSubtasksNames(newInputSubtaskName)
+    }
+
     const listOfSubtasks = currentTask.subtasks.map((subtask, i) => {
-        return ( <li key={i} className='container-view-task-subtasks-list-subtask' onChange={handleSubtaskForm}>
-            <input type='checkbox' id={subtask.title} name={subtask.title}></input>
-            <label htmlFor={subtask.title} className={subtask.isCompleted ? 'checked' : null}>
-            {subtask.title}</label>
-            </li>)
+        return (
+            <li key={i} className='container-view-task-subtasks-list-subtask' onChange={handleSubtaskForm}>
+                <input type='checkbox' id={subtask.title} name={subtask.title}></input>
+                <label htmlFor={subtask.title} className={subtask.isCompleted ? 'checked' : null}>
+                {subtask.title}</label>
+            </li>
+        )
     })
+
+    const inputSubtasks = subtasks.map((subtask, i) => {
+        return (
+            <li className='container-subtasks' key={i}>
+                <input 
+                    type='text' 
+                    id={subtask.id} 
+                    name='subtasks' 
+                    className='input subtask' 
+                    placeholder='e.g. Make Coffee' 
+                    value={inputSubtasksNames[subtask.id]}
+                    onChange={handleInputSubtaskName}
+                />
+                <button title='Delete Subtask' className='button-delete'>
+                    <span className='material-symbols-outlined'>
+                        close
+                    </span>
+                </button>
+            </li>
+        )
+    }) 
 
     return (
         <>
@@ -118,6 +158,7 @@ const ModalViewTask = ({modal, setModal, currentTask}) => {
                         handleTextAreaChange={handleTextAreaDescriptionChange}
                         // titleSubtask={titlesSubtask}
                         subtasks={subtasks}
+                        inputSubtasks={inputSubtasks}
                     >
                     </Modal>
                 </div>

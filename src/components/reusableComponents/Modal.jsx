@@ -2,27 +2,28 @@ import '../../styles/reusableComponents/Modal.scss'
 import MainButton from '../reusableComponents/MainButton'
 import Status from './Status'
 
-const Modal = ({title, labelTitle, placeholderTitle, valueInputTitle, labelDescription, placeholderDescription, buttonText, handleClickForm, handleInputChange, valueTextAreaDescription, handleTextAreaChange, subtasks, columnName, handleChangeSelect, handleSubmitClick}) => {
+const Modal = ({title, labelTitle, placeholderTitle, valueInputTitle, labelDescription, placeholderDescription, buttonText, handleClickForm, handleInputChange, valueTextAreaDescription, handleTextAreaChange, subtasks, columnName, handleChangeSelect, handleSubmitClick, handleSubtaskInputChange, inputSubtasks}) => {
 
-    const inputSubtasks = subtasks.map((subtask, i) => {
-        return (
-            <li className='container-subtasks' key={i}>
-                <input 
-                    type='text' 
-                    id={subtask.title} 
-                    name='subtasks' 
-                    className='input subtask' 
-                    placeholder='e.g. Make Coffee' 
-                    value={subtask.title}
-                />
-                <button title='Delete Subtask' className='button-delete'>
-                    <span className='material-symbols-outlined'>
-                        close
-                    </span>
-                </button>
-            </li>
-        )
-    }) 
+    // const inputSubtasks = subtasks.map((subtask, i) => {
+    //     return (
+    //         <li className='container-subtasks' key={i}>
+    //             <input 
+    //                 type='text' 
+    //                 id={subtask.title} 
+    //                 name='subtasks' 
+    //                 className='input subtask' 
+    //                 placeholder='e.g. Make Coffee' 
+    //                 value={subtask.title}
+    //                 onChange={handleSubtaskInputChange}
+    //             />
+    //             <button title='Delete Subtask' className='button-delete'>
+    //                 <span className='material-symbols-outlined'>
+    //                     close
+    //                 </span>
+    //             </button>
+    //         </li>
+    //     )
+    // }) 
     
     return (
         <div className='container-view-task'>
@@ -30,7 +31,14 @@ const Modal = ({title, labelTitle, placeholderTitle, valueInputTitle, labelDescr
                 <h2 className='modal-form-title'>{title}</h2>
                 <fieldset className='modal-form-fieldset-title fieldset'>
                     <label htmlFor='title' className='label'>{labelTitle}</label>
-                    <input type='text' id='title' name='title' className='input' placeholder={placeholderTitle} value={valueInputTitle} onChange={handleInputChange}/>
+                    <input 
+                        type='text' 
+                        id='title' 
+                        name='title' 
+                        className='input' 
+                        placeholder={placeholderTitle} 
+                        value={valueInputTitle} 
+                        onChange={handleInputChange}/>
                 </fieldset>
                 <fieldset className='fieldset'>
                     <label htmlFor='description' className='label'>{labelDescription}</label>
