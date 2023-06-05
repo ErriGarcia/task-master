@@ -94,7 +94,7 @@ const ModalViewTask = ({modal, setModal, currentTask, handleGetCurrentSubtask, c
 
     const inputSubtasks = subtasks.map((subtask, i) => {
         return (
-            <li className='container-subtasks' key={i}>
+            <li className='container-subtasks-list' key={i}>
                 <input 
                     type='text' 
                     id={subtask.id} 
@@ -106,7 +106,7 @@ const ModalViewTask = ({modal, setModal, currentTask, handleGetCurrentSubtask, c
                 />
                 <button title='Delete Subtask' className='button-delete' onClick={handleDeleteSubtask}>
                     <span className='material-symbols-outlined' id={subtask.id}>
-                        close
+                        delete
                     </span>
                 </button>
             </li>

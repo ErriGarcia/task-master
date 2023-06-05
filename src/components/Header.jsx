@@ -130,24 +130,24 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
 
     const handleAddNewColumn = (ev) => {
         ev.preventDefault()
-        return (
-            <li className='container-subtasks'>
-                <input 
-                    type='text' 
-                    id='subtasks' 
-                    name='subtasks' 
-                    className='input subtask' 
-                    placeholder={''} 
-                    value={''} 
-                    onChange={() => {}}
-                />
-                <button title={''} className='button-delete'>
-                    <span className='material-symbols-outlined'>
-                        close
-                    </span>
-                </button>
-            </li>
-        )
+        // return (
+        //     <li className='container-subtasks'>
+        //         <input 
+        //             type='text' 
+        //             id='subtasks' 
+        //             name='subtasks' 
+        //             className='input subtask' 
+        //             placeholder={''} 
+        //             value={''} 
+        //             onChange={() => {}}
+        //         />
+        //         <button title={''} className='button-delete'>
+        //             <span className='material-symbols-outlined'>
+        //                 close
+        //             </span>
+        //         </button>
+        //     </li>
+        // )
     }
 
     const buttonBoardName = allBoards.map((board, index) => {
@@ -162,7 +162,7 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
 
     const inputColumns = currentBoard.columns.map((column, i) => {
         return (
-            <li className='container-subtasks' key={i}>
+            <li className='container-subtasks-list' key={i}>
                 <input 
                     type='text' 
                     id={column.id} 

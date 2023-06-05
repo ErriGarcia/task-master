@@ -36,7 +36,7 @@ const ModalBoard = ({
                 <fieldset className='fieldset'>
                     <label htmlFor='subtasks' className='label'>{labelSecondInputs}</label>
                 {/* {subtasks} */}
-                    <ul>
+                    <ul className='container-subtasks'>
                         {inputColumns}
                         
                         {/* <li className='container-subtasks'>

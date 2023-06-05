@@ -48,9 +48,9 @@ const Modal = ({title, labelTitle, placeholderTitle, valueInputTitle, labelDescr
 
                 <fieldset className='fieldset'>
                     <label htmlFor='subtasks' className='label'>Subtasks</label>
-                        <ul>
+                        <ul className='container-subtasks'>
                            {inputSubtasks}
-                           <li className='container-subtasks'>
+                           <li className='container-subtasks-list'>
                                 <input 
                                     type='text' 
                                     id='Add new subtask' 
@@ -61,7 +61,7 @@ const Modal = ({title, labelTitle, placeholderTitle, valueInputTitle, labelDescr
                                 />
                                 <button title='Delete Subtask' className='button-delete'>
                                     <span className='material-symbols-outlined'>
-                                        close
+                                        delete
                                     </span>
                                 </button>
                             </li>

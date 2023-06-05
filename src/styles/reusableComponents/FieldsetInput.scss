@@ -1,7 +1,14 @@
 .container-subtasks {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     gap: 1rem;
+
+    &-list {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+    }
 }
 
 .subtask {

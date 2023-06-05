@@ -23,10 +23,10 @@ const Main = ({currentBoard}) => {
         return (
             <section key={index} className='main-board-section'>
                 <h2 className='main-board-section-title'>{column.name}{`(${column.tasks.length})`}</h2>
-                <ul>
+                <ul className='main-board-section-list'>
                         {column.tasks.map((task, index) => {
                             return (
-                                <li className='main-board-section-list' id={task.id} key={index} onClick={handleArticleClick}>
+                                <li id={task.id} key={index} onClick={handleArticleClick}>
                                     <article className='main-board-section-list-article'>
                                         <h3>{task.title}</h3>
                                     </article>
