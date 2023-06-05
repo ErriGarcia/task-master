@@ -2,15 +2,21 @@ import { useState } from 'react'
 import ModalViewTask from './ModalViewTask'
 import api from '../services/api/index'
 
-const Main = ({currentBoard, currentColumn}) => {
+const Main = ({currentBoard}) => {
 
-    const [currentTask, setCurrentTask] = useState()
+    const [currentTask, setCurrentTask] = useState('')
     const [modal, setModal] = useState(false)
+    const [currentSubtask, setCurrentSubtask] = useState('')
     
     const handleArticleClick = (ev) => {
         const { id } = ev.currentTarget
         setModal(true)
         setCurrentTask(api.task.getById(id))
+    }
+
+    const handleGetCurrentSubtask = (ev) => {
+        const { id } = ev.target
+        setCurrentSubtask(api.subtask.getById(id))
     }
 
     const listColumns = currentBoard.columns.map((column, index) => {
@@ -41,6 +47,8 @@ const Main = ({currentBoard, currentColumn}) => {
                     modal={modal} 
                     setModal={setModal} 
                     currentTask={currentTask}
+                    currentSubtask={currentSubtask}
+                    handleGetCurrentSubtask={handleGetCurrentSubtask}
                 >
                 </ModalViewTask>
                 )

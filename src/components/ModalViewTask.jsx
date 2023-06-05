@@ -4,7 +4,7 @@ import Modal from './reusableComponents/Modal'
 import ModalDelete from './reusableComponents/ModalDelete'
 import api from '../services/api/index'
 
-const ModalViewTask = ({modal, setModal, currentTask}) => {
+const ModalViewTask = ({modal, setModal, currentTask, handleGetCurrentSubtask, currentSubtask}) => {
 
     const [check, setCheck] = useState(false)
     const [moreOptions, setMoreOptions] = useState(false)
@@ -60,6 +60,7 @@ const ModalViewTask = ({modal, setModal, currentTask}) => {
     const updateTask = (ev) => {
         ev.preventDefault()
         api.task.updateById(currentTask.id, inputTitleTask, textAreaDescription)
+        api.subtask.updateById(currentSubtask.id, inputSubtasksNames[currentSubtask.id])
     }
 
     const handleDeleteTask = (ev) => {
@@ -95,7 +96,7 @@ const ModalViewTask = ({modal, setModal, currentTask}) => {
                     className='input subtask' 
                     placeholder='e.g. Make Coffee' 
                     value={inputSubtasksNames[subtask.id]}
-                    onChange={handleInputSubtaskName}
+                    onChange={ev => {handleInputSubtaskName(ev); handleGetCurrentSubtask(ev)}}
                 />
                 <button title='Delete Subtask' className='button-delete'>
                     <span className='material-symbols-outlined'>
