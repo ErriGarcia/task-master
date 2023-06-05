@@ -16,6 +16,7 @@ const getById = (id) => {
                 const searchingSubtask = task.subtasks.find(subtask => subtask.id === id)
     
                 if (searchingSubtask) {
+                    console.log(searchingSubtask, 'searchingSubtask')
                     return searchingSubtask
                 }
 
@@ -41,30 +42,38 @@ const updateById = (id, title) => {
     subtaskToUpdate.title = title
 }
 
-// /**
-//  * This function delete a subtask found by id
-//  * @param {*} id string
-//  * @returns 
-//  */
-// const deleteById = (id) => {
-//     const columnToDelete = getById(id)
+/**
+ * This function delete a subtask found by id
+ * @param {*} id string
+ * @returns 
+ */
+const deleteById = (id) => {
+    const subtaskToDelete = getById(id)
+    console.log(subtaskToDelete, 'subtaskToDeleteeeeee!!!')
 
-//     if (!columnToDelete) {
-//         console.error(`Can not delete task with this id: ${id} not found`)
-//         return
-//     }
+    if (!subtaskToDelete) {
+        console.error(`Can not delete subtask with this id: ${id} not found`)
+        return
+    }
 
-//     data.boards.forEach(board => {
-//         const indexTask = board.columns.indexOf(columnToDelete)
-//         return board.columns.splice(indexTask, 1)
-//     })
-// }
+    data.boards.forEach(board => {
+        console.log(board, 'board')
+        board.columns.forEach(column => {
+            console.log(column, 'column')
+            column.tasks.forEach(task => {
+                console.log(task, 'task')
+                const indexSubtask = task.subtasks.indexOf(subtaskToDelete)
+                return task.subtasks.splice(indexSubtask, 1)
+            })
+        })
+    })
+}
 
 const apiSubtask = {
     create,
     getById,
     updateById,
-    // deleteById
+    deleteById
 }
 
 export default apiSubtask

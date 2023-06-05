@@ -76,6 +76,12 @@ const ModalViewTask = ({modal, setModal, currentTask, handleGetCurrentSubtask, c
         setInputSubtasksNames(newInputSubtaskName)
     }
 
+    const handleDeleteSubtask = (ev) => {
+        console.log(ev, 'ev')
+        api.subtask.deleteById(ev.target.id)
+        console.log(subtasks, 'subtasks')
+    }
+
     const listOfSubtasks = currentTask.subtasks.map((subtask, i) => {
         return (
             <li key={i} className='container-view-task-subtasks-list-subtask' onChange={handleSubtaskForm}>
@@ -98,8 +104,8 @@ const ModalViewTask = ({modal, setModal, currentTask, handleGetCurrentSubtask, c
                     value={inputSubtasksNames[subtask.id]}
                     onChange={ev => {handleInputSubtaskName(ev); handleGetCurrentSubtask(ev)}}
                 />
-                <button title='Delete Subtask' className='button-delete'>
-                    <span className='material-symbols-outlined'>
+                <button title='Delete Subtask' className='button-delete' onClick={handleDeleteSubtask}>
+                    <span className='material-symbols-outlined' id={subtask.id}>
                         close
                     </span>
                 </button>
