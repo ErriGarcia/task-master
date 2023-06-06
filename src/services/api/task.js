@@ -9,11 +9,16 @@ import { v4 } from 'uuid'
  * @param {*} status : column selected, for now it's just column [0]
  * @returns 
  */
-const create = (board, titleTask, descriptionTask, statusTask) => {
+const create = (board, titleTask, descriptionTask, subtaskTask, statusTask) => {
     return board.columns[0].tasks.push({
         id: v4(),
         title: titleTask, 
-        description: descriptionTask, 
+        description: descriptionTask,
+        subtasks: [{
+            id: v4(),
+            isCompleted: false,
+            title: subtaskTask
+        }],
         status: statusTask
     })
 }

@@ -7,7 +7,7 @@ import ModalBoard from './reusableComponents/ModalBoard'
 import ModalDelete from './reusableComponents/ModalDelete'
 import api from '../services/api/index'
 
-const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateBoard, inputTitleBoard, setInputTitleBoard, inputColumnNames, setInputColumnNames}) => {
+const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateBoard, inputTitleBoard, setInputTitleBoard, inputColumnNames, setInputColumnNames, currentColumn}) => {
 
     const [modalNewTask, setModalNewStask] = useState(false)
     const [moreOptionsBoard, setMoreOptionsBoard] = useState(false)
@@ -22,6 +22,7 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
     const [newDescriptionTask, setNewDescriptionTask] = useState('')
     const [column, setColumn] = useState('Todo')
     const [newNameBoard, setNewNameBoard] = useState('')
+    const [newSubtaskTitle, setNewSubtaskTitle] = useState('')
     
     useEffect(() => {
         setAllBoards(api.board.getAll())
@@ -30,6 +31,7 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
             columnsDetails[column.id] = column.name
         }
         setInputColumnNames(columnsDetails)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentBoard.columns])
 
     const handleAddTask = () => {
@@ -89,7 +91,8 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
     }
 
     const handleCreateTaskClick = () => {
-        api.task.create(currentBoard, newTitleTask, newDescriptionTask, column)
+        console.log(currentBoard, 'current Board')
+        api.task.create(currentBoard, newTitleTask, newDescriptionTask, newSubtaskTitle, column)
     }
 
     const handleCreateTitleBoardClick = (ev) => {
@@ -244,7 +247,9 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
                         columnName={column}
                         handleSubmitClick={handleCreateTaskClick}
                         subtasks={[]}
-                        columns={currentBoard.columns}>
+                        columns={currentBoard.columns}
+                        valueSubtask={newSubtaskTitle}
+                        handleSubtaskChange={ev => {setNewSubtaskTitle(ev.target.value)}}>
                     </Modal>
                 </div>
             )}

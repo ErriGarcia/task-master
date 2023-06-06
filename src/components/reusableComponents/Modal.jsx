@@ -2,28 +2,25 @@ import '../../styles/reusableComponents/Modal.scss'
 import MainButton from '../reusableComponents/MainButton'
 import Status from './Status'
 
-const Modal = ({title, labelTitle, placeholderTitle, valueInputTitle, labelDescription, placeholderDescription, buttonText, handleClickForm, handleInputChange, valueTextAreaDescription, handleTextAreaChange, subtasks, columnName, handleChangeSelect, handleSubmitClick, handleSubtaskInputChange, inputSubtasks}) => {
-
-    // const inputSubtasks = subtasks.map((subtask, i) => {
-    //     return (
-    //         <li className='container-subtasks' key={i}>
-    //             <input 
-    //                 type='text' 
-    //                 id={subtask.title} 
-    //                 name='subtasks' 
-    //                 className='input subtask' 
-    //                 placeholder='e.g. Make Coffee' 
-    //                 value={subtask.title}
-    //                 onChange={handleSubtaskInputChange}
-    //             />
-    //             <button title='Delete Subtask' className='button-delete'>
-    //                 <span className='material-symbols-outlined'>
-    //                     close
-    //                 </span>
-    //             </button>
-    //         </li>
-    //     )
-    // }) 
+const Modal = ({
+    title, 
+    labelTitle, 
+    placeholderTitle, 
+    valueInputTitle, 
+    labelDescription, 
+    placeholderDescription, 
+    valueTextAreaDescription, 
+    buttonText, 
+    handleClickForm, 
+    handleInputChange, 
+    handleTextAreaChange,  
+    columnName, 
+    handleChangeSelect, 
+    handleSubmitClick,
+    inputSubtasks, 
+    valueSubtask, 
+    handleSubtaskChange
+}) => {
     
     return (
         <div className='container-view-task'>
@@ -45,7 +42,6 @@ const Modal = ({title, labelTitle, placeholderTitle, valueInputTitle, labelDescr
                     <textarea type='text' id='description' name='description' className='textarea' placeholder={placeholderDescription} value={valueTextAreaDescription} onChange={handleTextAreaChange}>
                     </textarea>
                 </fieldset>
-
                 <fieldset className='fieldset'>
                     <label htmlFor='subtasks' className='label'>Subtasks</label>
                         <ul className='container-subtasks'>
@@ -57,7 +53,8 @@ const Modal = ({title, labelTitle, placeholderTitle, valueInputTitle, labelDescr
                                     name='subtasks' 
                                     className='input subtask' 
                                     placeholder='e.g. Make Coffee' 
-                                    value=''
+                                    value={valueSubtask}
+                                    onChange={handleSubtaskChange}
                                 />
                                 <button title='Delete Subtask' className='button-delete'>
                                     <span className='material-symbols-outlined'>
@@ -71,14 +68,6 @@ const Modal = ({title, labelTitle, placeholderTitle, valueInputTitle, labelDescr
                         Add New Subtask
                     </button>
                 </fieldset>
-
-                {/* <FieldsetInput
-                    labelSubtasks='Subtasks'
-                    placeholderSubtask='e.g. Make Coffee'
-                    titleIcon='Delete Subtask'
-                    buttonText='Add New Subtask'
-                    valueInputSubtask={titleSubtask}>
-                </FieldsetInput> */}
                 <Status
                     columnName={columnName}
                     handleChangeSelect={handleChangeSelect}

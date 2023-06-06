@@ -61,6 +61,8 @@ const ModalViewTask = ({modal, setModal, currentTask, handleGetCurrentSubtask, c
         ev.preventDefault()
         api.task.updateById(currentTask.id, inputTitleTask, textAreaDescription)
         api.subtask.updateById(currentSubtask.id, inputSubtasksNames[currentSubtask.id])
+        setModal(false)
+        setModalEditTask(false)
     }
 
     const handleDeleteTask = (ev) => {
@@ -155,17 +157,20 @@ const ModalViewTask = ({modal, setModal, currentTask, handleGetCurrentSubtask, c
                 <div className='modal' onClick={handleClickCloseModal}>
                     <Modal 
                         title='Edit Task' 
-                        labelTitle='Title' 
-                        labelDescription='Descritpion' 
-                        buttonText='Update Task' 
-                        handleClickForm={updateTask} 
-                        valueInputTitle={inputTitleTask} 
-                        handleInputChange={handleInputTitleChange} 
+                        labelTitle='Title'
+                        placeholderTitle='e.g. Make Coffee'
+                        valueInputTitle={inputTitleTask}
+                        labelDescription='Descritpion'
+                        placeholderDescription=''
                         valueTextAreaDescription={textAreaDescription} 
+                        buttonText='Update Task' 
+                        handleClickForm={e => e.preventDefault()} 
+                        handleInputChange={handleInputTitleChange} 
                         handleTextAreaChange={handleTextAreaDescriptionChange}
-                        // titleSubtask={titlesSubtask}
-                        subtasks={subtasks}
+                        handleSubmitClick={updateTask}
                         inputSubtasks={inputSubtasks}
+                        valueSubtask={''}
+                        handleSubtaskChange={e => console.log('change input default')}
                     >
                     </Modal>
                 </div>
