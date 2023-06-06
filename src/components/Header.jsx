@@ -11,7 +11,6 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
 
     const [modalNewTask, setModalNewStask] = useState(false)
     const [moreOptionsBoard, setMoreOptionsBoard] = useState(false)
-    // const [modalEditBoard, setModalEditBoard] = useState(false)
     const [modalDeleteBoard, setModalDeleteBoard] = useState(false)
     const [modalNewBoard, setModalNewBoard] = useState(false)
     const [modalSelectBoard, setModalSelectBoard] = useState(false)
@@ -22,7 +21,7 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
     const [newDescriptionTask, setNewDescriptionTask] = useState('')
     const [column, setColumn] = useState('Todo')
     const [newNameBoard, setNewNameBoard] = useState('')
-    const [newSubtaskTitle, setNewSubtaskTitle] = useState('')
+    const [newSubtaskTitle] = useState('')
 
     console.log(allBoards, 'allboards')
 
@@ -115,11 +114,6 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
             setModalNewBoard(false)
         }
     }
-
-    // Modal Add Board
-    // const handleInputBoardColumn = (ev) => {
-    //     // setInputColumnName(ev.target.value)
-    // }
 
     const handleInputTitleChange = (ev) => {
         setInputTitleBoard(ev.target.value)
@@ -234,21 +228,22 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
                     <Modal 
                         title='Add New Task' 
                         labelTitle='Title' 
-                        placeholderTitle='e.g. Take coffee break' 
-                        labelDescription='Description' 
-                        placeholderDescription='e.g. It is always good to take a break. This 15 minutes break will recharge the batteries a little.'
-                        buttonText='Create Task'
-                        handleClickForm={handleFormClick} 
+                        placeholderTitle='e.g. Take coffee break'
                         valueInputTitle={newTitleTask}
                         handleInputChange={handlTitleChange} 
+
+                        labelDescription='Description' 
+                        placeholderDescription='e.g. It is always good to take a break. This 15 minutes break will recharge the batteries a little.'
                         valueTextAreaDescription={newDescriptionTask} 
                         handleTextAreaChange={handleDescriptionChange}
+
+                        buttonText='Create Task'
+                        handleClickForm={handleFormClick} 
                         handleChangeSelect={handleChangeColumn}
                         columnName={column}
                         handleSubmitClick={handleCreateTaskClick}
                         subtasks={[]}
                         columns={currentBoard.columns}
-                        // valueSubtask={newSubtaskTitle}
                         >
                     </Modal>
                 </div>
@@ -272,7 +267,7 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
                         secondButtonText='Add New Column'
                         valueMainButtonSubmit='Save Changes'
 
-                        handleFormClick={e => e.preventDefault()}
+                        handleFormClick={ev => ev.preventDefault()}
                         columns={currentBoard.columns}
                         inputColumns={inputColumns}
                         handleSubmitClick={updateBoard}
@@ -302,11 +297,8 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
 
                         labelSecondInputs='Board Columns'
                         placeholderSecondInput='e.g. Todo'
-                        // valueSecondInput={inputColumnNames}
-                        // handleSecondInputChange={handleInputBoardColumn}
 
                         titleCloseIcon='Delete Column'
-                        // handleAddSecondInputClick={e => {console.log(e)}}
                         secondButtonText='Add New Column'
                         valueMainButtonSubmit='Create New Board'
 

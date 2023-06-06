@@ -1,7 +1,6 @@
 import data from '../../services/data.json'
 
 // make it reusable don't stick to the first column
-
 const Status = ({columnName, handleChangeSelect}) => {
 
     const firstColumn = data.boards[0].columns

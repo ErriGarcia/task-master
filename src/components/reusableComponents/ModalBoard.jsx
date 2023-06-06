@@ -10,8 +10,6 @@ const ModalBoard = ({
     handleTitleChange,
     labelSecondInputs,
     placeholderSecondInput,
-    // valueSecondInput,
-    // handleSecondInputChange,
     titleCloseIcon,
     secondButtonText,
     valueMainButtonSubmit,
@@ -74,7 +72,6 @@ const ModalBoard = ({
                 
                 <fieldset className='fieldset'>
                     <label htmlFor='column' className='label'>{labelSecondInputs}</label>
-                {/* {subtasks} */}
                     <ul className='container-subtasks'>
                         {inputColumns}
                         {columnList.map((singleInput, index) => {

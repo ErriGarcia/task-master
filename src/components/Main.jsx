@@ -5,7 +5,6 @@ import api from '../services/api/index'
 const Main = ({currentBoard, modal, setModal}) => {
 
     const [currentTask, setCurrentTask] = useState('')
-    // const [modal, setModal] = useState(false)
     const [currentSubtask, setCurrentSubtask] = useState('')
     
     const handleArticleClick = (ev) => {
@@ -30,7 +29,8 @@ const Main = ({currentBoard, modal, setModal}) => {
                                     <article className='main-board-section-list-article'>
                                         <h3>{task.title}</h3>
                                     </article>
-                                </li>)
+                                </li>
+                            )
                         })}
                 </ul>
             </section>
@@ -51,8 +51,7 @@ const Main = ({currentBoard, modal, setModal}) => {
                     handleGetCurrentSubtask={handleGetCurrentSubtask}
                 >
                 </ModalViewTask>
-                )
-            }
+            )}
         </>
     )
 }

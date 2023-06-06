@@ -33,9 +33,9 @@ const ModalViewTask = ({modal, setModal, currentTask, handleGetCurrentSubtask, c
         }
     }
 
-    const handleClickEvPreventDefault = (ev) => {
-        ev.preventDefault()
-    }
+    // const handleClickEvPreventDefault = (ev) => {
+    //     ev.preventDefault()
+    // }
 
     const handleClickMoreOptions = () => {
         setMoreOptions(true)
@@ -85,17 +85,28 @@ const ModalViewTask = ({modal, setModal, currentTask, handleGetCurrentSubtask, c
     }
 
     const handleDeleteSubtask = (ev) => {
-        console.log(ev, 'ev')
         api.subtask.deleteById(ev.target.id)
         console.log(subtasks, 'subtasks')
     }
 
     const listOfSubtasks = currentTask.subtasks.map((subtask, i) => {
         return (
-            <li key={i} className='container-view-task-subtasks-list-subtask' onChange={handleSubtaskForm}>
-                <input type='checkbox' id={subtask.title} name={subtask.title}></input>
-                <label htmlFor={subtask.title} className={subtask.isCompleted ? 'checked' : null}>
-                {subtask.title}</label>
+            <li 
+                key={i} 
+                className='container-view-task-subtasks-list-subtask' 
+                onChange={handleSubtaskForm}
+            >
+                <input type='checkbox' 
+                    id={subtask.title} 
+                    name={subtask.title}
+                >
+                </input>
+                <label 
+                    htmlFor={subtask.title} 
+                    className={subtask.isCompleted ? 'checked' : null}
+                >
+                    {subtask.title}
+                </label>
             </li>
         )
     })
@@ -125,7 +136,7 @@ const ModalViewTask = ({modal, setModal, currentTask, handleGetCurrentSubtask, c
         <>
             {modal && (
                 <div className='modal' onClick={handleClickCloseModal}>
-                    <form className='container-view-task' onClick={handleClickEvPreventDefault}>
+                    <form className='container-view-task' onClick={(ev) => {ev.preventDefault()}}>
                         <fieldset className='container-view-task-header'>
                             <h2 className='container-view-task-header-title'>{currentTask.title}</h2>
                             <button title='Edit Task' className='container-view-task-header-more-options-button' onClick={handleClickMoreOptions}>
