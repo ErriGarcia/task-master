@@ -23,7 +23,7 @@ const FieldsetInput = ({labelSubtasks, placeholderSubtask, titleIcon, buttonText
                         <input type='text' id='subtasks' name='subtasks' className='input subtask' placeholder={placeholderSubtask} value={inputText} onChange={handleInputChange}/>
                         <button title={titleIcon} className='button-delete'>
                             <span className='material-symbols-outlined'>
-                                close
+                                delete
                             </span>
                         </button>
                     </li>

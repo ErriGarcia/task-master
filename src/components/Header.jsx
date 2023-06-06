@@ -23,7 +23,7 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
     const [column, setColumn] = useState('Todo')
     const [newNameBoard, setNewNameBoard] = useState('')
     const [newSubtaskTitle, setNewSubtaskTitle] = useState('')
-    
+
     useEffect(() => {
         setAllBoards(api.board.getAll())
         const columnsDetails = {}
@@ -100,14 +100,18 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
     }
 
     const handleCreateBoardClick = () => {
-        api.board.create(newNameBoard, 'inputColumnName')
-        setModalNewBoard(false)
+        if (!newNameBoard) {
+            setModalNewBoard(true)
+        } else {
+            api.board.create(newNameBoard, 'inputColumnName')
+            setModalNewBoard(false)
+        }
     }
 
     // Modal Add Board
-    const handleInputBoardColumn = (ev) => {
-        // setInputColumnName(ev.target.value)
-    }
+    // const handleInputBoardColumn = (ev) => {
+    //     // setInputColumnName(ev.target.value)
+    // }
 
     const handleInputTitleChange = (ev) => {
         setInputTitleBoard(ev.target.value)
@@ -143,7 +147,7 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
 
     const buttonBoardName = allBoards.map((board, index) => {
         return (
-            <button className='modal-select-board-buttons-button' key={index} onClick={handleClickBoard} id={board.id}>
+            <button className='modal-select-board-buttons-button selected' key={index} onClick={handleClickBoard} id={board.id}>
                 <i className='fa-solid fa-table-columns'></i>
                 {board.name}
             </button>
@@ -290,11 +294,11 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
 
                         labelSecondInputs='Board Columns'
                         placeholderSecondInput='e.g. Todo'
-                        valueSecondInput={inputColumnNames}
-                        handleSecondInputChange={handleInputBoardColumn}
+                        // valueSecondInput={inputColumnNames}
+                        // handleSecondInputChange={handleInputBoardColumn}
 
                         titleCloseIcon='Delete Column'
-                        handleAddSecondInputClick={'FIX: click to add new column'}
+                        // handleAddSecondInputClick={e => {console.log(e)}}
                         secondButtonText='Add New Column'
                         valueMainButtonSubmit='Create New Board'
 

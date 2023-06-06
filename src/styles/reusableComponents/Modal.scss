@@ -41,5 +41,21 @@
         line-height: 1.4375rem;
         height: 7rem;
     }
+
+    .error-board-name {
+        border: solid 1px rgba(255, 0, 0, 0.737);
+    }
+
+    .error-board-name-message {
+        display: flex;
+        align-items: center;
+        font-size: 0.65rem;
+        gap: 0.3rem;
+        color: rgba(255, 0, 0, 0.737);
+
+        &-icon {
+            font-size: 1rem;
+        }
+    }
 }
 
