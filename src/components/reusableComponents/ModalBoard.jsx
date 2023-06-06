@@ -49,9 +49,9 @@ const ModalBoard = ({
     return (
         <div className='container-view-task'>
             <form className='modal-form' onClick={handleFormClick}>
-                <h2 className='modal-form-title'>{modalTitle} *</h2>
+                <h2 className='modal-form-title'>{modalTitle}</h2>
                 <fieldset className='modal-form-fieldset-title fieldset'>
-                    <label htmlFor='title' className='label'>{firstInputLabelTitle}</label>
+                    <label htmlFor='title' className='label'>{firstInputLabelTitle} *</label>
                     <input 
                         type='text' 
                         id='title' 
@@ -62,19 +62,22 @@ const ModalBoard = ({
                         className={`input ${setErrorBoardName('error-board-name')}`}
                         required
                     />
-                {setErrorBoardName('error-board-name') && (
-                    <div className='error-board-name-message'>
-                        <span className='material-icons error-board-name-message-icon'>
-                            error
-                            </span>
-                        <p>Board name is required</p>
-                    </div>
-                )}
+                    {setErrorBoardName('error-board-name') && (
+                        <div className='error-board-name-message'>
+                            <span className='material-icons error-board-name-message-icon'>
+                                error
+                                </span>
+                            <p>Board name is required</p>
+                        </div>
+                    )}
                 </fieldset>
                 
                 <fieldset className='fieldset'>
                     <label htmlFor='column' className='label'>{labelSecondInputs}</label>
                 {/* {subtasks} */}
+                    <ul className='container-subtasks'>
+                        {inputColumns}
+                    </ul>
                     {columnList.map((singleInput, index) => {
                         return (
                             <li className='container-subtasks-list' key={index}>
@@ -87,23 +90,18 @@ const ModalBoard = ({
                                     value={singleInput.input} 
                                     onChange={(ev) => handleColumnInputChange(ev, index)}
                                 />
-                                {columnList.length > 1 && (
-                                    <button 
-                                        title={titleCloseIcon} 
-                                        className='button-delete' 
-                                        onClick={() => handleRemoveColumnList(index)}
-                                    >
-                                        <span className='material-symbols-outlined'>
-                                            delete
-                                        </span>
-                                    </button>
-                                )}
+                                <button 
+                                    title={titleCloseIcon} 
+                                    className='button-delete' 
+                                    onClick={() => handleRemoveColumnList(index)}
+                                >
+                                    <span className='material-symbols-outlined'>
+                                        delete
+                                    </span>
+                                </button>
                             </li>
                         )
                     })}
-                    <ul className='container-subtasks'>
-                        {inputColumns}
-                    </ul>
                     {/* Make reusable second button */}
                     {columnList.length <= 8 && (
                         <button className='second-button' onClick={handleAddColumnClick}>
