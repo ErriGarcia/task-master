@@ -7,11 +7,11 @@ import ModalBoard from './reusableComponents/ModalBoard'
 import ModalDelete from './reusableComponents/ModalDelete'
 import api from '../services/api/index'
 
-const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateBoard, inputTitleBoard, setInputTitleBoard, inputColumnNames, setInputColumnNames, currentColumn}) => {
+const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateBoard, inputTitleBoard, setInputTitleBoard, inputColumnNames, setInputColumnNames, currentColumn, setModal, modalEditBoard, setModalEditBoard}) => {
 
     const [modalNewTask, setModalNewStask] = useState(false)
     const [moreOptionsBoard, setMoreOptionsBoard] = useState(false)
-    const [modalEditBoard, setModalEditBoard] = useState(false)
+    // const [modalEditBoard, setModalEditBoard] = useState(false)
     const [modalDeleteBoard, setModalDeleteBoard] = useState(false)
     const [modalNewBoard, setModalNewBoard] = useState(false)
     const [modalSelectBoard, setModalSelectBoard] = useState(false)
@@ -91,8 +91,8 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
     }
 
     const handleCreateTaskClick = () => {
-        console.log(currentBoard, 'current Board')
         api.task.create(currentBoard, newTitleTask, newDescriptionTask, newSubtaskTitle, column)
+        setModal(false)
     }
 
     const handleCreateTitleBoardClick = (ev) => {
@@ -101,6 +101,7 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
 
     const handleCreateBoardClick = () => {
         api.board.create(newNameBoard, 'inputColumnName')
+        setModalNewBoard(false)
     }
 
     // Modal Add Board
@@ -115,6 +116,11 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
     const handleDeleteBoard = (ev) => {
         ev.preventDefault()
         api.board.deleteById(currentBoard.id)
+        setModalDeleteBoard(false)
+    }
+
+    const handleCloseDeleteBoard = () => {
+        setModalDeleteBoard(false)
     }
 
     const handleInputColumnName = (ev) => {
@@ -133,24 +139,6 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
 
     const handleAddNewColumn = (ev) => {
         ev.preventDefault()
-        // return (
-        //     <li className='container-subtasks'>
-        //         <input 
-        //             type='text' 
-        //             id='subtasks' 
-        //             name='subtasks' 
-        //             className='input subtask' 
-        //             placeholder={''} 
-        //             value={''} 
-        //             onChange={() => {}}
-        //         />
-        //         <button title={''} className='button-delete'>
-        //             <span className='material-symbols-outlined'>
-        //                 close
-        //             </span>
-        //         </button>
-        //     </li>
-        // )
     }
 
     const buttonBoardName = allBoards.map((board, index) => {
@@ -272,9 +260,10 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
                         secondButtonText='Add New Column'
                         valueMainButtonSubmit='Save Changes'
 
-                        handleFormClick={updateBoard}
+                        handleFormClick={e => e.preventDefault()}
                         columns={currentBoard.columns}
                         inputColumns={inputColumns}
+                        handleSubmitClick={updateBoard}
                     >
                     </ModalBoard>
                 </div>
@@ -285,6 +274,7 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
                         title='Delete this board?' 
                         content={`Are you sure you want to delete the "${currentBoard.name}" board? This action will remove all columns and tasks and cannot be reversed.`}
                         handleDeleteClick={handleDeleteBoard}
+                        handleCancelClick={handleCloseDeleteBoard}
                     >
                     </ModalDelete>
                 </div>

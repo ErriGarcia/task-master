@@ -10,6 +10,8 @@ function App() {
   const [currentColumn, setCurrentColumn] = useState('')
   const [inputTitleBoard, setInputTitleBoard] = useState(currentBoard.name)
   const [inputColumnNames, setInputColumnNames] = useState('')
+  const [modal, setModal] = useState(false)
+  const [modalEditBoard, setModalEditBoard] = useState(false)
 
   const handleClickBoard = (ev) => {
     const { id } = ev.currentTarget
@@ -25,6 +27,7 @@ function App() {
     ev.preventDefault()
     api.board.updateById(currentBoard.id, inputTitleBoard)
     api.column.updateById(currentColumn.id, inputColumnNames[currentColumn.id])
+    setModalEditBoard(false)
   }
 
   return (
@@ -38,12 +41,17 @@ function App() {
         setInputTitleBoard={setInputTitleBoard}
         inputColumnNames={inputColumnNames}
         setInputColumnNames={setInputColumnNames}
+        setModal={setModal}
+        modalEditBoard={modalEditBoard}
+        setModalEditBoard={setModalEditBoard}
       >
       </Header>
       <Main 
         currentBoard={currentBoard}
         currentColumn={currentColumn}
         inputColumnNames={inputColumnNames}
+        modal={modal}
+        setModal={setModal}
       >
       </Main>
     </div>

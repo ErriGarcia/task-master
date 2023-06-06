@@ -68,6 +68,12 @@ const ModalViewTask = ({modal, setModal, currentTask, handleGetCurrentSubtask, c
     const handleDeleteTask = (ev) => {
         ev.preventDefault()
         api.task.deleteById(currentTask.id)
+        setModal(false)
+        setModalDeleteTask(false)
+    }
+
+    const handleCloseDeleteTask = (ev) => {
+        setModalDeleteTask(false)
     }
 
     const handleInputSubtaskName = (ev) => {
@@ -182,6 +188,7 @@ const ModalViewTask = ({modal, setModal, currentTask, handleGetCurrentSubtask, c
                         title='Delete this task?' 
                         content={`Are you sure you want to delete the "${currentTask.title}" task and its subtasks? This action cannot be reversed.`}
                         handleDeleteClick={handleDeleteTask}
+                        handleCancelClick={handleCloseDeleteTask}
                     >
                     </ModalDelete>
                 </div>

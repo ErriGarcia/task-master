@@ -2,10 +2,10 @@ import { useState } from 'react'
 import ModalViewTask from './ModalViewTask'
 import api from '../services/api/index'
 
-const Main = ({currentBoard}) => {
+const Main = ({currentBoard, modal, setModal}) => {
 
     const [currentTask, setCurrentTask] = useState('')
-    const [modal, setModal] = useState(false)
+    // const [modal, setModal] = useState(false)
     const [currentSubtask, setCurrentSubtask] = useState('')
     
     const handleArticleClick = (ev) => {
