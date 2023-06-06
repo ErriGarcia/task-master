@@ -91,8 +91,14 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
     }
 
     const handleCreateTaskClick = () => {
-        api.task.create(currentBoard, newTitleTask, newDescriptionTask, newSubtaskTitle, column)
-        setModal(false)
+        if (!newTitleTask) {
+            console.log('no valid title')
+            // open modal
+        } else {
+            console.log('valid title')
+            api.task.create(currentBoard, newTitleTask, newDescriptionTask, newSubtaskTitle, column)
+            setModal(false)
+        }
     }
 
     const handleCreateTitleBoardClick = (ev) => {
