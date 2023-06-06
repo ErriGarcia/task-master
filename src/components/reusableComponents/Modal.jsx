@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import '../../styles/reusableComponents/Modal.scss'
 import MainButton from '../reusableComponents/MainButton'
 import Status from './Status'
+import { v4 } from 'uuid'
 
 const Modal = ({
     title, 
@@ -17,10 +19,27 @@ const Modal = ({
     columnName, 
     handleChangeSelect, 
     handleSubmitClick,
-    inputSubtasks, 
-    valueSubtask, 
-    handleSubtaskChange
+    inputSubtasks,  
 }) => {
+
+    const [subtaskList, setSubtaskList] = useState([{title: '', id: v4()},])
+
+    const handleAddSubtaskClick = () => {
+        setSubtaskList([...subtaskList, {title: '',  id: v4()}])
+    }
+
+    const handleRemoveColumnList = (index) => {
+        const list = [...subtaskList]
+        list.splice(index, 1)
+        setSubtaskList(list)
+    }
+
+    const handleColumnInputChange = (ev, index) => {
+        const {name, value} = ev.target
+        const list = [...subtaskList]
+        list[index][name] = value
+        setSubtaskList(list)
+    }
 
     const setErrorBoardName = (className) => {
         if (!valueInputTitle) {
@@ -57,34 +76,49 @@ const Modal = ({
                 </fieldset>
                 <fieldset className='fieldset'>
                     <label htmlFor='description' className='label'>{labelDescription}</label>
-                    <textarea type='text' id='description' name='description' className='textarea' placeholder={placeholderDescription} value={valueTextAreaDescription} onChange={handleTextAreaChange}>
+                    <textarea 
+                        type='text' 
+                        id='description' 
+                        name='description' 
+                        className='textarea' 
+                        placeholder={placeholderDescription} 
+                        value={valueTextAreaDescription} 
+                        onChange={handleTextAreaChange}
+                        maxLength='200'
+                    >
                     </textarea>
                 </fieldset>
                 <fieldset className='fieldset'>
                     <label htmlFor='subtasks' className='label'>Subtasks</label>
                         <ul className='container-subtasks'>
                            {inputSubtasks}
-                           <li className='container-subtasks-list'>
-                                <input 
-                                    type='text' 
-                                    id='Add new subtask' 
-                                    name='subtasks' 
-                                    className='input subtask' 
-                                    placeholder='e.g. Make Coffee' 
-                                    value={valueSubtask}
-                                    onChange={handleSubtaskChange}
-                                />
-                                <button title='Delete Subtask' className='button-delete'>
-                                    <span className='material-symbols-outlined'>
-                                        delete
-                                    </span>
-                                </button>
-                            </li>
+                            {subtaskList.map((singleSubtask, index) => {
+                                return (
+                                    <li className='container-subtasks-list' key={index}>
+                                        <input 
+                                            type='text' 
+                                            id='Add new subtask' 
+                                            name='title' 
+                                            className='input subtask' 
+                                            placeholder='e.g. Make Coffee' 
+                                            value={singleSubtask.title}
+                                            onChange={(ev) => handleColumnInputChange(ev, index)}
+                                        />
+                                        <button title='Delete Subtask' className='button-delete' onClick={handleRemoveColumnList}>
+                                            <span className='material-symbols-outlined'>
+                                                delete
+                                            </span>
+                                        </button>
+                                    </li>
+                                )
+                            })}
                         </ul>
-                    <button className='second-button'>
-                        <i className='fa-solid fa-plus icon-plus'></i>
-                        Add New Subtask
-                    </button>
+                        {subtaskList.length < 10 && (
+                            <button className='second-button' onClick={handleAddSubtaskClick}>
+                                <i className='fa-solid fa-plus icon-plus'></i>
+                                Add New Subtask
+                            </button>
+                        )}
                 </fieldset>
                 <Status
                     columnName={columnName}

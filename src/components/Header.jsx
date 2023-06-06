@@ -24,6 +24,8 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
     const [newNameBoard, setNewNameBoard] = useState('')
     const [newSubtaskTitle, setNewSubtaskTitle] = useState('')
 
+    console.log(allBoards, 'allboards')
+
     useEffect(() => {
         setAllBoards(api.board.getAll())
         const columnsDetails = {}
@@ -246,8 +248,8 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
                         handleSubmitClick={handleCreateTaskClick}
                         subtasks={[]}
                         columns={currentBoard.columns}
-                        valueSubtask={newSubtaskTitle}
-                        handleSubtaskChange={ev => {setNewSubtaskTitle(ev.target.value)}}>
+                        // valueSubtask={newSubtaskTitle}
+                        >
                     </Modal>
                 </div>
             )}

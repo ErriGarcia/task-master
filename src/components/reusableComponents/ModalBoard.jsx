@@ -77,33 +77,33 @@ const ModalBoard = ({
                 {/* {subtasks} */}
                     <ul className='container-subtasks'>
                         {inputColumns}
+                        {columnList.map((singleInput, index) => {
+                            return (
+                                <li className='container-subtasks-list' key={index}>
+                                    <input 
+                                        type='text' 
+                                        id='column' 
+                                        name='name' 
+                                        className='input subtask' 
+                                        placeholder={placeholderSecondInput} 
+                                        value={singleInput.name} 
+                                        onChange={(ev) => handleColumnInputChange(ev, index)}
+                                    />
+                                    <button 
+                                        title={titleCloseIcon} 
+                                        className='button-delete' 
+                                        onClick={() => handleRemoveColumnList(index)}
+                                    >
+                                        <span className='material-symbols-outlined'>
+                                            delete
+                                        </span>
+                                    </button>
+                                </li>
+                            )
+                        })}
                     </ul>
-                    {columnList.map((singleInput, index) => {
-                        return (
-                            <li className='container-subtasks-list' key={index}>
-                                <input 
-                                    type='text' 
-                                    id='column' 
-                                    name='name' 
-                                    className='input subtask' 
-                                    placeholder={placeholderSecondInput} 
-                                    value={singleInput.input} 
-                                    onChange={(ev) => handleColumnInputChange(ev, index)}
-                                />
-                                <button 
-                                    title={titleCloseIcon} 
-                                    className='button-delete' 
-                                    onClick={() => handleRemoveColumnList(index)}
-                                >
-                                    <span className='material-symbols-outlined'>
-                                        delete
-                                    </span>
-                                </button>
-                            </li>
-                        )
-                    })}
                     {/* Make reusable second button */}
-                    {columnList.length <= 8 && (
+                    {columnList.length < 8 && (
                         <button className='second-button' onClick={handleAddColumnClick}>
                             <i className='fa-solid fa-plus icon-plus'></i>
                             {secondButtonText}
