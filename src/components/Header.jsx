@@ -6,10 +6,11 @@ import Modal from '../components/reusableComponents/Modal'
 import ModalBoard from './reusableComponents/ModalBoard'
 import ModalDelete from './reusableComponents/ModalDelete'
 import api from '../services/api/index'
+import { v4 } from 'uuid'
 
 const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateBoard, inputTitleBoard, setInputTitleBoard, inputColumnNames, setInputColumnNames, currentColumn, setModal, modalEditBoard, setModalEditBoard}) => {
 
-    const [modalNewTask, setModalNewStask] = useState(false)
+    const [modalNewTask, setModalNewTask] = useState(false)
     const [moreOptionsBoard, setMoreOptionsBoard] = useState(false)
     const [modalDeleteBoard, setModalDeleteBoard] = useState(false)
     const [modalNewBoard, setModalNewBoard] = useState(false)
@@ -22,6 +23,7 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
     const [column, setColumn] = useState('Todo')
     const [newNameBoard, setNewNameBoard] = useState('')
     const [newSubtaskTitle] = useState('')
+    const [columnList, setColumnList] = useState([{name: '', id: v4()},])
 
     console.log(allBoards, 'allboards')
 
@@ -36,12 +38,12 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
     }, [currentBoard.columns])
 
     const handleAddTask = () => {
-        setModalNewStask(true)
+        setModalNewTask(true)
     }
 
     const handleCloseModal = (ev) => {
         if (ev.target.className === 'modal') {
-            setModalNewStask(false)
+            setModalNewTask(false)
             setMoreOptionsBoard(false)
             setModalEditBoard(false)
             setModalDeleteBoard(false)
@@ -83,10 +85,6 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
         setNewDescriptionTask(ev.target.value)
     }
 
-    const handleFormClick = (ev) => {
-        ev.preventDefault()
-    }
-
     const handleChangeColumn = (ev) => {
         setColumn(ev.target.value)
     }
@@ -94,11 +92,11 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
     const handleCreateTaskClick = () => {
         if (!newTitleTask) {
             console.log('no valid title')
-            // open modal
+            setModalNewTask(true)
         } else {
             console.log('valid title')
             api.task.create(currentBoard, newTitleTask, newDescriptionTask, newSubtaskTitle, column)
-            setModal(false)
+            setModalNewTask(false)
         }
     }
 
@@ -110,7 +108,7 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
         if (!newNameBoard) {
             setModalNewBoard(true)
         } else {
-            api.board.create(newNameBoard, 'inputColumnName')
+            api.board.create(newNameBoard, columnList)
             setModalNewBoard(false)
         }
     }
@@ -238,7 +236,7 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
                         handleTextAreaChange={handleDescriptionChange}
 
                         buttonText='Create Task'
-                        handleClickForm={handleFormClick} 
+                        handleClickForm={(ev) => (ev.preventDefault())} 
                         handleChangeSelect={handleChangeColumn}
                         columnName={column}
                         handleSubmitClick={handleCreateTaskClick}
@@ -303,8 +301,9 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
                         valueMainButtonSubmit='Create New Board'
 
                         handleSubmitClick={handleCreateBoardClick}
-                        handleFormClick={handleFormClick}
-                        columns={[]}
+                        handleFormClick={ev => ev.preventDefault()}
+                        columnList={columnList}
+                        setColumnList={setColumnList}
                     >
                     </ModalBoard>
                 </div>

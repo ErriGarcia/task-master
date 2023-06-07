@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { v4 } from 'uuid'
 
 const ModalBoard = ({
@@ -15,23 +14,36 @@ const ModalBoard = ({
     valueMainButtonSubmit,
     handleSubmitClick,
     inputColumns,
+    columnList,
+    setColumnList
     }) => {
 
-    const [columnList, setColumnList] = useState([{name: '', id: v4()},])
+    /* I create an array for the board columns to map every board column */
+    // const [columnList, setColumnList] = useState([{name: '', id: v4()},])
+    console.log(columnList, 'columnList')
 
+    /* I use the spread operator to copy the column list and I add a new object every time I click on the button */
     const handleAddColumnClick = () => {
         setColumnList([...columnList, {name: '',  id: v4()}])
     }
 
+    /* I use the index to know the specific input field to remove */
     const handleRemoveColumnList = (index) => {
+        /* I create a new const to copy the actual column list*/
         const list = [...columnList]
+
+        /* With splice I can remove the input selected with the index */
         list.splice(index, 1)
+
+        /* I update the column list with the new list where I remove the input I want*/
         setColumnList(list)
     }
 
     const handleColumnInputChange = (ev, index) => {
+        /* Distructuring it's like writing ev.target.name && ev.target.value */
         const {name, value} = ev.target
         const list = [...columnList]
+        /* I access to a specific input using the index and the name so I can update the value (ev.target.value) */
         list[index][name] = value
         setColumnList(list)
     }
@@ -74,6 +86,8 @@ const ModalBoard = ({
                     <label htmlFor='column' className='label'>{labelSecondInputs}</label>
                     <ul className='container-subtasks'>
                         {inputColumns}
+
+                        {/* I show dinamically every board column */}
                         {columnList.map((singleInput, index) => {
                             return (
                                 <li className='container-subtasks-list' key={index}>
@@ -83,6 +97,7 @@ const ModalBoard = ({
                                         name='name' 
                                         className='input subtask' 
                                         placeholder={placeholderSecondInput} 
+                                        /* I need to track the event so I need the ev and index to know which input is updating */
                                         value={singleInput.name} 
                                         onChange={(ev) => handleColumnInputChange(ev, index)}
                                     />
@@ -99,6 +114,7 @@ const ModalBoard = ({
                             )
                         })}
                     </ul>
+
                     {/* Make reusable second button */}
                     {columnList.length < 8 && (
                         <button className='second-button' onClick={handleAddColumnClick}>

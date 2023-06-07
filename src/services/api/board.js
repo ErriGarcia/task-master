@@ -12,14 +12,11 @@ const getAll = () => data.boards
  * @param {*} columnsBoard string
  * @returns object
  */
-const create = (nameBoard, columnsBoard) => {
+const create = (nameBoard, columns) => {
     return data.boards.push({
         name: nameBoard,
         id: v4(),
-        columns: [{
-            name: columnsBoard,
-            id: v4()
-        }]
+        columns
     })
 }
 
