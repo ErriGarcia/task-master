@@ -46,6 +46,7 @@ const Main = ({currentBoard, modal, setModal}) => {
                 <ModalViewTask 
                     modal={modal} 
                     setModal={setModal} 
+                    currentBoard={currentBoard}
                     currentTask={currentTask}
                     currentSubtask={currentSubtask}
                     handleGetCurrentSubtask={handleGetCurrentSubtask}

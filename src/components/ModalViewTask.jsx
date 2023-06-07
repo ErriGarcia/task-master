@@ -4,7 +4,7 @@ import Modal from './reusableComponents/Modal'
 import ModalDelete from './reusableComponents/ModalDelete'
 import api from '../services/api/index'
 
-const ModalViewTask = ({modal, setModal, currentTask, handleGetCurrentSubtask, currentSubtask}) => {
+const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCurrentSubtask, currentSubtask}) => {
 
     const [check, setCheck] = useState(false)
     const [moreOptions, setMoreOptions] = useState(false)
@@ -124,7 +124,8 @@ const ModalViewTask = ({modal, setModal, currentTask, handleGetCurrentSubtask, c
         <>
             {modal && (
                 <div className='modal' onClick={handleClickCloseModal}>
-                    <form className='container-view-task' onClick={(ev) => {ev.preventDefault()}}>
+                    <form className='container-view-task' 
+                        onClick={(ev) => {ev.preventDefault()}}>
                         <fieldset className='container-view-task-header'>
                             <h2 className='container-view-task-header-title'>{currentTask.title}</h2>
                             <button title='Edit Task' className='container-view-task-header-more-options-button' onClick={handleClickMoreOptions}>
@@ -153,7 +154,10 @@ const ModalViewTask = ({modal, setModal, currentTask, handleGetCurrentSubtask, c
                                     {listOfSubtasks}
                             </ul>
                         </fieldset>
-                        <Status></Status>
+                        <Status
+                            currentBoard={currentBoard}
+                        >
+                        </Status>
                     </form>
                 </div>
             )}

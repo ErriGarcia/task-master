@@ -13,6 +13,8 @@ function App() {
   const [modal, setModal] = useState(false)
   const [modalEditBoard, setModalEditBoard] = useState(false)
 
+  console.log(currentBoard, 'currentBoard')
+  
   const handleClickBoard = (ev) => {
     const { id } = ev.currentTarget
     setCurrentBoard(api.board.getById(id))
