@@ -1,8 +1,8 @@
 const Column = ({columnName, handleChangeSelect, currentBoard, column}) => {
 
-    const listOfStatusName = currentBoard.columns.map((statusName, i) => {
-        return <option key={i} value={statusName.name}>{statusName.name}</option>
-    })
+    // const listOfStatusName = currentBoard.columns.map((statusName, i) => {
+    //     return <option key={i} value={statusName.name}>{statusName.name}</option>
+    // })
 
     return (
         <fieldset className='container-view-task-section'>
@@ -18,7 +18,7 @@ const Column = ({columnName, handleChangeSelect, currentBoard, column}) => {
                 value={columnName} 
                 onChange={handleChangeSelect}
             >
-                {listOfStatusName}
+                {/* {listOfStatusName} */}
             </select>
         </fieldset>
     )

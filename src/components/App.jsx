@@ -16,7 +16,7 @@ function App() {
   const [column, setColumn] = useState(currentTask.status)
 
   // console.log(currentBoard, 'currentBoard')
-  // console.log(currentColumn, 'current column')
+  console.log(currentColumn, 'ID current column!!')
   console.log(currentTask.status, 'currentTask')
   
   const handleClickBoard = (ev) => {
@@ -25,6 +25,7 @@ function App() {
   }
 
   const handleGetCurrentColumn = (ev) => {
+    console.log(ev, 'column for handleGetCurrentColumn')
     const { id } = ev.target
     setCurrentColumn(api.column.getById(id))
   }

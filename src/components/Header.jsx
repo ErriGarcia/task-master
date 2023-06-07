@@ -25,7 +25,7 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
     const [newSubtaskTitle] = useState('')
     const [columnList, setColumnList] = useState([{name: '', id: v4()},])
 
-    // console.log(allBoards, 'allboards')
+    console.log(allBoards, 'allboards')
     // console.log(column, 'columns')
 
     useEffect(() => {
@@ -133,6 +133,8 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
     )
 
     const inputColumns = currentBoard.columns.map((column, i) => {
+        console.log(column, 'column in the map in header line 136')
+        console.log(inputColumnNames[column.id], 'inputColumnNames[column.id]')
         return (
             <li className='container-subtasks-list' key={i}>
                 <input 
@@ -143,6 +145,7 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
                     placeholder={column.name} 
                     value={inputColumnNames[column.id]} 
                     onChange={ev => {handleInputColumnName(ev); handleGetCurrentColumn(ev)}}
+                    // onChange={ev => {handleInputColumnName(ev)}}
                 />
                 <button title='Delete Column' className='button-delete' onClick={handleDeleteColumn} id={column.id}>
                     <span className='material-symbols-outlined'>
