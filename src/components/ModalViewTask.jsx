@@ -4,7 +4,7 @@ import Modal from './reusableComponents/Modal'
 import ModalDelete from './reusableComponents/ModalDelete'
 import api from '../services/api/index'
 
-const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCurrentSubtask, currentSubtask}) => {
+const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCurrentSubtask, currentSubtask, column, setColumn}) => {
 
     const [check, setCheck] = useState(false)
     const [moreOptions, setMoreOptions] = useState(false)
@@ -14,6 +14,8 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
     const [textAreaDescription, setTextAreaDescription] = useState(currentTask.description)
     const [subtasks] = useState(currentTask.subtasks || [])
     const [inputSubtasksNames, setInputSubtasksNames] = useState('')
+
+    console.log(column, 'column in modal view task')
 
     useEffect(() => {
         const subtasksDetails = {}
@@ -156,6 +158,8 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
                         </fieldset>
                         <Status
                             currentBoard={currentBoard}
+                            columnName={column}
+                            handleChangeSelect={ev => setColumn(ev.target.value)}
                         >
                         </Status>
                     </form>

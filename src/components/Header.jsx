@@ -8,7 +8,7 @@ import ModalDelete from './reusableComponents/ModalDelete'
 import api from '../services/api/index'
 import { v4 } from 'uuid'
 
-const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateBoard, inputTitleBoard, setInputTitleBoard, inputColumnNames, setInputColumnNames, currentColumn, modalEditBoard, setModalEditBoard}) => {
+const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateBoard, inputTitleBoard, setInputTitleBoard, inputColumnNames, setInputColumnNames, currentColumn, modalEditBoard, setModalEditBoard, column, setColumn}) => {
 
     const [modalNewTask, setModalNewTask] = useState(false)
     const [moreOptionsBoard, setMoreOptionsBoard] = useState(false)
@@ -20,7 +20,7 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
     // const [isActive, setIsActive] = useState(false)
     const [newTitleTask, setNewTitleTask] = useState('')
     const [newDescriptionTask, setNewDescriptionTask] = useState('')
-    const [column, setColumn] = useState('Todo')
+    // const [column, setColumn] = useState('Todo')
     const [newNameBoard, setNewNameBoard] = useState('')
     const [newSubtaskTitle] = useState('')
     const [columnList, setColumnList] = useState([{name: '', id: v4()},])
@@ -245,6 +245,8 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
                         columns={currentBoard.columns}
                         inputColumns={inputColumns}
                         handleSubmitClick={updateBoard}
+                        columnList={columnList}
+                        setColumnList={setColumnList}
                     >
                     </ModalBoard>
                 </div>

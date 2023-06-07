@@ -12,8 +12,10 @@ function App() {
   const [inputColumnNames, setInputColumnNames] = useState('')
   const [modal, setModal] = useState(false)
   const [modalEditBoard, setModalEditBoard] = useState(false)
+  const [column, setColumn] = useState('Todo')
 
   console.log(currentBoard, 'currentBoard')
+  console.log(currentColumn, 'current column')
   
   const handleClickBoard = (ev) => {
     const { id } = ev.currentTarget
@@ -46,6 +48,8 @@ function App() {
         setModal={setModal}
         modalEditBoard={modalEditBoard}
         setModalEditBoard={setModalEditBoard}
+        column={column}
+        setColumn={setColumn}
       >
       </Header>
       <Main 
@@ -54,6 +58,8 @@ function App() {
         inputColumnNames={inputColumnNames}
         modal={modal}
         setModal={setModal}
+        column={column}
+        setColumn={setColumn}
       >
       </Main>
     </div>
