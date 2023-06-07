@@ -12,10 +12,12 @@ function App() {
   const [inputColumnNames, setInputColumnNames] = useState('')
   const [modal, setModal] = useState(false)
   const [modalEditBoard, setModalEditBoard] = useState(false)
-  const [column, setColumn] = useState('Todo')
+  const [currentTask, setCurrentTask] = useState('')
+  const [column, setColumn] = useState(currentTask.status)
 
-  console.log(currentBoard, 'currentBoard')
-  console.log(currentColumn, 'current column')
+  // console.log(currentBoard, 'currentBoard')
+  // console.log(currentColumn, 'current column')
+  console.log(currentTask.status, 'currentTask')
   
   const handleClickBoard = (ev) => {
     const { id } = ev.currentTarget
@@ -25,6 +27,12 @@ function App() {
   const handleGetCurrentColumn = (ev) => {
     const { id } = ev.target
     setCurrentColumn(api.column.getById(id))
+  }
+
+  const handleArticleClick = (ev) => {
+    const { id } = ev.currentTarget
+    setModal(true)
+    setCurrentTask(api.task.getById(id))
   }
 
   const updateBoard = (ev) => {
@@ -60,6 +68,9 @@ function App() {
         setModal={setModal}
         column={column}
         setColumn={setColumn}
+        currentTask={currentTask}
+        setCurrentTask={setCurrentTask}
+        handleArticleClick={handleArticleClick}
       >
       </Main>
     </div>

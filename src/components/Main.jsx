@@ -2,16 +2,16 @@ import { useState } from 'react'
 import ModalViewTask from './ModalViewTask'
 import api from '../services/api/index'
 
-const Main = ({currentBoard, modal, setModal, column, setColumn}) => {
+const Main = ({currentBoard, modal, setModal, column, setColumn, currentTask, setCurrentTask, handleArticleClick}) => {
 
-    const [currentTask, setCurrentTask] = useState('')
+    // const [currentTask, setCurrentTask] = useState('')
     const [currentSubtask, setCurrentSubtask] = useState('')
     
-    const handleArticleClick = (ev) => {
-        const { id } = ev.currentTarget
-        setModal(true)
-        setCurrentTask(api.task.getById(id))
-    }
+    // const handleArticleClick = (ev) => {
+    //     const { id } = ev.currentTarget
+    //     setModal(true)
+    //     setCurrentTask(api.task.getById(id))
+    // }
 
     const handleGetCurrentSubtask = (ev) => {
         const { id } = ev.target

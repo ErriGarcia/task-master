@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import Status from './reusableComponents/Status'
 import Modal from './reusableComponents/Modal'
 import ModalDelete from './reusableComponents/ModalDelete'
 import api from '../services/api/index'
+import Column from './reusableComponents/Column'
 
 const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCurrentSubtask, currentSubtask, column, setColumn}) => {
 
@@ -14,8 +14,6 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
     const [textAreaDescription, setTextAreaDescription] = useState(currentTask.description)
     const [subtasks] = useState(currentTask.subtasks || [])
     const [inputSubtasksNames, setInputSubtasksNames] = useState('')
-
-    console.log(column, 'column in modal view task')
 
     useEffect(() => {
         const subtasksDetails = {}
@@ -120,7 +118,11 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
                 </button>
             </li>
         )
-    }) 
+    })
+
+    const listOfStatusName = currentBoard.columns.map((statusName, i) => {
+        return <option key={i} value={statusName.name}>{statusName.name}</option>
+    })
 
     return (
         <>
@@ -156,12 +158,29 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
                                     {listOfSubtasks}
                             </ul>
                         </fieldset>
-                        <Status
+                        {/* <Column
                             currentBoard={currentBoard}
                             columnName={column}
                             handleChangeSelect={ev => setColumn(ev.target.value)}
                         >
-                        </Status>
+                        </Column> */}
+                        <fieldset className='container-view-task-section'>
+                            <label 
+                                htmlFor='status'     className='container-view-task-section-status-title'
+                            >
+                                Current status
+                            </label>
+                            <select 
+                                name='status' 
+                                id='status' 
+                                className='container-view-task-section-select'
+                                defaultValue={currentTask.status}
+                                value={column} 
+                                onChange={e => setColumn(e.target.value)}
+                            >
+                                {listOfStatusName}
+                            </select>
+                        </fieldset>
                     </form>
                 </div>
             )}
@@ -184,6 +203,7 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
                         inputSubtasks={inputSubtasks}
                         valueSubtask={''}
                         handleSubtaskChange={e => console.log('change input default')}
+                        columnName={column}
                     >
                     </Modal>
                 </div>

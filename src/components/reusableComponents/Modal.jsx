@@ -1,25 +1,28 @@
 import { useState } from 'react'
 import '../../styles/reusableComponents/Modal.scss'
 import MainButton from '../reusableComponents/MainButton'
-import Status from './Status'
 import { v4 } from 'uuid'
+import Column from './Column'
 
 const Modal = ({
     title, 
     labelTitle, 
     placeholderTitle, 
-    valueInputTitle, 
+    valueInputTitle,
+    handleInputChange,
+
     labelDescription, 
     placeholderDescription, 
     valueTextAreaDescription, 
+    handleTextAreaChange,  
     buttonText, 
     handleClickForm, 
-    handleInputChange, 
-    handleTextAreaChange,  
-    columnName, 
     handleChangeSelect, 
     handleSubmitClick,
-    inputSubtasks,  
+
+    // columnName, 
+    inputSubtasks, 
+    column 
 }) => {
 
     const [subtaskList, setSubtaskList] = useState([{title: '', id: v4()},])
@@ -120,11 +123,11 @@ const Modal = ({
                             </button>
                         )}
                 </fieldset>
-                <Status
-                    columnName={columnName}
+                <Column
+                    columnName={column}
                     handleChangeSelect={handleChangeSelect}
                 >
-                </Status>
+                </Column>
                 <MainButton 
                     value={buttonText}
                     handleSubmitClick={handleSubmitClick}

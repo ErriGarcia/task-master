@@ -25,7 +25,8 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
     const [newSubtaskTitle] = useState('')
     const [columnList, setColumnList] = useState([{name: '', id: v4()},])
 
-    console.log(allBoards, 'allboards')
+    // console.log(allBoards, 'allboards')
+    // console.log(column, 'columns')
 
     useEffect(() => {
         setAllBoards(api.board.getAll())
@@ -214,10 +215,10 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
                         buttonText='Create Task'
                         handleClickForm={(ev) => (ev.preventDefault())} 
                         handleChangeSelect={ev => setColumn(ev.target.value)}
-                        columnName={column}
+                        // columnName={column}
                         handleSubmitClick={handleCreateTaskClick}
                         subtasks={[]}
-                        columns={currentBoard.columns}
+                        // columns={currentBoard.columns}
                         >
                     </Modal>
                 </div>

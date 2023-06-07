@@ -1,4 +1,4 @@
-const Status = ({columnName, handleChangeSelect, currentBoard}) => {
+const Column = ({columnName, handleChangeSelect, currentBoard, column}) => {
 
     const listOfStatusName = currentBoard.columns.map((statusName, i) => {
         return <option key={i} value={statusName.name}>{statusName.name}</option>
@@ -24,4 +24,4 @@ const Status = ({columnName, handleChangeSelect, currentBoard}) => {
     )
 }
 
-export default Status
+export default Column
