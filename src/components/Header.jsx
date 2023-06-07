@@ -8,7 +8,7 @@ import ModalDelete from './reusableComponents/ModalDelete'
 import api from '../services/api/index'
 import { v4 } from 'uuid'
 
-const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateBoard, inputTitleBoard, setInputTitleBoard, inputColumnNames, setInputColumnNames, currentColumn, setModal, modalEditBoard, setModalEditBoard}) => {
+const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateBoard, inputTitleBoard, setInputTitleBoard, inputColumnNames, setInputColumnNames, currentColumn, modalEditBoard, setModalEditBoard}) => {
 
     const [modalNewTask, setModalNewTask] = useState(false)
     const [moreOptionsBoard, setMoreOptionsBoard] = useState(false)
@@ -77,18 +77,6 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
         setModalSelectBoard(true)
     }
 
-    const handlTitleChange = (ev) => {
-        setNewTitleTask(ev.target.value)
-    }
-
-    const handleDescriptionChange = (ev) => {
-        setNewDescriptionTask(ev.target.value)
-    }
-
-    const handleChangeColumn = (ev) => {
-        setColumn(ev.target.value)
-    }
-
     const handleCreateTaskClick = () => {
         if (!newTitleTask) {
             console.log('no valid title')
@@ -100,10 +88,6 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
         }
     }
 
-    const handleCreateTitleBoardClick = (ev) => {
-        setNewNameBoard(ev.target.value)
-    }
-
     const handleCreateBoardClick = () => {
         if (!newNameBoard) {
             setModalNewBoard(true)
@@ -111,10 +95,6 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
             api.board.create(newNameBoard, columnList)
             setModalNewBoard(false)
         }
-    }
-
-    const handleInputTitleChange = (ev) => {
-        setInputTitleBoard(ev.target.value)
     }
 
     const handleDeleteBoard = (ev) => {
@@ -139,10 +119,6 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
         console.log(ev, 'ev')
         api.column.deleteById(ev.target.id)
         console.log(allBoards)
-    }
-
-    const handleAddNewColumn = (ev) => {
-        ev.preventDefault()
     }
 
     const buttonBoardName = allBoards.map((board, index) => {
@@ -228,16 +204,16 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
                         labelTitle='Title' 
                         placeholderTitle='e.g. Take coffee break'
                         valueInputTitle={newTitleTask}
-                        handleInputChange={handlTitleChange} 
+                        handleInputChange={ev => setNewTitleTask(ev.target.value)} 
 
                         labelDescription='Description' 
                         placeholderDescription='e.g. It is always good to take a break. This 15 minutes break will recharge the batteries a little.'
                         valueTextAreaDescription={newDescriptionTask} 
-                        handleTextAreaChange={handleDescriptionChange}
+                        handleTextAreaChange={ev => setNewDescriptionTask(ev.target.value)}
 
                         buttonText='Create Task'
                         handleClickForm={(ev) => (ev.preventDefault())} 
-                        handleChangeSelect={handleChangeColumn}
+                        handleChangeSelect={ev => setColumn(ev.target.value)}
                         columnName={column}
                         handleSubmitClick={handleCreateTaskClick}
                         subtasks={[]}
@@ -253,7 +229,7 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
                         firstInputLabelTitle='Board Name'
                         firstInputPlaceholderTitle='e.g. Portfolio'
                         firstInputValueTitle={inputTitleBoard}
-                        handleTitleChange={handleInputTitleChange}
+                        handleTitleChange={ev => setInputTitleBoard(ev.target.value)}
 
                         labelSecondInputs='Board Columns'
                         placeholderSecondInput='e.g. Todo'
@@ -261,7 +237,7 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
                         handleSecondInputChange={handleInputColumnName}
 
                         titleCloseIcon='Delete Column'
-                        handleAddSecondInputClick={handleAddNewColumn}
+                        handleAddSecondInputClick={ev => ev.preventDefault()}
                         secondButtonText='Add New Column'
                         valueMainButtonSubmit='Save Changes'
 
@@ -291,7 +267,7 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
                         firstInputLabelTitle='Board Name' 
                         firstInputPlaceholderTitle='e.g. Portfolio'
                         firstInputValueTitle={newNameBoard}
-                        handleTitleChange={handleCreateTitleBoardClick}
+                        handleTitleChange={ev => setNewNameBoard(ev.target.value)}
 
                         labelSecondInputs='Board Columns'
                         placeholderSecondInput='e.g. Todo'

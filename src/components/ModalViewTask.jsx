@@ -33,10 +33,6 @@ const ModalViewTask = ({modal, setModal, currentTask, handleGetCurrentSubtask, c
         }
     }
 
-    // const handleClickEvPreventDefault = (ev) => {
-    //     ev.preventDefault()
-    // }
-
     const handleClickMoreOptions = () => {
         setMoreOptions(true)
     }
@@ -47,14 +43,6 @@ const ModalViewTask = ({modal, setModal, currentTask, handleGetCurrentSubtask, c
 
     const handleClickDeleteTask = () => {
         setModalDeleteTask(true)
-    }
-    
-    const handleInputTitleChange = (ev) => {
-        setInputTitleTask(ev.target.value)
-    }
-
-    const handleTextAreaDescriptionChange = (ev) => {
-        setTextAreaDescription(ev.target.value)
     }
 
     const updateTask = (ev) => {
@@ -181,9 +169,9 @@ const ModalViewTask = ({modal, setModal, currentTask, handleGetCurrentSubtask, c
                         placeholderDescription=''
                         valueTextAreaDescription={textAreaDescription} 
                         buttonText='Update Task' 
-                        handleClickForm={e => e.preventDefault()} 
-                        handleInputChange={handleInputTitleChange} 
-                        handleTextAreaChange={handleTextAreaDescriptionChange}
+                        handleClickForm={ev => ev.preventDefault()} 
+                        handleInputChange={ev => setInputTitleTask(ev.target.value)} 
+                        handleTextAreaChange={ev => setTextAreaDescription(ev.target.value)}
                         handleSubmitClick={updateTask}
                         inputSubtasks={inputSubtasks}
                         valueSubtask={''}
