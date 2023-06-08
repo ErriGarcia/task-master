@@ -6,6 +6,7 @@ import Main from './Main'
 
 function App() {
 
+  const [allBoards, setAllBoards] = useState([api.board.getAll()])
   const [currentBoard, setCurrentBoard] = useState(api.board.getAll()[0])
   const [currentColumn, setCurrentColumn] = useState('')
   const [inputTitleBoard, setInputTitleBoard] = useState(currentBoard.name)
@@ -46,6 +47,8 @@ function App() {
   return (
     <div className='main'>
       <Header 
+        allBoards={allBoards}
+        setAllBoards={setAllBoards}
         currentBoard={currentBoard} 
         handleClickBoard={handleClickBoard}
         handleGetCurrentColumn={handleGetCurrentColumn}
@@ -57,6 +60,7 @@ function App() {
         setModal={setModal}
         modalEditBoard={modalEditBoard}
         setModalEditBoard={setModalEditBoard}
+        setCurrentBoard={setCurrentBoard}
       >
       </Header>
       <Main 

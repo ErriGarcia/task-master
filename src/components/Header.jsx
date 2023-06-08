@@ -8,15 +8,13 @@ import ModalDelete from './reusableComponents/ModalDelete'
 import api from '../services/api/index'
 import { v4 } from 'uuid'
 
-const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateBoard, inputTitleBoard, setInputTitleBoard, inputColumnNames, setInputColumnNames, currentColumn, modalEditBoard, setModalEditBoard, column, setColumn}) => {
+const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handleGetCurrentColumn, updateBoard, inputTitleBoard, setInputTitleBoard, inputColumnNames, setInputColumnNames, currentColumn, modalEditBoard, setModalEditBoard, column, setColumn, setCurrentBoard}) => {
 
     const [modalNewTask, setModalNewTask] = useState(false)
     const [moreOptionsBoard, setMoreOptionsBoard] = useState(false)
     const [modalDeleteBoard, setModalDeleteBoard] = useState(false)
     const [modalNewBoard, setModalNewBoard] = useState(false)
     const [modalSelectBoard, setModalSelectBoard] = useState(false)
-    
-    const [allBoards, setAllBoards] = useState([api.board.getAll()])
     const [newTitleTask, setNewTitleTask] = useState('')
     const [newDescriptionTask, setNewDescriptionTask] = useState('')
     const [newNameBoard, setNewNameBoard] = useState('')
@@ -95,6 +93,7 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
         ev.preventDefault()
         api.board.deleteById(currentBoard.id)
         setModalDeleteBoard(false)
+        setCurrentBoard(allBoards[0])
     }
 
     const handleCloseDeleteBoard = () => {
