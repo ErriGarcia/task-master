@@ -20,8 +20,6 @@ function App() {
     setDefaultColumn(api.column.getByName(currentTask.status))
   }, [currentTask.status])
 
-  console.log(defaultColumn, 'defaultColumn')
-
   const handleClickBoard = (ev) => {
     const { id } = ev.currentTarget
     setCurrentBoard(api.board.getById(id))

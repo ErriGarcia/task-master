@@ -25,7 +25,7 @@ const Main = ({currentBoard, modal, setModal, currentTask, handleArticleClick, s
                         {column.tasks.map((task, index) => {
                             return (
                                 <li 
-                                    draggable={true}
+                                    draggable
                                     onDragStart={e => console.log('onDragStart')}
                                     onDragEnd={e => console.log('onDragEnd')} 
                                     id={task.id} 
