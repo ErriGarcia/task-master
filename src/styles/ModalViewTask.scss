@@ -113,3 +113,29 @@
             }
     }
 }
+
+// input:checked {
+//     border: none;
+//     background-color: red;
+//     outline: 2px solid white;
+// }
+
+input[type='checkbox'] {
+    height: 1rem;
+    width: 1rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    border: 1px solid #34495E;
+    border-radius: 4px;
+    outline: none;
+    transition-duration: 0.3s;
+    background-color: none;
+    cursor: pointer;
+}
+
+input:checked {
+    // border: 1px solid #41B883;
+    background-color: none;
+}

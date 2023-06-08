@@ -5,7 +5,7 @@ import api from '../services/api/index'
 
 const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCurrentSubtask, currentSubtask, statusCurrentTask, setStatusCurrentTask, defaultColumn}) => {
 
-    const [check, setCheck] = useState(false)
+    // const [check, setCheck] = useState(false)
     const [moreOptions, setMoreOptions] = useState(false)
     const [modalEditTask, setModalEditTask] = useState(false)
     const [modalDeleteTask, setModalDeleteTask] = useState(false)
@@ -13,6 +13,11 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
     const [textAreaDescription, setTextAreaDescription] = useState(currentTask.description)
     const [subtasks] = useState(currentTask.subtasks || [])
     const [inputSubtasksNames, setInputSubtasksNames] = useState('')
+    const [checkedState, setCheckedState] = useState(
+        new Array(currentTask.subtasks.length).fill(false)
+    )
+
+    console.log(checkedState, 'checkedState FUORI')
 
     useEffect(() => {
         const subtasksDetails = {}
@@ -22,8 +27,18 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
         setInputSubtasksNames(subtasksDetails)
     }, [currentTask.subtasks, subtasks.id])
 
-    const handleSubtaskForm = () => {
-        setCheck(!check)
+    const handleCheckChange = (position) => {
+        const updateCheckedState = checkedState.map((singleCheckedState, index) => {
+            if (index === position) {
+                console.log(index, 'index e position uguali!!!!')
+                return !singleCheckedState
+            } else {
+                return singleCheckedState
+            }
+        })
+        setCheckedState(updateCheckedState)
+        console.log(updateCheckedState, 'updateCheckedState')
+        console.log(checkedState, 'checkedState DENTRO')
     }
 
     const handleClickCloseModal = (ev) => {
@@ -99,20 +114,23 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
     }
 
     const listOfSubtasks = currentTask.subtasks.map((subtask, i) => {
+        // console.log(checkedState[i], 'checkedState[i]')
+        // console.log(checkedState, 'checkedState')
         return (
             <li 
                 key={i} 
                 className='container-view-task-subtasks-list-subtask' 
-                onChange={handleSubtaskForm}
             >
                 <input type='checkbox' 
-                    id={subtask.title} 
+                    id={subtask.id} 
                     name={subtask.title}
+                    checked={checkedState[i]}
+                    onChange={() => handleCheckChange(i)}
                 >
                 </input>
                 <label 
-                    htmlFor={subtask.title} 
-                    className={subtask.isCompleted ? 'checked' : null}
+                    htmlFor={subtask.id} 
+                    className={checkedState[i] ? 'checked' : null}
                 >
                     {subtask.title}
                 </label>
