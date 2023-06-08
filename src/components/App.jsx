@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import api from '../services/api/index'
 import '../styles/App.scss'
 import Header from './Header'
@@ -6,26 +6,28 @@ import Main from './Main'
 
 function App() {
 
-  const [currentBoard, setCurrentBoard] = useState(api.board.getAll()[0])
+  const [currentBoard, setCurrentBoard] = useState(api.board.getAll()[2])
   const [currentColumn, setCurrentColumn] = useState('')
   const [inputTitleBoard, setInputTitleBoard] = useState(currentBoard.name)
   const [inputColumnNames, setInputColumnNames] = useState('')
   const [modal, setModal] = useState(false)
   const [modalEditBoard, setModalEditBoard] = useState(false)
   const [currentTask, setCurrentTask] = useState('')
-  const [column, setColumn] = useState(currentTask.status)
+  const [statusCurrentTask, setStatusCurrentTask] = useState('')
+  const [defaultColumn, setDefaultColumn] = useState('')
 
-  // console.log(currentBoard, 'currentBoard')
-  console.log(currentColumn, 'ID current column!!')
-  console.log(currentTask.status, 'currentTask')
-  
+  useEffect(() => {
+    setDefaultColumn(api.column.getByName(currentTask.status))
+  }, [currentTask.status])
+
+  console.log(defaultColumn, 'defaultColumn')
+
   const handleClickBoard = (ev) => {
     const { id } = ev.currentTarget
     setCurrentBoard(api.board.getById(id))
   }
 
   const handleGetCurrentColumn = (ev) => {
-    console.log(ev, 'column for handleGetCurrentColumn')
     const { id } = ev.target
     setCurrentColumn(api.column.getById(id))
   }
@@ -57,8 +59,6 @@ function App() {
         setModal={setModal}
         modalEditBoard={modalEditBoard}
         setModalEditBoard={setModalEditBoard}
-        column={column}
-        setColumn={setColumn}
       >
       </Header>
       <Main 
@@ -67,11 +67,12 @@ function App() {
         inputColumnNames={inputColumnNames}
         modal={modal}
         setModal={setModal}
-        column={column}
-        setColumn={setColumn}
         currentTask={currentTask}
         setCurrentTask={setCurrentTask}
         handleArticleClick={handleArticleClick}
+        statusCurrentTask={statusCurrentTask}
+        setStatusCurrentTask={setStatusCurrentTask}
+        defaultColumn={defaultColumn}
       >
       </Main>
     </div>

@@ -20,7 +20,6 @@ const ModalBoard = ({
 
     /* I create an array for the board columns to map every board column */
     // const [columnList, setColumnList] = useState([{name: '', id: v4()},])
-    console.log(columnList, 'columnList')
 
     /* I use the spread operator to copy the column list and I add a new object every time I click on the button */
     const handleAddColumnClick = () => {
@@ -115,7 +114,6 @@ const ModalBoard = ({
                         })}
                     </ul>
 
-                    {/* Make reusable second button */}
                     {columnList.length < 8 && (
                         <button className='second-button' onClick={handleAddColumnClick}>
                             <i className='fa-solid fa-plus icon-plus'></i>

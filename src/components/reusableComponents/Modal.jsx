@@ -2,7 +2,6 @@ import { useState } from 'react'
 import '../../styles/reusableComponents/Modal.scss'
 import MainButton from '../reusableComponents/MainButton'
 import { v4 } from 'uuid'
-import Column from './Column'
 
 const Modal = ({
     title, 
@@ -19,8 +18,6 @@ const Modal = ({
     handleClickForm, 
     handleChangeSelect, 
     handleSubmitClick,
-
-    // columnName, 
     inputSubtasks, 
     column 
 }) => {
@@ -123,11 +120,6 @@ const Modal = ({
                             </button>
                         )}
                 </fieldset>
-                <Column
-                    columnName={column}
-                    handleChangeSelect={handleChangeSelect}
-                >
-                </Column>
                 <MainButton 
                     value={buttonText}
                     handleSubmitClick={handleSubmitClick}

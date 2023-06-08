@@ -390,7 +390,7 @@
               "id": "b851eedb-7a52-4896-b105-d49f8f98041a",
               "title": "Share on Show HN",
               "description": "",
-              "status": "",
+              "status": "Todo",
               "subtasks": [
                 {
                   "title": "Draft out HN post",
@@ -413,7 +413,7 @@
               "id": "2b9ade37-f93e-4d74-9ea9-b9d4acdb6a9e",
               "title": "Write launch article to publish on multiple channels",
               "description": "",
-              "status": "",
+              "status": "Todo",
               "subtasks": [
                 {
                   "title": "Write article",
@@ -463,7 +463,7 @@
               "id": "fb95f32a-6374-46e9-8977-e015c92f5fa7",
               "title": "Launch version one",
               "description": "",
-              "status": "",
+              "status": "Now",
               "subtasks": [
                 {
                   "title": "Launch privately to our waitlist",
@@ -481,7 +481,7 @@
               "id": "3833d270-2160-4939-ab85-cb0afafce78d",
               "title": "Review early feedback and plan next steps for roadmap",
               "description": "Beyond the initial launch, we're keeping the initial roadmap completely empty. This meeting will help us plan out our next steps based on actual customer feedback.",
-              "status": "",
+              "status": "Now",
               "subtasks": [
                 {
                   "title": "Interview 10 customers",

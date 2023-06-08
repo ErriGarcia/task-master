@@ -19,6 +19,16 @@ const getById = (id) => {
     }
 }
 
+const getByName = (name) => {
+    for (const board of data.boards) {
+       const searchingColumn = board.columns.find(column => column.name === name)
+
+       if (searchingColumn) {
+        return searchingColumn
+       }
+    }
+}
+
 /**
  * This function update a column found by id
  * @param {*} id string
@@ -58,6 +68,7 @@ const deleteById = (id) => {
 const apiColumn = {
     create,
     getById,
+    getByName,
     updateById,
     deleteById
 }

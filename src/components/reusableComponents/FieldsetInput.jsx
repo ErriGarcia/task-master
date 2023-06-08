@@ -13,7 +13,6 @@ const FieldsetInput = ({labelSubtasks, placeholderSubtask, titleIcon, buttonText
                         </button>
                     </li>
                 </ul>
-            {/* Make reusable second button */}
             <button className='second-button' onClick={handleAddClick}>
                 <i className='fa-solid fa-plus icon-plus'></i>
                 {buttonText}

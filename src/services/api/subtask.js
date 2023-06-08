@@ -16,7 +16,6 @@ const getById = (id) => {
                 const searchingSubtask = task.subtasks.find(subtask => subtask.id === id)
     
                 if (searchingSubtask) {
-                    console.log(searchingSubtask, 'searchingSubtask')
                     return searchingSubtask
                 }
 
@@ -49,7 +48,6 @@ const updateById = (id, title) => {
  */
 const deleteById = (id) => {
     const subtaskToDelete = getById(id)
-    console.log(subtaskToDelete, 'subtaskToDeleteeeeee!!!')
 
     if (!subtaskToDelete) {
         console.error(`Can not delete subtask with this id: ${id} not found`)
@@ -57,11 +55,8 @@ const deleteById = (id) => {
     }
 
     data.boards.forEach(board => {
-        console.log(board, 'board')
         board.columns.forEach(column => {
-            console.log(column, 'column')
             column.tasks.forEach(task => {
-                console.log(task, 'task')
                 const indexSubtask = task.subtasks.indexOf(subtaskToDelete)
                 return task.subtasks.splice(indexSubtask, 1)
             })

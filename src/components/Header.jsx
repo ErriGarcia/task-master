@@ -17,16 +17,11 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
     const [modalSelectBoard, setModalSelectBoard] = useState(false)
     
     const [allBoards, setAllBoards] = useState([api.board.getAll()])
-    // const [isActive, setIsActive] = useState(false)
     const [newTitleTask, setNewTitleTask] = useState('')
     const [newDescriptionTask, setNewDescriptionTask] = useState('')
-    // const [column, setColumn] = useState('Todo')
     const [newNameBoard, setNewNameBoard] = useState('')
     const [newSubtaskTitle] = useState('')
     const [columnList, setColumnList] = useState([{name: '', id: v4()},])
-
-    console.log(allBoards, 'allboards')
-    // console.log(column, 'columns')
 
     useEffect(() => {
         setAllBoards(api.board.getAll())
@@ -80,10 +75,8 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
 
     const handleCreateTaskClick = () => {
         if (!newTitleTask) {
-            console.log('no valid title')
             setModalNewTask(true)
         } else {
-            console.log('valid title')
             api.task.create(currentBoard, newTitleTask, newDescriptionTask, newSubtaskTitle, column)
             setModalNewTask(false)
         }
@@ -117,9 +110,7 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
     }
 
     const handleDeleteColumn = (ev) => {
-        console.log(ev, 'ev')
         api.column.deleteById(ev.target.id)
-        console.log(allBoards)
     }
 
     const buttonBoardName = allBoards.map((board, index) => {
@@ -133,8 +124,6 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
     )
 
     const inputColumns = currentBoard.columns.map((column, i) => {
-        console.log(column, 'column in the map in header line 136')
-        console.log(inputColumnNames[column.id], 'inputColumnNames[column.id]')
         return (
             <li className='container-subtasks-list' key={i}>
                 <input 
@@ -145,7 +134,6 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
                     placeholder={column.name} 
                     value={inputColumnNames[column.id]} 
                     onChange={ev => {handleInputColumnName(ev); handleGetCurrentColumn(ev)}}
-                    // onChange={ev => {handleInputColumnName(ev)}}
                 />
                 <button title='Delete Column' className='button-delete' onClick={handleDeleteColumn} id={column.id}>
                     <span className='material-symbols-outlined'>
@@ -218,10 +206,8 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
                         buttonText='Create Task'
                         handleClickForm={(ev) => (ev.preventDefault())} 
                         handleChangeSelect={ev => setColumn(ev.target.value)}
-                        // columnName={column}
                         handleSubmitClick={handleCreateTaskClick}
                         subtasks={[]}
-                        // columns={currentBoard.columns}
                         >
                     </Modal>
                 </div>
