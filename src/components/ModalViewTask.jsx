@@ -17,8 +17,6 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
         new Array(currentTask.subtasks.length).fill(false)
     )
 
-    console.log(checkedState, 'checkedState FUORI')
-
     useEffect(() => {
         const subtasksDetails = {}
         for (const subtask of currentTask.subtasks) {
@@ -30,15 +28,12 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
     const handleCheckChange = (position) => {
         const updateCheckedState = checkedState.map((singleCheckedState, index) => {
             if (index === position) {
-                console.log(index, 'index e position uguali!!!!')
                 return !singleCheckedState
             } else {
                 return singleCheckedState
             }
         })
         setCheckedState(updateCheckedState)
-        console.log(updateCheckedState, 'updateCheckedState')
-        console.log(checkedState, 'checkedState DENTRO')
     }
 
     const handleClickCloseModal = (ev) => {
@@ -114,8 +109,6 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
     }
 
     const listOfSubtasks = currentTask.subtasks.map((subtask, i) => {
-        // console.log(checkedState[i], 'checkedState[i]')
-        // console.log(checkedState, 'checkedState')
         return (
             <li 
                 key={i} 
