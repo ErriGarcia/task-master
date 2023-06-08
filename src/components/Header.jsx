@@ -115,7 +115,7 @@ const Header = ({currentBoard, handleClickBoard, handleGetCurrentColumn, updateB
 
     const buttonBoardName = allBoards.map((board, index) => {
         return (
-            <button className='modal-select-board-buttons-button selected' key={index} onClick={handleClickBoard} id={board.id}>
+            <button className='modal-select-board-buttons-button' key={index} onClick={handleClickBoard} id={board.id}>
                 <i className='fa-solid fa-table-columns'></i>
                 {board.name}
             </button>

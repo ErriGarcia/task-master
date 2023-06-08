@@ -6,7 +6,7 @@ import Main from './Main'
 
 function App() {
 
-  const [currentBoard, setCurrentBoard] = useState(api.board.getAll()[2])
+  const [currentBoard, setCurrentBoard] = useState(api.board.getAll()[0])
   const [currentColumn, setCurrentColumn] = useState('')
   const [inputTitleBoard, setInputTitleBoard] = useState(currentBoard.name)
   const [inputColumnNames, setInputColumnNames] = useState('')
