@@ -55,7 +55,7 @@ const deleteById = (id) => {
     const columnToDelete = getById(id)
 
     if (!columnToDelete) {
-        console.error(`Can not delete task with this id: ${id} not found`)
+        console.error(`Can not delete column with this id: ${id} not found`)
         return
     }
 

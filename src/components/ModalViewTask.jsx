@@ -82,8 +82,16 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
     }
 
     const handleDeleteSubtask = (ev) => {
+        console.log(ev.target.id)
         api.subtask.deleteById(ev.target.id)
+        console.log(currentTask, 'currentTask')
+        const newInputSubtaskName = {
+            ...inputSubtasksNames,
+            [ev.target.id]: ev.target.value
+        }
+        setInputSubtasksNames(newInputSubtaskName)
     }
+
 
     const handleStatusTaskChange = (ev) => {
         setStatusCurrentTask(ev.target.value)
@@ -143,7 +151,7 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
                     value={inputSubtasksNames[subtask.id]}
                     onChange={ev => {handleInputSubtaskName(ev); handleGetCurrentSubtask(ev)}}
                 />
-                <button title='Delete Subtask' className='button-delete' onClick={handleDeleteSubtask}>
+                <button title='Delete Subtask' className='button-delete' onClick={handleDeleteSubtask} id={subtask.id}>
                     <span className='material-symbols-outlined' id={subtask.id}>
                         delete
                     </span>
@@ -206,7 +214,7 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
                                 name='status' 
                                 id='status' 
                                 className='container-view-task-section-select'
-                                // defaultValue={currentTask.status}
+                                defaultValue={currentTask.status}
                                 value={statusCurrentTask} 
                                 onChange={handleStatusTaskChange}
                             >
@@ -234,7 +242,7 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
                         handleSubmitClick={updateTask}
                         inputSubtasks={inputSubtasks}
                         valueSubtask={''}
-                        handleSubtaskChange={e => console.log('change input default')}
+                        handleSubtaskChange={ev => console.log(ev, 'change input default')}
                     >
                     </Modal>
                 </div>

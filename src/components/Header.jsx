@@ -109,7 +109,9 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
     }
 
     const handleDeleteColumn = (ev) => {
+        console.log(currentBoard.columns, 'currentBoard.columns')
         api.column.deleteById(ev.target.id)
+        setInputColumnNames(currentBoard.columns)
     }
 
     const buttonBoardName = allBoards.map((board, index) => {
@@ -131,11 +133,11 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
                     name='subtasks' 
                     className='input subtask' 
                     placeholder={column.name} 
-                    value={inputColumnNames[column.id]} 
+                    value={inputColumnNames[column.id] || column.name} 
                     onChange={ev => {handleInputColumnName(ev); handleGetCurrentColumn(ev)}}
                 />
                 <button title='Delete Column' className='button-delete' onClick={handleDeleteColumn} id={column.id}>
-                    <span className='material-symbols-outlined'>
+                    <span className='material-symbols-outlined' id={column.id}>
                         delete
                     </span>
                 </button>

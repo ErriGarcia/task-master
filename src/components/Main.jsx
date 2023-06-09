@@ -11,23 +11,38 @@ const Main = ({currentBoard, modal, setModal, currentTask, handleArticleClick, s
         setCurrentSubtask(api.subtask.getById(id))
     }
 
+    const dragStarted = (ev, id) => {
+        console.log('drag has started')
+        ev.dataTransfer.setData("test", id)
+    }
+
+    const draggingOver = (ev) => {
+        ev.preventDefault()
+        console.log('dragging over')
+    }
+
+    const dragDropped = (ev) => {
+        ev.preventDefault()
+        let transferTestId = ev.dataTransfer.getData("test")
+        console.log(transferTestId)
+    }
+
     const listColumns = currentBoard.columns.map((column, index) => {
         return (
             <section 
                 key={index} className='main-board-section'
-                onDragEnter={e => console.log('onDragEnter')}
-                onDragLeave={e => console.log('onDragLeave')}
-                onDragOver={e => { e.preventDefault(); console.log('onDragOver'); }}
-                onDrop={e => console.log('onDrop')}
+                onDragOver={(ev) => draggingOver(ev)} 
+                onDrop={(ev) => dragDropped(ev)}
                 >
                 <h2 className='main-board-section-title'>{column.name}{`(${column.tasks.length})`}</h2>
-                <ul className='main-board-section-list'>
+                <ul 
+                    className='main-board-section-list' 
+                >
                         {column.tasks.map((task, index) => {
                             return (
                                 <li 
                                     draggable
-                                    onDragStart={e => console.log('onDragStart')}
-                                    onDragEnd={e => console.log('onDragEnd')} 
+                                    onDragStart={ev => dragStarted(ev, column.id)}
                                     id={task.id} 
                                     key={index} 
                                     onClick={handleArticleClick}

@@ -14,7 +14,7 @@ function App() {
   const [modal, setModal] = useState(false)
   const [modalEditBoard, setModalEditBoard] = useState(false)
   const [currentTask, setCurrentTask] = useState('')
-  const [statusCurrentTask, setStatusCurrentTask] = useState('')
+  const [statusCurrentTask, setStatusCurrentTask] = useState(currentTask.status)
   const [defaultColumn, setDefaultColumn] = useState('')
 
   useEffect(() => {
