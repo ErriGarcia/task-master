@@ -4,7 +4,16 @@ import { v4 } from 'uuid'
 /**
  * Retrieve all the boards from the json
  */
-const getAll = () => data.boards
+const getAll = () => {
+    let localStorageData = localStorage.getItem('data')
+    if (!localStorageData) {
+        localStorage.setItem('data', JSON.stringify(data.boards))
+    } 
+    const dataInLocalStorage = localStorage.getItem('data')
+    const parsedData = JSON.parse(dataInLocalStorage)
+    return parsedData
+}
+// const getAll = () => data.boards
 
 /**
  * Create a new board
@@ -13,11 +22,19 @@ const getAll = () => data.boards
  * @returns object
  */
 const create = (nameBoard, columns) => {
-    return data.boards.push({
+    const parsedData = getAll()
+    console.log(parsedData, 'parsedData')
+    parsedData.push({
         name: nameBoard,
         id: v4(),
-        columns
+        columns: columns
     })
+    localStorage.setItem('data', JSON.stringify(parsedData))
+    // data.boards.push({
+    //     name: nameBoard,
+    //     id: v4(),
+    //     columns: columns
+    // })
 }
 
 /**
@@ -25,9 +42,18 @@ const create = (nameBoard, columns) => {
  * @param {*} id number 
  */
 const getById = (id) => {
-    const searchingBoard = data.boards.find(board => board.id === id)
+    // const searchingBoard = data.boards.find(board => board.id === id)
+    
+    // if (searchingBoard) {
+    //     return searchingBoard
+    // }
+
+    const parsedData = getAll()
+
+    const searchingBoard = parsedData.find(board => board.id === id)
     
     if (searchingBoard) {
+        console.log(searchingBoard, 'searchingBoard')
         return searchingBoard
     }
 }

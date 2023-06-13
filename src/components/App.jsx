@@ -19,11 +19,13 @@ function App() {
 
   useEffect(() => {
     setDefaultColumn(api.column.getByName(currentTask.status))
+    setCurrentBoard(api.board.getAll()[0])
   }, [currentTask.status])
 
   const handleClickBoard = (ev) => {
     const { id } = ev.currentTarget
     setCurrentBoard(api.board.getById(id))
+    setInputTitleBoard(currentBoard.name)
   }
 
   const handleGetCurrentColumn = (ev) => {

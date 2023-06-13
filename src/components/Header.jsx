@@ -19,7 +19,7 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
     const [newDescriptionTask, setNewDescriptionTask] = useState('')
     const [newNameBoard, setNewNameBoard] = useState('')
     const [newSubtaskTitle] = useState('')
-    const [columnList, setColumnList] = useState([{name: '', id: v4()},])
+    const [columnList, setColumnList] = useState([{name: '', id: v4(), tasks: []},])
 
     useEffect(() => {
         setAllBoards(api.board.getAll())
@@ -86,6 +86,7 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
         } else {
             api.board.create(newNameBoard, columnList)
             setModalNewBoard(false)
+            setCurrentBoard(allBoards[allBoards.length-1])
         }
     }
 
