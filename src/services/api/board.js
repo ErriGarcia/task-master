@@ -50,7 +50,6 @@ const getById = (id) => {
     const searchingBoard = data.boards.find(board => board.id === id)
     
     if (searchingBoard) {
-        console.log(searchingBoard, 'searchingBoard')
         return searchingBoard
     }
 }
@@ -67,7 +66,11 @@ const updateById = (id, name) => {
         console.error(`board with this id: ${id} not found`)
     }
 
+    console.log(boardToUpdate, 'boardToUpdate')
+
     boardToUpdate.name = name
+    console.log(data.boards, 'boards')
+    localStorage.setItem('data', JSON.stringify(data.boards))
 }
 
 /**
