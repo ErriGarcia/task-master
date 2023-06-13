@@ -44,6 +44,7 @@ const updateById = (id, name) => {
     }
 
     columnToUpdate.name = name
+    localStorage.setItem('data', JSON.stringify(data.boards))
 }
 
 /**
@@ -63,6 +64,7 @@ const deleteById = (id) => {
         const indexTask = board.columns.indexOf(columnToDelete)
         return board.columns.splice(indexTask, 1)
     })
+    return localStorage.setItem('data', JSON.stringify(data.boards))
 }
 
 const apiColumn = {

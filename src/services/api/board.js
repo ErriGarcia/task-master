@@ -69,7 +69,6 @@ const updateById = (id, name) => {
     console.log(boardToUpdate, 'boardToUpdate')
 
     boardToUpdate.name = name
-    console.log(data.boards, 'boards')
     localStorage.setItem('data', JSON.stringify(data.boards))
 }
 
