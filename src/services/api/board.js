@@ -23,7 +23,6 @@ const getAll = () => {
  */
 const create = (nameBoard, columns) => {
     const parsedData = getAll()
-    console.log(parsedData, 'parsedData')
     parsedData.push({
         name: nameBoard,
         id: v4(),
@@ -48,9 +47,7 @@ const getById = (id) => {
     //     return searchingBoard
     // }
 
-    const parsedData = getAll()
-
-    const searchingBoard = parsedData.find(board => board.id === id)
+    const searchingBoard = data.boards.find(board => board.id === id)
     
     if (searchingBoard) {
         console.log(searchingBoard, 'searchingBoard')
@@ -87,8 +84,9 @@ const deleteById = (id) => {
         return
     }
 
-    const indexBoard = boards.indexOf(boardToDelete)
-    return boards.splice(indexBoard, 1)
+    const indexBoard = data.boards.indexOf(boardToDelete)
+    boards.splice(indexBoard, 1)
+    return localStorage.setItem('data', JSON.stringify(boards))
 }
 
 const apiBoard = {

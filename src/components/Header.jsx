@@ -93,6 +93,7 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
     const handleDeleteBoard = (ev) => {
         ev.preventDefault()
         api.board.deleteById(currentBoard.id)
+        console.log(currentBoard.id, 'currentBoard.id')
         setModalDeleteBoard(false)
         setCurrentBoard(allBoards[0])
     }
