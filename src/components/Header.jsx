@@ -8,7 +8,7 @@ import ModalDelete from './reusableComponents/ModalDelete'
 import api from '../services/api/index'
 import { v4 } from 'uuid'
 
-const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handleGetCurrentColumn, updateBoard, inputTitleBoard, setInputTitleBoard, inputColumnNames, setInputColumnNames, currentColumn, modalEditBoard, setModalEditBoard, column, setColumn, setCurrentBoard}) => {
+const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handleGetCurrentColumn, updateBoard, inputTitleBoard, setInputTitleBoard, inputColumnNames, setInputColumnNames, currentColumn, modalEditBoard, setModalEditBoard, setColumn, setCurrentBoard}) => {
 
     const [modalNewTask, setModalNewTask] = useState(false)
     const [moreOptionsBoard, setMoreOptionsBoard] = useState(false)
@@ -75,8 +75,9 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
         if (!newTitleTask) {
             setModalNewTask(true)
         } else {
-            api.task.create(currentBoard, newTitleTask, newDescriptionTask, newSubtaskTitle, column)
+            api.task.create(currentBoard, newTitleTask, newDescriptionTask, newSubtaskTitle, "Todo")
             setModalNewTask(false)
+            console.log(allBoards, 'all boards')
         }
     }
 

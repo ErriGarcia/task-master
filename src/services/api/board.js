@@ -47,7 +47,10 @@ const getById = (id) => {
     //     return searchingBoard
     // }
 
-    const searchingBoard = data.boards.find(board => board.id === id)
+    const boards = getAll()
+    console.log(boards, 'boards')
+
+    const searchingBoard = boards.find(board => board.id === id)
     
     if (searchingBoard) {
         return searchingBoard
