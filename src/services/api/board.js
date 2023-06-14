@@ -63,16 +63,19 @@ const getById = (id) => {
  * @param {*} title string
  */
 const updateById = (id, name) => {
+    const boards = getAll()
     const boardToUpdate = getById(id)
 
     if (!boardToUpdate) {
         console.error(`board with this id: ${id} not found`)
     }
+    boards.forEach(board => {
+        if (board.id === boardToUpdate.id) {
+            board.name = name
+        }
+    })
 
-    console.log(boardToUpdate, 'boardToUpdate')
-
-    boardToUpdate.name = name
-    localStorage.setItem('data', JSON.stringify(data.boards))
+    localStorage.setItem('data', JSON.stringify(boards))
 }
 
 /**
