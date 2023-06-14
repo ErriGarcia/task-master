@@ -97,6 +97,7 @@ const deleteById = (id) => {
             boards.splice(indexBoard, 1)
             console.log(boards, 'boards')
             localStorage.setItem('data', JSON.stringify(boards))
+            return boards
         }
     })
 }

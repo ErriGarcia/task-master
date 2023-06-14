@@ -9,7 +9,7 @@ function App() {
   const [allBoards, setAllBoards] = useState([api.board.getAll()])
   const [currentBoard, setCurrentBoard] = useState(api.board.getAll()[0])
   const [currentColumn, setCurrentColumn] = useState('')
-  const [inputTitleBoard, setInputTitleBoard] = useState(currentBoard.name)
+  const [inputTitleBoard, setInputTitleBoard] = useState('')
   const [inputColumnNames, setInputColumnNames] = useState('')
   const [modal, setModal] = useState(false)
   const [modalEditBoard, setModalEditBoard] = useState(false)
@@ -19,7 +19,7 @@ function App() {
 
   useEffect(() => {
     setDefaultColumn(api.column.getByName(currentTask.status))
-    setCurrentBoard(api.board.getAll()[0])
+    // setCurrentBoard(api.board.getAll()[0])
   }, [currentTask.status])
 
   const handleClickBoard = (ev) => {
@@ -44,6 +44,8 @@ function App() {
     api.board.updateById(currentBoard.id, inputTitleBoard)
     api.column.updateById(currentColumn.id, inputColumnNames[currentColumn.id])
     setModalEditBoard(false)
+    const updatedBoards = api.board.getAll()
+    setCurrentBoard(updatedBoards[0])
   }
 
   return (

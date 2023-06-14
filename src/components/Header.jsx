@@ -21,6 +21,8 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
     const [newSubtaskTitle] = useState('')
     const [columnList, setColumnList] = useState([{name: '', id: v4(), tasks: []},])
 
+    console.log(inputTitleBoard, 'inputTitleBoard')
+
     useEffect(() => {
         setAllBoards(api.board.getAll())
         const columnsDetails = {}
@@ -87,16 +89,17 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
         } else {
             api.board.create(newNameBoard, columnList)
             setModalNewBoard(false)
-            setCurrentBoard(allBoards[allBoards.length-1])
+            const updatedBoards = api.board.getAll()
+            setCurrentBoard(updatedBoards[updatedBoards.length-1])
         }
     }
 
     const handleDeleteBoard = (ev) => {
         ev.preventDefault()
         api.board.deleteById(currentBoard.id)
-        console.log(currentBoard.id, 'currentBoard.id')
         setModalDeleteBoard(false)
-        setCurrentBoard(allBoards[0])
+        const updatedBoards = api.board.getAll()
+        setCurrentBoard(updatedBoards[0])
     }
 
     const handleCloseDeleteBoard = () => {
