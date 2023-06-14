@@ -3,7 +3,7 @@ import Modal from './reusableComponents/Modal'
 import ModalDelete from './reusableComponents/ModalDelete'
 import api from '../services/api/index'
 
-const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCurrentSubtask, currentSubtask, statusCurrentTask, setStatusCurrentTask, defaultColumn}) => {
+const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCurrentSubtask, currentSubtask, statusCurrentTask, setStatusCurrentTask, defaultColumn, setCurrentBoard}) => {
 
     // const [check, setCheck] = useState(false)
     const [moreOptions, setMoreOptions] = useState(false)
@@ -60,6 +60,9 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
         api.subtask.updateById(currentSubtask.id, inputSubtasksNames[currentSubtask.id])
         setModal(false)
         setModalEditTask(false)
+        const updatedBoards = api.board.getAll()
+         // change to the index of currentBoard
+        setCurrentBoard(updatedBoards[0])
     }
 
     const handleDeleteTask = (ev) => {
@@ -67,6 +70,9 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
         api.task.deleteById(currentTask.id)
         setModal(false)
         setModalDeleteTask(false)
+        const updatedBoards = api.board.getAll()
+         // change to the index of currentBoard
+        setCurrentBoard(updatedBoards[0])
     }
 
     const handleCloseDeleteTask = (ev) => {

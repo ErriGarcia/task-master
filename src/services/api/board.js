@@ -68,6 +68,7 @@ const updateById = (id, name) => {
     if (!boardToUpdate) {
         console.error(`board with this id: ${id} not found`)
     }
+
     boards.forEach(board => {
         if (board.id === boardToUpdate.id) {
             board.name = name
@@ -95,7 +96,6 @@ const deleteById = (id) => {
         if (board.id === boardToDelete.id) {
             const indexBoard = boards.indexOf(board)
             boards.splice(indexBoard, 1)
-            console.log(boards, 'boards')
             localStorage.setItem('data', JSON.stringify(boards))
             return boards
         }

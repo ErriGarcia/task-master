@@ -1,16 +1,27 @@
 import data from '../data.json'
 import { v4 } from 'uuid'
 
+const getAllBoards = () => {
+    let localStorageData = localStorage.getItem('data')
+    if (!localStorageData) {
+        localStorage.setItem('data', JSON.stringify(data.boards))
+    } 
+    const dataInLocalStorage = localStorage.getItem('data')
+    const parsedData = JSON.parse(dataInLocalStorage)
+    return parsedData
+}
+
 /**
  * Create a new task
  * @param {*} board : board selected
- * @param {*} title : title value write by user
- * @param {*} description : description value write by user
- * @param {*} status : column selected, for now it's just column [0]
+ * @param {*} titleTask : title value write by user
+ * @param {*} descriptionTask : description value write by user
+ * @param {*} statusTask : column selected, for now it's just column [0]
  * @returns 
  */
 const create = (board, titleTask, descriptionTask, subtaskTask, statusTask) => {
-    return board.columns[0].tasks.push({
+    const boards = getAllBoards()
+    board.columns[0].tasks.push({
         id: v4(),
         title: titleTask, 
         description: descriptionTask,
@@ -21,6 +32,7 @@ const create = (board, titleTask, descriptionTask, subtaskTask, statusTask) => {
         }],
         status: statusTask
     })
+    localStorage.setItem('data', JSON.stringify(boards))
 }
 
 /**
@@ -28,7 +40,8 @@ const create = (board, titleTask, descriptionTask, subtaskTask, statusTask) => {
  * @param {*} id number 
  */
 const getById = (id) => {
-    for (const board of data.boards) {
+    const boards = getAllBoards()
+    for (const board of boards) {
         for (const column of board.columns) {
             const searchingTask = column.tasks.find(task => task.id === id)
 
@@ -47,6 +60,7 @@ const getById = (id) => {
  * @returns 
  */
 const updateById = (id, title, description) => {
+    const boards = getAllBoards()
     const taskToUpdate = getById(id)
 
     if (!taskToUpdate) {
@@ -54,8 +68,20 @@ const updateById = (id, title, description) => {
         return
     }
 
-    taskToUpdate.title = title
-    taskToUpdate.description = description
+    boards.forEach(board => {
+        board.columns.forEach(column => {
+            column.tasks.forEach(task => {
+                if (task.id === taskToUpdate.id) {
+                    task.title = title
+                    task.description = description
+                }
+            })
+        })
+    })
+
+    // taskToUpdate.title = title
+    // taskToUpdate.description = description
+    localStorage.setItem('data', JSON.stringify(boards))
 }
 
 /**
@@ -64,6 +90,7 @@ const updateById = (id, title, description) => {
  * @returns 
  */
 const deleteById = (id) => {
+    const boards = getAllBoards()
     const taskToDelete = getById(id)
 
     if (!taskToDelete) {
@@ -78,10 +105,17 @@ const deleteById = (id) => {
     //     }
     // }
 
-    data.boards.forEach(board => {
+    boards.forEach(board => {
         board.columns.forEach(column => {
-            const indexTask = column.tasks.indexOf(taskToDelete)
-            return column.tasks.splice(indexTask, 1)
+            column.tasks.forEach(task => {
+                if (task.id === taskToDelete.id) {
+                    console.log('entroooo')
+                    const indexTask = column.tasks.indexOf(task)
+                    console.log(indexTask, 'indexTask')
+                    column.tasks.splice(indexTask, 1)
+                    localStorage.setItem('data', JSON.stringify(boards))
+                }
+            })
         })
     })
 }

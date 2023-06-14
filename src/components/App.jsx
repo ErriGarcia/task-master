@@ -9,7 +9,7 @@ function App() {
   const [allBoards, setAllBoards] = useState([api.board.getAll()])
   const [currentBoard, setCurrentBoard] = useState(api.board.getAll()[0])
   const [currentColumn, setCurrentColumn] = useState('')
-  const [inputTitleBoard, setInputTitleBoard] = useState('')
+  const [inputTitleBoard, setInputTitleBoard] = useState(currentBoard.name)
   const [inputColumnNames, setInputColumnNames] = useState('')
   const [modal, setModal] = useState(false)
   const [modalEditBoard, setModalEditBoard] = useState(false)
@@ -25,7 +25,7 @@ function App() {
   const handleClickBoard = (ev) => {
     const { id } = ev.currentTarget
     setCurrentBoard(api.board.getById(id))
-    setInputTitleBoard(currentBoard.name)
+    setInputTitleBoard(api.board.getById(id).name)
   }
 
   const handleGetCurrentColumn = (ev) => {
@@ -40,11 +40,15 @@ function App() {
   }
 
   const updateBoard = (ev) => {
+    console.log('button SAVE CHANGES')
     ev.preventDefault()
     api.board.updateById(currentBoard.id, inputTitleBoard)
     api.column.updateById(currentColumn.id, inputColumnNames[currentColumn.id])
     setModalEditBoard(false)
     const updatedBoards = api.board.getAll()
+    console.log(currentBoard, 'currentBoard')
+    console.log(allBoards.indexOf(currentBoard), 'INDEXXXXX')
+    // change to the index of currentBoard
     setCurrentBoard(updatedBoards[0])
   }
 
@@ -65,6 +69,7 @@ function App() {
         modalEditBoard={modalEditBoard}
         setModalEditBoard={setModalEditBoard}
         setCurrentBoard={setCurrentBoard}
+        setCurrentColumn={setCurrentColumn}
       >
       </Header>
       <Main 
@@ -79,6 +84,7 @@ function App() {
         statusCurrentTask={statusCurrentTask}
         setStatusCurrentTask={setStatusCurrentTask}
         defaultColumn={defaultColumn}
+        setCurrentBoard={setCurrentBoard}
       >
       </Main>
     </div>

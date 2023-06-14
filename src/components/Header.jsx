@@ -8,7 +8,7 @@ import ModalDelete from './reusableComponents/ModalDelete'
 import api from '../services/api/index'
 import { v4 } from 'uuid'
 
-const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handleGetCurrentColumn, updateBoard, inputTitleBoard, setInputTitleBoard, inputColumnNames, setInputColumnNames, currentColumn, modalEditBoard, setModalEditBoard, setColumn, setCurrentBoard}) => {
+const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handleGetCurrentColumn, updateBoard, inputTitleBoard, setInputTitleBoard, inputColumnNames, setInputColumnNames, currentColumn, setCurrentColumn, modalEditBoard, setModalEditBoard, setColumn, setCurrentBoard}) => {
 
     const [modalNewTask, setModalNewTask] = useState(false)
     const [moreOptionsBoard, setMoreOptionsBoard] = useState(false)
@@ -20,8 +20,6 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
     const [newNameBoard, setNewNameBoard] = useState('')
     const [newSubtaskTitle] = useState('')
     const [columnList, setColumnList] = useState([{name: '', id: v4(), tasks: []},])
-
-    console.log(inputTitleBoard, 'inputTitleBoard')
 
     useEffect(() => {
         setAllBoards(api.board.getAll())
@@ -79,7 +77,6 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
         } else {
             api.task.create(currentBoard, newTitleTask, newDescriptionTask, newSubtaskTitle, "Todo")
             setModalNewTask(false)
-            console.log(allBoards, 'all boards')
         }
     }
 
@@ -99,6 +96,7 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
         api.board.deleteById(currentBoard.id)
         setModalDeleteBoard(false)
         const updatedBoards = api.board.getAll()
+         // change to the index of currentBoard
         setCurrentBoard(updatedBoards[0])
     }
 
@@ -115,9 +113,10 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
     }
 
     const handleDeleteColumn = (ev) => {
-        console.log(currentBoard.columns, 'currentBoard.columns')
         api.column.deleteById(ev.target.id)
-        setInputColumnNames(currentBoard.columns)
+        const updatedBoards = api.board.getAll()
+        // change to the index of currentBoard
+        setCurrentBoard(updatedBoards[0])
     }
 
     const buttonBoardName = allBoards.map((board, index) => {
@@ -141,6 +140,7 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
                     placeholder={column.name} 
                     value={inputColumnNames[column.id] || column.name} 
                     onChange={ev => {handleInputColumnName(ev); handleGetCurrentColumn(ev)}}
+                    onClick={ev => handleGetCurrentColumn(ev)}
                 />
                 <button title='Delete Column' className='button-delete' onClick={handleDeleteColumn} id={column.id}>
                     <span className='material-symbols-outlined' id={column.id}>

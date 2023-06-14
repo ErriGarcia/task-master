@@ -1,5 +1,15 @@
 import data from '../data.json'
 
+const getAllBoards = () => {
+    let localStorageData = localStorage.getItem('data')
+    if (!localStorageData) {
+        localStorage.setItem('data', JSON.stringify(data.boards))
+    } 
+    const dataInLocalStorage = localStorage.getItem('data')
+    const parsedData = JSON.parse(dataInLocalStorage)
+    return parsedData
+}
+
 const create = () => {
     
 }
@@ -10,7 +20,8 @@ const create = () => {
  * @returns 
  */
 const getById = (id) => {
-    for (const board of data.boards) {
+    const boards = getAllBoards()
+    for (const board of boards) {
        const searchingColumn = board.columns.find(column => column.id === id)
 
        if (searchingColumn) {
@@ -20,7 +31,8 @@ const getById = (id) => {
 }
 
 const getByName = (name) => {
-    for (const board of data.boards) {
+    const boards = getAllBoards()
+    for (const board of boards) {
        const searchingColumn = board.columns.find(column => column.name === name)
 
        if (searchingColumn) {
@@ -36,6 +48,7 @@ const getByName = (name) => {
  * @returns 
  */
 const updateById = (id, name) => {
+    const boards = getAllBoards()
     const columnToUpdate = getById(id)
 
     if (!columnToUpdate) {
@@ -43,8 +56,16 @@ const updateById = (id, name) => {
         return
     }
 
-    columnToUpdate.name = name
-    localStorage.setItem('data', JSON.stringify(data.boards))
+    boards.forEach(board => {
+        board.columns.forEach(column => {
+            if (column.id === columnToUpdate.id) {
+                column.name = name
+            }
+        })
+    })
+
+    // columnToUpdate.name = name
+    localStorage.setItem('data', JSON.stringify(boards))
 }
 
 /**
@@ -53,6 +74,7 @@ const updateById = (id, name) => {
  * @returns 
  */
 const deleteById = (id) => {
+    const boards = getAllBoards()
     const columnToDelete = getById(id)
 
     if (!columnToDelete) {
@@ -60,11 +82,15 @@ const deleteById = (id) => {
         return
     }
 
-    data.boards.forEach(board => {
-        const indexTask = board.columns.indexOf(columnToDelete)
-        return board.columns.splice(indexTask, 1)
+    boards.forEach(board => {
+        board.columns.forEach(column => {
+            if (column.id === columnToDelete.id) {
+                const indexColumn = board.columns.indexOf(column)
+                board.columns.splice(indexColumn, 1)
+                localStorage.setItem('data', JSON.stringify(boards))
+            }
+        })
     })
-    return localStorage.setItem('data', JSON.stringify(data.boards))
 }
 
 const apiColumn = {
