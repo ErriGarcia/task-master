@@ -48,7 +48,6 @@ const getById = (id) => {
     // }
 
     const boards = getAll()
-    console.log(boards, 'boards')
 
     const searchingBoard = boards.find(board => board.id === id)
     
@@ -92,9 +91,14 @@ const deleteById = (id) => {
         return
     }
 
-    const indexBoard = data.boards.indexOf(boardToDelete)
-    boards.splice(indexBoard, 1)
-    return localStorage.setItem('data', JSON.stringify(boards))
+    boards.forEach(board => {
+        if (board.id === boardToDelete.id) {
+            const indexBoard = boards.indexOf(board)
+            boards.splice(indexBoard, 1)
+            console.log(boards, 'boards')
+            localStorage.setItem('data', JSON.stringify(boards))
+        }
+    })
 }
 
 const apiBoard = {
