@@ -1,4 +1,5 @@
 import data from '../data.json'
+import { v4 } from 'uuid'
 
 const getAllBoards = () => {
     let localStorageData = localStorage.getItem('data')
@@ -10,8 +11,27 @@ const getAllBoards = () => {
     return parsedData
 }
 
-const create = () => {
+const create = (currentBoard, nameColumn) => {
+    const boards = getAllBoards()
+    const indexOfBoard = boards.findIndex(board => board.id === currentBoard.id)
+
+    boards[indexOfBoard].columns.push({
+        name: nameColumn, 
+        id: v4(),
+        tasks: [{
+            id: v4(),
+            title: 'Example',
+            description: 'Example',
+            status: nameColumn,
+            subtasks: [{
+                id: v4(),
+                isCompleted: false,
+                title: 'Example'
+            }]
+        }]
+    })
     
+    localStorage.setItem('data', JSON.stringify(boards))
 }
 
 /**

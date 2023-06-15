@@ -6,9 +6,8 @@ import Modal from '../components/reusableComponents/Modal'
 import ModalBoard from './reusableComponents/ModalBoard'
 import ModalDelete from './reusableComponents/ModalDelete'
 import api from '../services/api/index'
-import { v4 } from 'uuid'
 
-const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handleGetCurrentColumn, updateBoard, inputTitleBoard, setInputTitleBoard, inputColumnNames, setInputColumnNames, currentColumn, setCurrentColumn, modalEditBoard, setModalEditBoard, setColumn, setCurrentBoard}) => {
+const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handleGetCurrentColumn, updateBoard, inputTitleBoard, setInputTitleBoard, inputColumnNames, setInputColumnNames, currentColumn, setCurrentColumn, modalEditBoard, setModalEditBoard, setColumn, setCurrentBoard, columnList, setColumnList}) => {
 
     const [modalNewTask, setModalNewTask] = useState(false)
     const [moreOptionsBoard, setMoreOptionsBoard] = useState(false)
@@ -19,7 +18,7 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
     const [newDescriptionTask, setNewDescriptionTask] = useState('')
     const [newNameBoard, setNewNameBoard] = useState('')
     const [newSubtaskTitle] = useState('')
-    const [columnList, setColumnList] = useState([{name: '', id: v4(), tasks: []},])
+    // const [columnList, setColumnList] = useState([{name: '', id: v4(), tasks: []},])
 
     useEffect(() => {
         setAllBoards(api.board.getAll())

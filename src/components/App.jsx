@@ -3,6 +3,7 @@ import api from '../services/api/index'
 import '../styles/App.scss'
 import Header from './Header'
 import Main from './Main'
+import { v4 } from 'uuid'
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
   const [currentTask, setCurrentTask] = useState('')
   const [statusCurrentTask, setStatusCurrentTask] = useState(currentTask.status)
   const [defaultColumn, setDefaultColumn] = useState('')
+  const [columnList, setColumnList] = useState([{name: '', id: v4(), tasks: []},])
 
   useEffect(() => {
     setDefaultColumn(api.column.getByName(currentTask.status))
@@ -44,11 +46,15 @@ function App() {
     api.board.updateById(currentBoard.id, inputTitleBoard)
     api.column.updateById(currentColumn.id, inputColumnNames[currentColumn.id])
     setModalEditBoard(false)
+    // create a column for each element of columnList
+    columnList.forEach(eachColumn => {
+      console.log(currentBoard, 'currentBoard')
+      api.column.create(currentBoard, eachColumn.name)
+    })
     const updatedBoards = api.board.getAll()
     const indexOfBoard = updatedBoards.findIndex(board => board.id === currentBoard.id)
-    // change to the index of currentBoard
     setCurrentBoard(updatedBoards[indexOfBoard])
-  }
+   }
 
   return (
     <div className='main'>
@@ -68,6 +74,8 @@ function App() {
         setModalEditBoard={setModalEditBoard}
         setCurrentBoard={setCurrentBoard}
         setCurrentColumn={setCurrentColumn}
+        columnList={columnList}
+        setColumnList={setColumnList}
       >
       </Header>
       <Main 
