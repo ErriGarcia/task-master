@@ -77,6 +77,9 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
         } else {
             api.task.create(currentBoard, newTitleTask, newDescriptionTask, newSubtaskTitle, "Todo")
             setModalNewTask(false)
+            const updatedBoards = api.board.getAll()
+            const indexOfBoard = updatedBoards.findIndex(board => board.id === currentBoard.id)
+            setCurrentBoard(updatedBoards[indexOfBoard])
         }
     }
 
@@ -96,7 +99,7 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
         api.board.deleteById(currentBoard.id)
         setModalDeleteBoard(false)
         const updatedBoards = api.board.getAll()
-         // change to the index of currentBoard
+        // change to the index of currentBoard
         setCurrentBoard(updatedBoards[0])
     }
 
@@ -115,8 +118,9 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
     const handleDeleteColumn = (ev) => {
         api.column.deleteById(ev.target.id)
         const updatedBoards = api.board.getAll()
+        const indexOfBoard = updatedBoards.findIndex(board => board.id === currentBoard.id)
         // change to the index of currentBoard
-        setCurrentBoard(updatedBoards[0])
+        setCurrentBoard(updatedBoards[indexOfBoard])
     }
 
     const buttonBoardName = allBoards.map((board, index) => {

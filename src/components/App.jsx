@@ -46,10 +46,9 @@ function App() {
     api.column.updateById(currentColumn.id, inputColumnNames[currentColumn.id])
     setModalEditBoard(false)
     const updatedBoards = api.board.getAll()
-    console.log(currentBoard, 'currentBoard')
-    console.log(allBoards.indexOf(currentBoard), 'INDEXXXXX')
+    const indexOfBoard = updatedBoards.findIndex(board => board.id === currentBoard.id)
     // change to the index of currentBoard
-    setCurrentBoard(updatedBoards[0])
+    setCurrentBoard(updatedBoards[indexOfBoard])
   }
 
   return (
