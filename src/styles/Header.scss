@@ -103,9 +103,14 @@
         gap: 0.8rem;
 
         @include tablet {
-            max-width: 12rem;
+            max-width: 20%;
             top: 3rem;
-            left: 36.5rem;
+            left: 60%;
+        }
+
+        @include desktop {
+            max-width: 20%;
+            left: 75%;
         }
 
         &-edit-button, &-delete-button, &-add-button {
