@@ -11,30 +11,85 @@ const getAllBoards = () => {
     return parsedData
 }
 
+// const create2 = (currentBoard, currentTask, titleSubtask) => {
+//     const boards = getAllBoards()
+//     // const indexOfBoard = boards.findIndex(board => board.columns[1].tasks[0].id === currentTask.id)
+//     boards.forEach(board => {
+//         if (board.id === currentBoard.id) {
+//             const indexBoard = boards.indexOf(board)
+//             board.columns.forEach(column => {
+//                 column.tasks.forEach(task => {
+//                     if (task.id === currentTask.id) {
+//                         const indexTask = column.tasks.indexOf(task)
+                        
+//                         // !!! Change column !!!
+//                         boards[indexBoard].columns[0].tasks[indexTask].subtasks.push({
+//                             id: v4(),
+//                             isCompleted: false,
+//                             title: titleSubtask
+//                         })
+//                     }
+//                 })
+//             })
+//         }
+//     })
+    
+//     localStorage.setItem('data', JSON.stringify(boards))
+// }
+
 const create = (currentBoard, currentTask, titleSubtask) => {
     const boards = getAllBoards()
-    // const indexOfBoard = boards.findIndex(board => board.columns[1].tasks[0].id === currentTask.id)
-    boards.forEach(board => {
-        if (board.id === currentBoard.id) {
-            const indexBoard = boards.indexOf(board)
-            board.columns.forEach(column => {
-                column.tasks.forEach(task => {
-                    if (task.id === currentTask.id) {
-                        const indexTask = column.tasks.indexOf(task)
-                        
-                        // !!! Change column !!!
-                        boards[indexBoard].columns[0].tasks[indexTask].subtasks.push({
-                            id: v4(),
-                            isCompleted: false,
-                            title: titleSubtask
-                        })
-                    }
+    const indexCurrentBoard = boards.findIndex(board => board.id === currentBoard.id)
+    // const indexCurrentColumn = boards[indexCurrentBoard].columns.forEach((column, columnIndex) => {
+    //     column.tasks.forEach(task => {
+    //         if (task.id === currentTask.id) {
+    //             return columnIndex
+    //         }
+    //      })
+    // })
+
+    boards[indexCurrentBoard].columns.forEach((column) => {
+        column.tasks.forEach((task) => {
+            if (task.id === currentTask.id) {
+                const indexCurrentTask = column.tasks.indexOf(task)
+                column.tasks[indexCurrentTask].subtasks.push({
+                    id: v4(),
+                    isCompleted: false,
+                    title: titleSubtask 
                 })
-            })
-        }
+                localStorage.setItem('data', JSON.stringify(boards))
+            }
+         })
     })
-    
-    localStorage.setItem('data', JSON.stringify(boards))
+
+
+
+    // boards[indexCurrentBoard].columns[indexCurrentColumn].tasks[0].subtasks.push({
+    //     id: v4(),
+    //     isCompleted: false,
+    //     title: titleSubtask
+    // })
+
+    // localStorage.setItem('data', JSON.stringify(boards))
+
+    // const boards = getAllBoards()
+    // boards.forEach(board => {
+    //     if (board.id === currentBoard.id) {
+    //         board.columns.forEach(column => {
+    //             if (column.id === currentColumn.id) {
+    //                 column.tasks.forEach(task => {
+    //                     if (task.id === currentTask.id) {
+    //                         task.subtasks.push({
+    //                             id: v4(),
+    //                             isCompleted: false,
+    //                             title: titleSubtask
+    //                         })
+    //                     }
+    //                 })
+    //             }
+    //         })
+    //     }
+    // })
 }
 
 /**

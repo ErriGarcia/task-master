@@ -208,12 +208,6 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
                                     {listOfSubtasks}
                             </ul>
                         </fieldset>
-                        {/* <Column
-                            currentBoard={currentBoard}
-                            columnName={column}
-                            handleChangeSelect={ev => setColumn(ev.target.value)}
-                        >
-                        </Column> */}
                         <fieldset className='container-view-task-section'>
                             <label 
                                 htmlFor='status'     className='container-view-task-section-status-title'

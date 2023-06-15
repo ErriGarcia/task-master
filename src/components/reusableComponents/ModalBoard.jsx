@@ -89,26 +89,36 @@ const ModalBoard = ({
                         {/* I show dinamically every board column */}
                         {columnList.map((singleInput, index) => {
                             return (
-                                <li className='container-subtasks-list' key={index}>
-                                    <input 
-                                        type='text' 
-                                        id='column' 
-                                        name='name' 
-                                        className='input subtask' 
-                                        placeholder={placeholderSecondInput} 
-                                        /* I need to track the event so I need the ev and index to know which input is updating */
-                                        value={singleInput.name} 
-                                        onChange={(ev) => handleColumnInputChange(ev, index)}
-                                    />
-                                    <button 
-                                        title={titleCloseIcon} 
-                                        className='button-delete' 
-                                        onClick={() => handleRemoveColumnList(index)}
-                                    >
-                                        <span className='material-symbols-outlined'>
-                                            delete
-                                        </span>
-                                    </button>
+                                <li key={index}>
+                                    <div className='container-subtasks-list'>
+                                        <input 
+                                            type='text' 
+                                            id='column' 
+                                            name='name' 
+                                            className={`input subtask ${singleInput ? null : setErrorBoardName('error-board-name')}`} 
+                                            placeholder={placeholderSecondInput} 
+                                            /* I need to track the event so I need the ev and index to know which input is updating */
+                                            value={singleInput.name} 
+                                            onChange={(ev) => handleColumnInputChange(ev, index)}
+                                        />
+                                        <button 
+                                            title={titleCloseIcon} 
+                                            className='button-delete' 
+                                            onClick={() => handleRemoveColumnList(index)}
+                                            >
+                                            <span className='material-symbols-outlined'>
+                                                delete
+                                            </span>
+                                        </button>
+                                    </div>
+                                    {setErrorBoardName('error-board-name') && (
+                                        <div className='error-board-name-message error-column'>
+                                            <span className='material-icons error-board-name-message-icon'>
+                                                error
+                                                </span>
+                                            <p>Column name is required</p>
+                                        </div>
+                                    )}
                                 </li>
                             )
                         })}

@@ -37,12 +37,9 @@ function App() {
   }
 
   const handleArticleClick = (ev) => {
-    console.log(ev, 'ev')
     const { id } = ev.currentTarget
     setModal(true)
     setCurrentTask(api.task.getById(id))
-    console.log(currentTask, 'currentTask !!')
-    console.log(currentColumn, 'current column !!')
 
     // allBoards.forEach(board => {
     //   board.columns.forEach(column => {

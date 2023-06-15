@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import '../../styles/reusableComponents/Modal.scss'
 import MainButton from '../reusableComponents/MainButton'
 import { v4 } from 'uuid'
