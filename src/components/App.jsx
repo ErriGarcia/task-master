@@ -18,6 +18,7 @@ function App() {
   const [statusCurrentTask, setStatusCurrentTask] = useState(currentTask.status)
   const [defaultColumn, setDefaultColumn] = useState('')
   const [columnList, setColumnList] = useState([{name: '', id: v4(), tasks: []},])
+  const [subtaskList, setSubtaskList] = useState([{title: '', id: v4()},])
 
   useEffect(() => {
     setDefaultColumn(api.column.getByName(currentTask.status))
@@ -89,6 +90,8 @@ function App() {
         setCurrentColumn={setCurrentColumn}
         columnList={columnList}
         setColumnList={setColumnList}
+        subtaskList={subtaskList}
+        setSubtaskList={setSubtaskList}
       >
       </Header>
       <Main 
@@ -104,6 +107,8 @@ function App() {
         setStatusCurrentTask={setStatusCurrentTask}
         defaultColumn={defaultColumn}
         setCurrentBoard={setCurrentBoard}
+        subtaskList={subtaskList}
+        setSubtaskList={setSubtaskList}
       >
       </Main>
     </div>

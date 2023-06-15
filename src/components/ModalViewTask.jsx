@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react'
 import Modal from './reusableComponents/Modal'
 import ModalDelete from './reusableComponents/ModalDelete'
 import api from '../services/api/index'
-import { v4 } from 'uuid'
 
-const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCurrentSubtask, currentSubtask, statusCurrentTask, setStatusCurrentTask, defaultColumn, setCurrentBoard, currentColumn}) => {
+const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCurrentSubtask, currentSubtask, statusCurrentTask, setStatusCurrentTask, defaultColumn, setCurrentBoard, currentColumn, subtaskList, setSubtaskList}) => {
 
     // const [check, setCheck] = useState(false)
     const [moreOptions, setMoreOptions] = useState(false)
@@ -17,7 +16,7 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
     const [checkedState, setCheckedState] = useState(
         new Array(currentTask.subtasks.length).fill(false)
     )
-    const [subtaskList, setSubtaskList] = useState([{title: '', id: v4()},])
+    // const [subtaskList, setSubtaskList] = useState([{title: '', id: v4()},])
 
     useEffect(() => {
         const subtasksDetails = {}

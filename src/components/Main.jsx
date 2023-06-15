@@ -2,7 +2,7 @@ import { useState } from 'react'
 import ModalViewTask from './ModalViewTask'
 import api from '../services/api/index'
 
-const Main = ({currentBoard, modal, setModal, currentTask, handleArticleClick, statusCurrentTask, setStatusCurrentTask, defaultColumn, setCurrentBoard, currentColumn}) => {
+const Main = ({currentBoard, modal, setModal, currentTask, handleArticleClick, statusCurrentTask, setStatusCurrentTask, defaultColumn, setCurrentBoard, currentColumn, subtaskList, setSubtaskList}) => {
 
     const [currentSubtask, setCurrentSubtask] = useState('')
 
@@ -29,32 +29,34 @@ const Main = ({currentBoard, modal, setModal, currentTask, handleArticleClick, s
 
     const listColumns = currentBoard.columns.map((column, index) => {
         return (
-            <section 
-                key={index} className='main-board-section'
-                onDragOver={(ev) => draggingOver(ev)} 
-                onDrop={(ev) => dragDropped(ev)}
-                >
-                <h2 className='main-board-section-title'>{column.name}{`(${column.tasks.length})`}</h2>
-                <ul 
-                    className='main-board-section-list' 
-                >
-                        {column.tasks.map((task, index) => {
-                            return (
-                                <li 
-                                    draggable
-                                    onDragStart={ev => dragStarted(ev, column.id)}
-                                    id={task.id} 
-                                    key={index} 
-                                    onClick={handleArticleClick}
-                                >
-                                    <article className='main-board-section-list-article'>
-                                        <h3>{task.title}</h3>
-                                    </article>
-                                </li>
-                            )
-                        })}
-                </ul>
-            </section>
+            <>
+                <section 
+                    key={index} className='main-board-section'
+                    onDragOver={(ev) => draggingOver(ev)} 
+                    onDrop={(ev) => dragDropped(ev)}
+                    >
+                    <h2 className='main-board-section-title'>{column.name ? column.name : 'example'}{`(${column.tasks.length})`}</h2>
+                    <ul 
+                        className='main-board-section-list' 
+                    >
+                            {column.tasks.map((task, index) => {
+                                return (
+                                    <li 
+                                        draggable
+                                        onDragStart={ev => dragStarted(ev, column.id)}
+                                        id={task.id} 
+                                        key={index} 
+                                        onClick={handleArticleClick}
+                                    >
+                                        <article className='main-board-section-list-article'>
+                                            <h3>{task.title}</h3>
+                                        </article>
+                                    </li>
+                                )
+                            })}
+                    </ul>
+                </section>
+            </>
         )
     })
 
@@ -76,6 +78,8 @@ const Main = ({currentBoard, modal, setModal, currentTask, handleArticleClick, s
                     defaultColumn={defaultColumn}
                     setCurrentBoard={setCurrentBoard}
                     currentColumn={currentColumn}
+                    subtaskList={subtaskList}
+                    setSubtaskList={setSubtaskList}
                 >
                 </ModalViewTask>
             )}
