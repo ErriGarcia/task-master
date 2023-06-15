@@ -35,7 +35,6 @@ const create = (currentBoard, titleTask, descriptionTask, subtaskTask, statusTas
         status: statusTask
     })
     
-    console.log(indexOfBoard, 'index')
     localStorage.setItem('data', JSON.stringify(boards))
 }
 
@@ -113,9 +112,7 @@ const deleteById = (id) => {
         board.columns.forEach(column => {
             column.tasks.forEach(task => {
                 if (task.id === taskToDelete.id) {
-                    console.log('entroooo')
                     const indexTask = column.tasks.indexOf(task)
-                    console.log(indexTask, 'indexTask')
                     column.tasks.splice(indexTask, 1)
                     localStorage.setItem('data', JSON.stringify(boards))
                 }

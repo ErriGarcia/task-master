@@ -88,9 +88,7 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
     }
 
     const handleDeleteSubtask = (ev) => {
-        console.log(ev.target.id)
         api.subtask.deleteById(ev.target.id)
-        console.log(currentTask, 'currentTask')
         const newInputSubtaskName = {
             ...inputSubtasksNames,
             [ev.target.id]: ev.target.value

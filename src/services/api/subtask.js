@@ -1,5 +1,15 @@
 import data from '../data.json'
 
+const getAllBoards = () => {
+    let localStorageData = localStorage.getItem('data')
+    if (!localStorageData) {
+        localStorage.setItem('data', JSON.stringify(data.boards))
+    } 
+    const dataInLocalStorage = localStorage.getItem('data')
+    const parsedData = JSON.parse(dataInLocalStorage)
+    return parsedData
+}
+
 const create = () => {
 
 }
@@ -10,7 +20,8 @@ const create = () => {
  * @returns 
  */
 const getById = (id) => {
-    for (const board of data.boards) {
+    const boards = getAllBoards()
+    for (const board of boards) {
         for (const column of board.columns) {
             for (const task of column.tasks) {
                 const searchingSubtask = task.subtasks.find(subtask => subtask.id === id)
@@ -31,6 +42,7 @@ const getById = (id) => {
  * @returns 
  */
 const updateById = (id, title) => {
+    const boards = getAllBoards()
     const subtaskToUpdate = getById(id)
 
     if (!subtaskToUpdate) {
@@ -38,7 +50,20 @@ const updateById = (id, title) => {
         return
     }
 
-    subtaskToUpdate.title = title
+    boards.forEach(board => {
+        board.columns.forEach(column => {
+            column.tasks.forEach(task => {
+                task.subtasks.forEach(subtask => {
+                    if (subtask.id === subtaskToUpdate.id) {
+                    subtask.title = title
+                    }
+                })
+            })
+        })
+    })
+
+    // subtaskToUpdate.title = title
+    localStorage.setItem('data', JSON.stringify(boards))
 }
 
 /**
@@ -47,6 +72,7 @@ const updateById = (id, title) => {
  * @returns 
  */
 const deleteById = (id) => {
+    const boards = getAllBoards()
     const subtaskToDelete = getById(id)
 
     if (!subtaskToDelete) {
@@ -54,11 +80,16 @@ const deleteById = (id) => {
         return
     }
 
-    data.boards.forEach(board => {
+    boards.forEach(board => {
         board.columns.forEach(column => {
             column.tasks.forEach(task => {
-                const indexSubtask = task.subtasks.indexOf(subtaskToDelete)
-                return task.subtasks.splice(indexSubtask, 1)
+                task.subtasks.forEach(subtask => {
+                    if (subtask.id === subtaskToDelete.id) {
+                        const indexSubtask = task.subtasks.indexOf(subtask)
+                        task.subtasks.splice(indexSubtask, 1)
+                        localStorage.setItem('data', JSON.stringify(boards))
+                    }
+                })
             })
         })
     })

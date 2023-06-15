@@ -40,7 +40,6 @@ function App() {
   }
 
   const updateBoard = (ev) => {
-    console.log('button SAVE CHANGES')
     ev.preventDefault()
     api.board.updateById(currentBoard.id, inputTitleBoard)
     api.column.updateById(currentColumn.id, inputColumnNames[currentColumn.id])
