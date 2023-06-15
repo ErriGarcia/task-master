@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import '../../styles/reusableComponents/Modal.scss'
 import MainButton from '../reusableComponents/MainButton'
 import { v4 } from 'uuid'
@@ -19,10 +18,12 @@ const Modal = ({
     handleChangeSelect, 
     handleSubmitClick,
     inputSubtasks, 
-    column 
+    column,
+    subtaskList,
+    setSubtaskList
 }) => {
 
-    const [subtaskList, setSubtaskList] = useState([{title: '', id: v4()},])
+    // const [subtaskList, setSubtaskList] = useState([{title: '', id: v4()},])
 
     const handleAddSubtaskClick = () => {
         setSubtaskList([...subtaskList, {title: '',  id: v4()}])

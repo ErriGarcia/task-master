@@ -1,4 +1,5 @@
 import data from '../data.json'
+import { v4 } from 'uuid'
 
 const getAllBoards = () => {
     let localStorageData = localStorage.getItem('data')
@@ -10,8 +11,30 @@ const getAllBoards = () => {
     return parsedData
 }
 
-const create = () => {
-
+const create = (currentBoard, currentTask, titleSubtask) => {
+    const boards = getAllBoards()
+    // const indexOfBoard = boards.findIndex(board => board.columns[1].tasks[0].id === currentTask.id)
+    boards.forEach(board => {
+        if (board.id === currentBoard.id) {
+            const indexBoard = boards.indexOf(board)
+            board.columns.forEach(column => {
+                column.tasks.forEach(task => {
+                    if (task.id === currentTask.id) {
+                        const indexTask = column.tasks.indexOf(task)
+                        
+                        // !!! Change column !!!
+                        boards[indexBoard].columns[0].tasks[indexTask].subtasks.push({
+                            id: v4(),
+                            isCompleted: false,
+                            title: titleSubtask
+                        })
+                    }
+                })
+            })
+        }
+    })
+    
+    localStorage.setItem('data', JSON.stringify(boards))
 }
 
 /**

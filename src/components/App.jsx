@@ -36,9 +36,23 @@ function App() {
   }
 
   const handleArticleClick = (ev) => {
+    console.log(ev, 'ev')
     const { id } = ev.currentTarget
     setModal(true)
     setCurrentTask(api.task.getById(id))
+    console.log(currentTask, 'currentTask !!')
+    console.log(currentColumn, 'current column !!')
+
+    // allBoards.forEach(board => {
+    //   board.columns.forEach(column => {
+    //     if (column.name === currentTask.status) {
+    //       console.log('entroooo')
+    //       const indexOfColumn = board.columns.indexOf(column)
+    //       console.log(indexOfColumn, 'indexOfColumn')
+    //       setCurrentColumn(allBoards[indexOfColumn])
+    //     }
+    //   })
+    // })
   }
 
   const updateBoard = (ev) => {
@@ -48,7 +62,6 @@ function App() {
     setModalEditBoard(false)
     // create a column for each element of columnList
     columnList.forEach(eachColumn => {
-      console.log(currentBoard, 'currentBoard')
       api.column.create(currentBoard, eachColumn.name)
     })
     const updatedBoards = api.board.getAll()

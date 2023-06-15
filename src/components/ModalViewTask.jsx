@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react'
 import Modal from './reusableComponents/Modal'
 import ModalDelete from './reusableComponents/ModalDelete'
 import api from '../services/api/index'
+import { v4 } from 'uuid'
 
-const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCurrentSubtask, currentSubtask, statusCurrentTask, setStatusCurrentTask, defaultColumn, setCurrentBoard}) => {
+const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCurrentSubtask, currentSubtask, statusCurrentTask, setStatusCurrentTask, defaultColumn, setCurrentBoard, currentColumn}) => {
 
     // const [check, setCheck] = useState(false)
     const [moreOptions, setMoreOptions] = useState(false)
@@ -16,6 +17,7 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
     const [checkedState, setCheckedState] = useState(
         new Array(currentTask.subtasks.length).fill(false)
     )
+    const [subtaskList, setSubtaskList] = useState([{title: '', id: v4()},])
 
     useEffect(() => {
         const subtasksDetails = {}
@@ -60,6 +62,11 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
         api.subtask.updateById(currentSubtask.id, inputSubtasksNames[currentSubtask.id])
         setModal(false)
         setModalEditTask(false)
+
+        // console.log(currentColumn, 'currentColumn')
+        subtaskList.forEach(eachSubtask => {
+            api.subtask.create(currentBoard, currentTask, eachSubtask.title)
+        })
         const updatedBoards = api.board.getAll()
          // change to the index of currentBoard
         setCurrentBoard(updatedBoards[0])
@@ -247,6 +254,8 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
                         inputSubtasks={inputSubtasks}
                         valueSubtask={''}
                         handleSubtaskChange={ev => console.log(ev, 'change input default')}
+                        subtaskList={subtaskList}
+                        setSubtaskList={setSubtaskList}
                     >
                     </Modal>
                 </div>
