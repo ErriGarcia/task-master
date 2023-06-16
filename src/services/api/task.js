@@ -55,6 +55,30 @@ const getById = (id) => {
     }
 }
 
+const updateStatus = (id, status) => {
+    const boards = getAllBoards()
+    const taskToUpdate = getById(id)
+
+    if (!taskToUpdate) {
+        console.error(`Can not update task with this id: ${id} not found`)
+        return
+    }
+
+    boards.forEach(board => {
+        board.columns.forEach(column => {
+            column.tasks.forEach(task => {
+                if (task.id === taskToUpdate.id) {
+                    console.log(taskToUpdate, 'taskToUpdate')
+                    console.log(task, 'task')
+                    task.status = status
+                }
+            })
+        })
+    })
+
+    localStorage.setItem('data', JSON.stringify(boards))
+}
+
 /**
  * This function update a task found by id
  * @param {*} id 
@@ -62,9 +86,13 @@ const getById = (id) => {
  * @param {*} description 
  * @returns 
  */
-const updateById = (id, title, description) => {
+const updateById = (id, title, description, status = null) => {
     const boards = getAllBoards()
     const taskToUpdate = getById(id)
+
+    if (status) {
+        _changeTaskColumn()
+    }
 
     if (!taskToUpdate) {
         console.error(`Can not update task with this id: ${id} not found`)
@@ -85,6 +113,10 @@ const updateById = (id, title, description) => {
     // taskToUpdate.title = title
     // taskToUpdate.description = description
     localStorage.setItem('data', JSON.stringify(boards))
+}
+
+const _changeTaskColumn = (task, status) => {
+
 }
 
 /**
@@ -124,6 +156,7 @@ const deleteById = (id) => {
 const apiTask = {
     create,
     getById,
+    updateStatus,
     updateById,
     deleteById
 }

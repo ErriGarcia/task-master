@@ -8,27 +8,28 @@ import { v4 } from 'uuid'
 function App() {
 
   const [allBoards, setAllBoards] = useState([api.board.getAll()])
-  const [currentBoard, setCurrentBoard] = useState(api.board.getAll()[0])
+  const [currentBoard, setCurrentBoard] = useState(api.board.getAll()[2])
   const [currentColumn, setCurrentColumn] = useState('')
   const [inputTitleBoard, setInputTitleBoard] = useState(currentBoard.name)
   const [inputColumnNames, setInputColumnNames] = useState('')
   const [modal, setModal] = useState(false)
   const [modalEditBoard, setModalEditBoard] = useState(false)
+  const [modalSelectBoard, setModalSelectBoard] = useState(false)
   const [currentTask, setCurrentTask] = useState('')
   const [statusCurrentTask, setStatusCurrentTask] = useState(currentTask.status)
-  const [defaultColumn, setDefaultColumn] = useState('')
+  const [previousColumn, setPreviousColumn] = useState('')
   const [columnList, setColumnList] = useState([{name: '', id: v4(), tasks: []},])
   const [subtaskList, setSubtaskList] = useState([{title: '', id: v4()},])
 
   useEffect(() => {
-    setDefaultColumn(api.column.getByName(currentTask.status))
-    // setCurrentBoard(api.board.getAll()[0])
+    setPreviousColumn(api.column.getByName(currentTask.status))
   }, [currentTask.status])
 
   const handleClickBoard = (ev) => {
     const { id } = ev.currentTarget
     setCurrentBoard(api.board.getById(id))
     setInputTitleBoard(api.board.getById(id).name)
+    setModalSelectBoard(false)
   }
 
   const handleGetCurrentColumn = (ev) => {
@@ -40,17 +41,6 @@ function App() {
     const { id } = ev.currentTarget
     setModal(true)
     setCurrentTask(api.task.getById(id))
-
-    // allBoards.forEach(board => {
-    //   board.columns.forEach(column => {
-    //     if (column.name === currentTask.status) {
-    //       console.log('entroooo')
-    //       const indexOfColumn = board.columns.indexOf(column)
-    //       console.log(indexOfColumn, 'indexOfColumn')
-    //       setCurrentColumn(allBoards[indexOfColumn])
-    //     }
-    //   })
-    // })
   }
 
   const updateBoard = (ev) => {
@@ -89,6 +79,8 @@ function App() {
         setColumnList={setColumnList}
         subtaskList={subtaskList}
         setSubtaskList={setSubtaskList}
+        modalSelectBoard={modalSelectBoard}
+        setModalSelectBoard={setModalSelectBoard}
       >
       </Header>
       <Main 
@@ -102,7 +94,8 @@ function App() {
         handleArticleClick={handleArticleClick}
         statusCurrentTask={statusCurrentTask}
         setStatusCurrentTask={setStatusCurrentTask}
-        defaultColumn={defaultColumn}
+        previousColumn={previousColumn}
+        setPreviousColumn={setPreviousColumn}
         setCurrentBoard={setCurrentBoard}
         subtaskList={subtaskList}
         setSubtaskList={setSubtaskList}

@@ -7,13 +7,13 @@ import ModalBoard from './reusableComponents/ModalBoard'
 import ModalDelete from './reusableComponents/ModalDelete'
 import api from '../services/api/index'
 
-const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handleGetCurrentColumn, updateBoard, inputTitleBoard, setInputTitleBoard, inputColumnNames, setInputColumnNames, currentColumn, setCurrentColumn, modalEditBoard, setModalEditBoard, setColumn, setCurrentBoard, columnList, setColumnList, subtaskList, setSubtaskList}) => {
+const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handleGetCurrentColumn, updateBoard, inputTitleBoard, setInputTitleBoard, inputColumnNames, setInputColumnNames, currentColumn, setCurrentColumn, modalEditBoard, setModalEditBoard, setColumn, setCurrentBoard, columnList, setColumnList, subtaskList, setSubtaskList, modalSelectBoard, setModalSelectBoard}) => {
 
     const [modalNewTask, setModalNewTask] = useState(false)
     const [moreOptionsBoard, setMoreOptionsBoard] = useState(false)
     const [modalDeleteBoard, setModalDeleteBoard] = useState(false)
     const [modalNewBoard, setModalNewBoard] = useState(false)
-    const [modalSelectBoard, setModalSelectBoard] = useState(false)
+    
     const [newTitleTask, setNewTitleTask] = useState('')
     const [newDescriptionTask, setNewDescriptionTask] = useState('')
     const [newNameBoard, setNewNameBoard] = useState('')
@@ -154,12 +154,16 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
         )
     })
 
+    const handleLogoClick = (ev) => {
+        setCurrentBoard(allBoards[0])
+    }
+
     return (
         <>
             <header className='main-header'>
                 <div className='main-header-container-logo'>
-                    <img src={logo} alt='logo task master'/>
-                    <img src={kanban} alt='kanban logo' className='main-header-container-logo-kanban'/>
+                    <img src={logo} alt='logo task master' className='main-header-container-logo-svg' onClick={handleLogoClick}/>
+                    <img src={kanban} alt='kanban logo' className='main-header-container-logo-kanban' onClick={handleLogoClick}/>
                     <div className='main-header-container-logo-container'>
                         <h1 className='main-header-container-logo-container-title'>{currentBoard.name}</h1>
                         <button title='All Boards' className='main-header-container-logo-container-button-down' onClick={handleClickSelectBoard}>

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import ModalViewTask from './ModalViewTask'
 import api from '../services/api/index'
 
-const Main = ({currentBoard, modal, setModal, currentTask, handleArticleClick, statusCurrentTask, setStatusCurrentTask, defaultColumn, setCurrentBoard, currentColumn, subtaskList, setSubtaskList}) => {
+const Main = ({currentBoard, modal, setModal, currentTask, handleArticleClick, statusCurrentTask, setStatusCurrentTask, previousColumn, setPreviousColumn, setCurrentBoard, currentColumn, subtaskList, setSubtaskList, setCurrentTask}) => {
 
     const [currentSubtask, setCurrentSubtask] = useState('')
 
@@ -73,11 +73,13 @@ const Main = ({currentBoard, modal, setModal, currentTask, handleArticleClick, s
                     handleGetCurrentSubtask={handleGetCurrentSubtask}
                     statusCurrentTask={statusCurrentTask}
                     setStatusCurrentTask={setStatusCurrentTask}
-                    defaultColumn={defaultColumn}
+                    previousColumn={previousColumn}
+                    setPreviousColumn={setPreviousColumn}
                     setCurrentBoard={setCurrentBoard}
                     currentColumn={currentColumn}
                     subtaskList={subtaskList}
                     setSubtaskList={setSubtaskList}
+                    setCurrentTask={setCurrentTask}
                 >
                 </ModalViewTask>
             )}

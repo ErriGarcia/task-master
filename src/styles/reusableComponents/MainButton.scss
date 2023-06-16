@@ -12,4 +12,8 @@
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-weight: 700;
     border: none;
+    
+    &:hover {
+        cursor: pointer;
+    }
 }

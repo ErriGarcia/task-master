@@ -26,11 +26,21 @@
             align-items: flex-end;
         }
 
+        &-svg {
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
         &-kanban {
             display: none;
 
             @include tablet {
                 display: block;
+            }
+
+            &:hover {
+                cursor: pointer;
             }
         }
 

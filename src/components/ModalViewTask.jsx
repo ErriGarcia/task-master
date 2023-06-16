@@ -3,9 +3,8 @@ import Modal from './reusableComponents/Modal'
 import ModalDelete from './reusableComponents/ModalDelete'
 import api from '../services/api/index'
 
-const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCurrentSubtask, currentSubtask, statusCurrentTask, setStatusCurrentTask, defaultColumn, setCurrentBoard, currentColumn, subtaskList, setSubtaskList}) => {
+const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCurrentSubtask, currentSubtask, statusCurrentTask, setStatusCurrentTask, previousColumn, setPreviousColumn, setCurrentBoard, currentColumn, subtaskList, setSubtaskList, setCurrentTask}) => {
 
-    // const [check, setCheck] = useState(false)
     const [moreOptions, setMoreOptions] = useState(false)
     const [modalEditTask, setModalEditTask] = useState(false)
     const [modalDeleteTask, setModalDeleteTask] = useState(false)
@@ -16,7 +15,6 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
     const [checkedState, setCheckedState] = useState(
         new Array(currentTask.subtasks.length).fill(false)
     )
-    // const [subtaskList, setSubtaskList] = useState([{title: '', id: v4()},])
 
     useEffect(() => {
         const subtasksDetails = {}
@@ -104,27 +102,70 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
 
 
     const handleStatusTaskChange = (ev) => {
-        setStatusCurrentTask(ev.target.value)
-        removeTaskFromThePreviousColumn()
-        addTaskToTheSelectedColumn(ev)
+        // const updatedBoards = api.board.getAll()
+        // da cambiare tutto il currentTask per cambiare lo status
+        // const newCurrentTask = {...currentTask, status: ev.target.value}
+        // setCurrentTask(newCurrentTask)
+        // setCurrentTask(api.task.updateStatus(currentTask.id, ev.target.value, ev, currentTask))
+        // removeDuplicatedTaskFromThePreviousColumn()
+        // addTaskToTheSelectedColumn(ev)
+        // setCurrentBoard(updatedBoards[2])
     }
 
-    const removeTaskFromThePreviousColumn = () => {
-        if (defaultColumn.name === currentTask.status) {
-            const indexOfTaskToDelete = defaultColumn.tasks.indexOf(currentTask)
-            defaultColumn.tasks.splice(indexOfTaskToDelete, 1)
-        }
-    }
+    
 
-    const addTaskToTheSelectedColumn = (ev) => {
-        const newSelectedColumn = api.column.getByName(ev.target.value)
-        currentBoard.columns.forEach(column => {
-            if (column.name === newSelectedColumn.name) {
-                currentTask.status = column.name
-                column.tasks.push(currentTask)
-            }
-        })
-    }
+    // const removeDuplicatedTaskFromThePreviousColumn = () => {
+    //     const boards = api.board.getAll()
+
+    //     const indexOfDuplicatedTaskToDelete = previousColumn.tasks.findIndex(duplicatedTask => {
+    //         return duplicatedTask.status !== previousColumn.name   
+    //     })
+
+    //     console.log(indexOfDuplicatedTaskToDelete, 'indexOfDuplicatedTaskToDelete')
+
+    //     boards.forEach(board => {
+    //         board.columns.forEach(column => {
+    //             if (column.id === previousColumn.id) {
+    //                 column.tasks.splice(indexOfDuplicatedTaskToDelete, 1)
+    //             }
+    //         })
+    //     })
+        
+    //     localStorage.setItem('data', JSON.stringify(boards))
+    // }
+
+    // const addTaskToTheSelectedColumn = (ev) => {
+    //     const boards = api.board.getAll()
+    //     const newSelectedColumn = api.column.getByName(ev.target.value)
+
+    //     boards.forEach(board => {
+    //         board.columns.forEach(column => {
+    //                 column.tasks.forEach(task => {
+    //                     if (task.status === newSelectedColumn.name) {
+    //                         console.log('entrooo')
+
+    //                         currentTask.status = ev.target.value
+    //                         newSelectedColumn.tasks.push(currentTask)
+
+    //                         console.log(boards, 'boards')
+    //                         localStorage.setItem('data', JSON.stringify(boards))
+    //                     }
+    //                 })
+    //         })
+    //     })
+        
+    // }
+
+        //     currentBoard.columns.forEach(column => {
+        //     if (column.name === newSelectedColumn.name) {
+        //         console.log(ev.target.value, 'ev.target.value')
+        //         currentTask.status = ev.target.value
+        //         console.log(currentTask.status, 'currentTask.status')
+        //         column.tasks.push(currentTask)
+        //         localStorage.setItem('data', JSON.stringify(boards))
+        //     }
+        // })
+    // }
 
     const listOfSubtasks = currentTask.subtasks.map((subtask, i) => {
         return (
@@ -210,7 +251,8 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
                         </fieldset>
                         <fieldset className='container-view-task-section'>
                             <label 
-                                htmlFor='status'     className='container-view-task-section-status-title'
+                                htmlFor='status'
+                                className='container-view-task-section-status-title'
                             >
                                 Current status
                             </label>
@@ -218,8 +260,8 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
                                 name='status' 
                                 id='status' 
                                 className='container-view-task-section-select'
-                                defaultValue={currentTask.status}
-                                value={statusCurrentTask} 
+                                // defaultValue={currentTask.status}
+                                value={currentTask.status} 
                                 onChange={handleStatusTaskChange}
                             >
                                 {listOfStatusName}
