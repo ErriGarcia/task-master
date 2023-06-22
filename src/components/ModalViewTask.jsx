@@ -110,6 +110,8 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
         // removeDuplicatedTaskFromThePreviousColumn()
         // addTaskToTheSelectedColumn(ev)
         // setCurrentBoard(updatedBoards[2])
+        api.task.updateStatus(currentTask.id, ev.target.value)
+        api.task._changeTaskColumn()
     }
 
     

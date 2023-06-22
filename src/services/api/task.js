@@ -1,5 +1,6 @@
 import data from '../data.json'
 import { v4 } from 'uuid'
+import api from './index'
 
 const getAllBoards = () => {
     let localStorageData = localStorage.getItem('data')
@@ -68,8 +69,6 @@ const updateStatus = (id, status) => {
         board.columns.forEach(column => {
             column.tasks.forEach(task => {
                 if (task.id === taskToUpdate.id) {
-                    console.log(taskToUpdate, 'taskToUpdate')
-                    console.log(task, 'task')
                     task.status = status
                 }
             })
@@ -90,9 +89,9 @@ const updateById = (id, title, description, status = null) => {
     const boards = getAllBoards()
     const taskToUpdate = getById(id)
 
-    if (status) {
-        _changeTaskColumn()
-    }
+    // if (status) {
+    //     _changeTaskColumn()
+    // }
 
     if (!taskToUpdate) {
         console.error(`Can not update task with this id: ${id} not found`)
@@ -110,13 +109,25 @@ const updateById = (id, title, description, status = null) => {
         })
     })
 
-    // taskToUpdate.title = title
-    // taskToUpdate.description = description
     localStorage.setItem('data', JSON.stringify(boards))
 }
 
-const _changeTaskColumn = (task, status) => {
+const _changeTaskColumn = () => {
+    const boards = getAllBoards()
 
+    boards.forEach(board => {
+        board.columns.forEach(column => {
+            column.tasks.forEach(task => {
+                if (task.status !== column.name) {
+                    const nameNewColumnSelected = task.status
+                    const newColumnSelected = api.column.getByName(nameNewColumnSelected)
+                    newColumnSelected.tasks.push(task)
+                    console.log(newColumnSelected, 'newColumnSelected')
+                }
+            })
+        })
+    })
+    localStorage.setItem('data', JSON.stringify(boards))
 }
 
 /**
@@ -132,13 +143,6 @@ const deleteById = (id) => {
         console.error(`Can not delete task with this id: ${id} not found`)
         return
     }
-
-    // for (const board of data.boards) {
-    //     for (const column of board.columns) {
-    //         const indexTask = column.tasks.indexOf(taskToDelete)
-    //         return column.tasks.splice(indexTask, 1)
-    //     }
-    // }
 
     boards.forEach(board => {
         board.columns.forEach(column => {
@@ -158,6 +162,7 @@ const apiTask = {
     getById,
     updateStatus,
     updateById,
+    _changeTaskColumn,
     deleteById
 }
 
