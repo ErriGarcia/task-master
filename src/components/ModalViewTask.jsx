@@ -63,8 +63,8 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
             api.subtask.create(currentBoard, currentTask, eachSubtask.title)
         })
         const updatedBoards = api.board.getAll()
-         // change to the index of currentBoard
-        setCurrentBoard(updatedBoards[0])
+        const indexOfBoard = updatedBoards.findIndex(board => board.id === currentBoard.id)
+        setCurrentBoard(updatedBoards[indexOfBoard])
     }
 
     const handleDeleteTask = (ev) => {
@@ -73,8 +73,8 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
         setModal(false)
         setModalDeleteTask(false)
         const updatedBoards = api.board.getAll()
-         // change to the index of currentBoard
-        setCurrentBoard(updatedBoards[0])
+        const indexOfBoard = updatedBoards.findIndex(board => board.id === currentBoard.id)
+        setCurrentBoard(updatedBoards[indexOfBoard])
     }
 
     const handleCloseDeleteTask = (ev) => {
@@ -104,7 +104,8 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
         api.task.deleteFromPreviousColumn()
         const updatedBoards = api.board.getAll()
         // change to the index of currentBoard
-        setCurrentBoard(updatedBoards[2])
+        const indexOfBoard = updatedBoards.findIndex(board => board.id === currentBoard.id)
+        setCurrentBoard(updatedBoards[indexOfBoard])
         setModal(false)
     }
 
