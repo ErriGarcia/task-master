@@ -7,7 +7,7 @@ import ModalBoard from './reusableComponents/ModalBoard'
 import ModalDelete from './reusableComponents/ModalDelete'
 import api from '../services/api/index'
 
-const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handleGetCurrentColumn, updateBoard, inputTitleBoard, setInputTitleBoard, inputColumnNames, setInputColumnNames, currentColumn, setCurrentColumn, modalEditBoard, setModalEditBoard, setColumn, setCurrentBoard, columnList, setColumnList, subtaskList, setSubtaskList, modalSelectBoard, setModalSelectBoard}) => {
+const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handleGetCurrentColumn, updateBoard, inputTitleBoard, setInputTitleBoard, inputColumnNames, setInputColumnNames, modalEditBoard, setModalEditBoard, setColumn, setCurrentBoard, columnList, setColumnList, subtaskList, setSubtaskList, modalSelectBoard, setModalSelectBoard}) => {
 
     const [modalNewTask, setModalNewTask] = useState(false)
     const [moreOptionsBoard, setMoreOptionsBoard] = useState(false)

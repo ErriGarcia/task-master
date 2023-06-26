@@ -3,12 +3,13 @@ import api from '../services/api/index'
 import '../styles/App.scss'
 import Header from './Header'
 import Main from './Main'
+import Footer from './Footer'
 import { v4 } from 'uuid'
 
 function App() {
 
   const [allBoards, setAllBoards] = useState([api.board.getAll()])
-  const [currentBoard, setCurrentBoard] = useState(api.board.getAll()[2])
+  const [currentBoard, setCurrentBoard] = useState(api.board.getAll()[0])
   const [currentColumn, setCurrentColumn] = useState('')
   const [inputTitleBoard, setInputTitleBoard] = useState(currentBoard.name)
   const [inputColumnNames, setInputColumnNames] = useState('')
@@ -101,6 +102,7 @@ function App() {
         setSubtaskList={setSubtaskList}
       >
       </Main>
+      <Footer></Footer>
     </div>
   )
 }
