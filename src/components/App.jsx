@@ -9,7 +9,7 @@ import { v4 } from 'uuid'
 function App() {
 
   const [allBoards, setAllBoards] = useState([api.board.getAll()])
-  const [currentBoard, setCurrentBoard] = useState(api.board.getAll()[3])
+  const [currentBoard, setCurrentBoard] = useState(api.board.getAll()[0])
   const [currentColumn, setCurrentColumn] = useState('')
   const [inputTitleBoard, setInputTitleBoard] = useState(currentBoard.name)
   const [inputColumnNames, setInputColumnNames] = useState('')

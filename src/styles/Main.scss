@@ -2,12 +2,19 @@
     padding: 1.5rem 1rem;
     display: flex;
     gap: 1.5rem;
-    height: 100vh;
+    min-height: 34rem;
+    height: 100%;
+
+    @include tablet {
+        min-height: 35rem;
+        height: 100%;
+    }
 
     &-section {
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
+        min-width: 18rem;
 
         &-title {
             text-transform: uppercase;
