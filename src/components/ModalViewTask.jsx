@@ -100,74 +100,11 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
         setInputSubtasksNames(newInputSubtaskName)
     }
 
-
     const handleStatusTaskChange = (ev) => {
-        // const updatedBoards = api.board.getAll()
-        // da cambiare tutto il currentTask per cambiare lo status
-        // const newCurrentTask = {...currentTask, status: ev.target.value}
-        // setCurrentTask(newCurrentTask)
-        // setCurrentTask(api.task.updateStatus(currentTask.id, ev.target.value, ev, currentTask))
-        // removeDuplicatedTaskFromThePreviousColumn()
-        // addTaskToTheSelectedColumn(ev)
-        // setCurrentBoard(updatedBoards[2])
         api.task.updateStatus(currentTask.id, ev.target.value)
-        api.task._changeTaskColumn()
+        api.task.changeColumn()
     }
 
-    
-
-    // const removeDuplicatedTaskFromThePreviousColumn = () => {
-    //     const boards = api.board.getAll()
-
-    //     const indexOfDuplicatedTaskToDelete = previousColumn.tasks.findIndex(duplicatedTask => {
-    //         return duplicatedTask.status !== previousColumn.name   
-    //     })
-
-    //     console.log(indexOfDuplicatedTaskToDelete, 'indexOfDuplicatedTaskToDelete')
-
-    //     boards.forEach(board => {
-    //         board.columns.forEach(column => {
-    //             if (column.id === previousColumn.id) {
-    //                 column.tasks.splice(indexOfDuplicatedTaskToDelete, 1)
-    //             }
-    //         })
-    //     })
-        
-    //     localStorage.setItem('data', JSON.stringify(boards))
-    // }
-
-    // const addTaskToTheSelectedColumn = (ev) => {
-    //     const boards = api.board.getAll()
-    //     const newSelectedColumn = api.column.getByName(ev.target.value)
-
-    //     boards.forEach(board => {
-    //         board.columns.forEach(column => {
-    //                 column.tasks.forEach(task => {
-    //                     if (task.status === newSelectedColumn.name) {
-    //                         console.log('entrooo')
-
-    //                         currentTask.status = ev.target.value
-    //                         newSelectedColumn.tasks.push(currentTask)
-
-    //                         console.log(boards, 'boards')
-    //                         localStorage.setItem('data', JSON.stringify(boards))
-    //                     }
-    //                 })
-    //         })
-    //     })
-        
-    // }
-
-        //     currentBoard.columns.forEach(column => {
-        //     if (column.name === newSelectedColumn.name) {
-        //         console.log(ev.target.value, 'ev.target.value')
-        //         currentTask.status = ev.target.value
-        //         console.log(currentTask.status, 'currentTask.status')
-        //         column.tasks.push(currentTask)
-        //         localStorage.setItem('data', JSON.stringify(boards))
-        //     }
-        // })
-    // }
 
     const listOfSubtasks = currentTask.subtasks.map((subtask, i) => {
         return (

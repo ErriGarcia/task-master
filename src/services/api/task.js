@@ -56,6 +56,12 @@ const getById = (id) => {
     }
 }
 
+/**
+ * 
+ * @param {*} id string, id task
+ * @param {*} status string, ev target value
+ * @returns 
+ */
 const updateStatus = (id, status) => {
     const boards = getAllBoards()
     const taskToUpdate = getById(id)
@@ -89,10 +95,6 @@ const updateById = (id, title, description, status = null) => {
     const boards = getAllBoards()
     const taskToUpdate = getById(id)
 
-    // if (status) {
-    //     _changeTaskColumn()
-    // }
-
     if (!taskToUpdate) {
         console.error(`Can not update task with this id: ${id} not found`)
         return
@@ -112,17 +114,20 @@ const updateById = (id, title, description, status = null) => {
     localStorage.setItem('data', JSON.stringify(boards))
 }
 
-const _changeTaskColumn = () => {
+const changeColumn = () => {
     const boards = getAllBoards()
 
     boards.forEach(board => {
         board.columns.forEach(column => {
             column.tasks.forEach(task => {
                 if (task.status !== column.name) {
-                    const nameNewColumnSelected = task.status
-                    const newColumnSelected = api.column.getByName(nameNewColumnSelected)
-                    newColumnSelected.tasks.push(task)
-                    console.log(newColumnSelected, 'newColumnSelected')
+                    boards.forEach(board => {
+                        board.columns.forEach(column => {
+                            if (column.name === task.status) {
+                                column.tasks.push(task)
+                            }
+                        })
+                    })
                 }
             })
         })
@@ -162,7 +167,7 @@ const apiTask = {
     getById,
     updateStatus,
     updateById,
-    _changeTaskColumn,
+    changeColumn,
     deleteById
 }
 
