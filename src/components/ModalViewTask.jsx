@@ -3,7 +3,7 @@ import Modal from './reusableComponents/Modal'
 import ModalDelete from './reusableComponents/ModalDelete'
 import api from '../services/api/index'
 
-const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCurrentSubtask, currentSubtask, statusCurrentTask, setStatusCurrentTask, previousColumn, setPreviousColumn, setCurrentBoard, currentColumn, subtaskList, setSubtaskList, setCurrentTask}) => {
+const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCurrentSubtask, currentSubtask, setCurrentBoard, subtaskList, setSubtaskList}) => {
 
     const [moreOptions, setMoreOptions] = useState(false)
     const [modalEditTask, setModalEditTask] = useState(false)
@@ -59,8 +59,6 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
         api.subtask.updateById(currentSubtask.id, inputSubtasksNames[currentSubtask.id])
         setModal(false)
         setModalEditTask(false)
-
-        // console.log(currentColumn, 'currentColumn')
         subtaskList.forEach(eachSubtask => {
             api.subtask.create(currentBoard, currentTask, eachSubtask.title)
         })
@@ -103,6 +101,11 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
     const handleStatusTaskChange = (ev) => {
         api.task.updateStatus(currentTask.id, ev.target.value)
         api.task.changeColumn()
+        api.task.deleteFromPreviousColumn()
+        const updatedBoards = api.board.getAll()
+        // change to the index of currentBoard
+        setCurrentBoard(updatedBoards[2])
+        setModal(false)
     }
 
 

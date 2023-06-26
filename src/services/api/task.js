@@ -114,17 +114,45 @@ const updateById = (id, title, description, status = null) => {
 }
 
 const changeColumn = () => {
+  const boards = getAllBoards()
+
+  boards.forEach((board) => {
+    board.columns.forEach(column => {
+      column.tasks.forEach(task => {
+        if (task.status !== column.name) {
+          boards.forEach(otherBoard => {
+            otherBoard.columns.forEach((otherColumn) => {
+              if (otherColumn.name === task.status) {
+                otherColumn.tasks.push(task)
+              }
+            })
+          })
+        }
+      })
+    })
+  })
+  
+  localStorage.setItem('data', JSON.stringify(boards))
+}
+
+const deleteFromPreviousColumn = () => {
     const boards = getAllBoards()
 
     boards.forEach(board => {
         board.columns.forEach(column => {
             column.tasks.forEach(task => {
                 if (task.status !== column.name) {
+                    const index = column.tasks.indexOf(task)
+                    // const newColumn = column
                     boards.forEach(board => {
                         board.columns.forEach(column => {
-                            if (column.name === task.status) {
-                                column.tasks.push(task)
-                            }
+                            column.tasks.forEach(task => {
+                                if (task.status !== column.name) {
+                                    const previousColumn = column
+                                    previousColumn.tasks.splice(index, 1)
+
+                                }
+                            })
                         })
                     })
                 }
@@ -167,6 +195,7 @@ const apiTask = {
     updateStatus,
     updateById,
     changeColumn,
+    deleteFromPreviousColumn,
     deleteById
 }
 
