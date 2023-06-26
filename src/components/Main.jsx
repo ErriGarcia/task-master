@@ -2,7 +2,7 @@ import { useState } from 'react'
 import ModalViewTask from './ModalViewTask'
 import api from '../services/api/index'
 
-const Main = ({currentBoard, modal, setModal, currentTask, handleArticleClick, statusCurrentTask, setStatusCurrentTask, previousColumn, setPreviousColumn, setCurrentBoard, currentColumn, subtaskList, setSubtaskList, setCurrentTask}) => {
+const Main = ({currentBoard, modal, setModal, currentTask, handleArticleClick, statusCurrentTask, setStatusCurrentTask, previousColumn, setPreviousColumn, setCurrentBoard, currentColumn, subtaskList, setSubtaskList, setCurrentTask, setModalEditBoard}) => {
 
     const [currentSubtask, setCurrentSubtask] = useState('')
 
@@ -58,10 +58,27 @@ const Main = ({currentBoard, modal, setModal, currentTask, handleArticleClick, s
         )
     })
 
+    const handleNewColumnClick = () => {
+        setModalEditBoard(true)
+    }
+
+    const buttonAddColumn = () => {
+        return (
+            <div className='button-add-column-container'>
+                <p className='button-add-column-container-text'>This board is empty. Create a new column to get started.</p>
+                <button className='button-add-column-container-button' onClick={handleNewColumnClick}>
+                    <i className='fa-solid fa-plus'></i>
+                    Add New Column
+                </button>
+            </div>
+        )
+    }
+
     return (
         <>
         <main className='main-board'>
-            {listColumns}
+            {listColumns.length === 1 ? buttonAddColumn() : listColumns}
+
         </main>
             {modal && (
                 <ModalViewTask 

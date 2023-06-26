@@ -39,4 +39,43 @@
             }
         }
     }
+
+    .button-add-column-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        height: 80vh;
+        width: 100%;
+
+        &-text {
+            color: $color-medium-grey;
+            text-align: center;
+            line-height: 1.4375rem;
+            font-size: 1.125rem;
+        }
+
+        &-button {
+            margin-top: 1.5rem;
+            background-color: $color-main-purple;
+            border-radius: 1.5rem;
+            color: $color-white;
+            font-size: 0.9375rem;
+            width: 10.25rem;
+            height: 2.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.25rem;
+
+            @include desktop {
+                opacity: 0.5;
+            }
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
 }

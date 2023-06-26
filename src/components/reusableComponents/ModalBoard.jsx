@@ -111,14 +111,14 @@ const ModalBoard = ({
                                             </span>
                                         </button>
                                     </div>
-                                    {setErrorBoardName('error-board-name') && (
+                                    {/* {setErrorBoardName('error-board-name') && (
                                         <div className='error-board-name-message error-column'>
                                             <span className='material-icons error-board-name-message-icon'>
                                                 error
                                                 </span>
                                             <p>Column name is required</p>
                                         </div>
-                                    )}
+                                    )} */}
                                 </li>
                             )
                         })}

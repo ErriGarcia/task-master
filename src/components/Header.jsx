@@ -144,6 +144,7 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
                     value={inputColumnNames[column.id] || column.name} 
                     onChange={ev => {handleInputColumnName(ev); handleGetCurrentColumn(ev)}}
                     onClick={ev => handleGetCurrentColumn(ev)}
+                    required
                 />
                 <button title='Delete Column' className='button-delete' onClick={handleDeleteColumn} id={column.id}>
                     <span className='material-symbols-outlined' id={column.id}>
