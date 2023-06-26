@@ -1,6 +1,5 @@
 import data from '../data.json'
 import { v4 } from 'uuid'
-import api from './index'
 
 const getAllBoards = () => {
     let localStorageData = localStorage.getItem('data')
