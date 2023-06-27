@@ -82,6 +82,12 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
         }
     }
 
+    const handleCreateTaskEnterKey = (ev) => {
+        if (ev.key === 'Enter') {
+            handleCreateTaskClick()
+        }
+    }
+
     const handleCreateBoardClick = () => {
         if (!newNameBoard) {
             setModalNewBoard(true)
@@ -154,7 +160,7 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
         )
     })
 
-    const handleLogoClick = (ev) => {
+    const handleLogoClick = () => {
         setCurrentBoard(allBoards[0])
     }
 
@@ -224,6 +230,9 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
                         subtasks={[]}
                         subtaskList={subtaskList}
                         setSubtaskList={setSubtaskList}
+
+                        handleSubmitKeyDown={handleCreateTaskEnterKey}
+
                         >
                     </Modal>
                 </div>

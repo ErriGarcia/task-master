@@ -20,7 +20,8 @@ const Modal = ({
     inputSubtasks, 
     column,
     subtaskList,
-    setSubtaskList
+    setSubtaskList,
+    handleSubmitKeyDown
 }) => {
 
     // const [subtaskList, setSubtaskList] = useState([{title: '', id: v4()},])
@@ -52,7 +53,7 @@ const Modal = ({
     
     return (
         <div className='container-view-task'>
-            <form className='modal-form' onClick={handleClickForm}>
+            <form className='modal-form' onClick={handleClickForm} onKeyDown={handleSubmitKeyDown}>
                 <h2 className='modal-form-title'>{title}</h2>
                 <fieldset className='modal-form-fieldset-title fieldset'>
                     <label htmlFor='title' className='label'>{labelTitle} *</label>
