@@ -89,6 +89,28 @@ const updateById = (id, name) => {
 }
 
 /**
+ * 
+ * @param {*} names obj
+ */
+const updateAllById = (names) => {
+    const boards = getAllBoards()
+    
+    boards.forEach(board => {
+        board.columns.forEach(column => {
+            const object = Object.entries(names)
+            const namesColumn = Object.values(object)
+            for (const name of namesColumn) {
+                if (column.id === name[0]) {
+                    column.name = name[1]
+                    console.log(name[1], 'name')
+                    localStorage.setItem('data', JSON.stringify(boards))
+                }
+            }
+        })
+    })
+}
+
+/**
  * This function delete a column found by id
  * @param {*} id string
  * @returns 
@@ -118,6 +140,7 @@ const apiColumn = {
     getById,
     getByName,
     updateById,
+    updateAllById,
     deleteById
 }
 

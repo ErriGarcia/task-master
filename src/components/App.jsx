@@ -48,6 +48,7 @@ function App() {
     ev.preventDefault()
     api.board.updateById(currentBoard.id, inputTitleBoard)
     api.column.updateById(currentColumn.id, inputColumnNames[currentColumn.id])
+    api.column.updateAllById(inputColumnNames)
     setModalEditBoard(false)
     // create a column for each element of columnList
     columnList.forEach(eachColumn => {
