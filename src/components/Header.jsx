@@ -167,7 +167,7 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
     })
 
     const handleLogoClick = () => {
-        setCurrentBoard(allBoards[0])
+        window.location.reload(false)
     }
 
     const handleUpdateBoardEnterKey = (ev) => {
