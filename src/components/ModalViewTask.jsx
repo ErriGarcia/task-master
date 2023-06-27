@@ -67,6 +67,12 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
         setCurrentBoard(updatedBoards[indexOfBoard])
     }
 
+    const handleUpdateTaskEnterKey = (ev) => {
+        if (ev.key === 'Enter') {
+            updateTask(ev)
+        }
+    }
+
     const handleDeleteTask = (ev) => {
         ev.preventDefault()
         api.task.deleteById(currentTask.id)
@@ -234,6 +240,7 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
                         handleSubtaskChange={ev => console.log(ev, 'change input default')}
                         subtaskList={subtaskList}
                         setSubtaskList={setSubtaskList}
+                        handleSubmitKeyDown={handleUpdateTaskEnterKey}
                     >
                     </Modal>
                 </div>

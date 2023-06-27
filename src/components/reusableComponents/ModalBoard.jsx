@@ -15,7 +15,8 @@ const ModalBoard = ({
     handleSubmitClick,
     inputColumns,
     columnList,
-    setColumnList
+    setColumnList,
+    handleSubmitKeyDown
     }) => {
 
     /* I create an array for the board columns to map every board column */
@@ -57,7 +58,7 @@ const ModalBoard = ({
 
     return (
         <div className='container-view-task'>
-            <form className='modal-form' onClick={handleFormClick}>
+            <form className='modal-form' onClick={handleFormClick} onKeyDown={handleSubmitKeyDown}>
                 <h2 className='modal-form-title'>{modalTitle}</h2>
                 <fieldset className='modal-form-fieldset-title fieldset'>
                     <label htmlFor='title' className='label'>{firstInputLabelTitle} *</label>

@@ -99,6 +99,12 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
         }
     }
 
+    const handleCreateBoardEnterKey = (ev) => {
+        if (ev.key === 'Enter') {
+            handleCreateBoardClick()
+        }
+    }
+
     const handleDeleteBoard = (ev) => {
         ev.preventDefault()
         api.board.deleteById(currentBoard.id)
@@ -162,6 +168,12 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
 
     const handleLogoClick = () => {
         setCurrentBoard(allBoards[0])
+    }
+
+    const handleUpdateBoardEnterKey = (ev) => {
+        if (ev.key === 'Enter') {
+            updateBoard(ev)
+        }
     }
 
     return (
@@ -262,6 +274,8 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
                         handleSubmitClick={updateBoard}
                         columnList={columnList}
                         setColumnList={setColumnList}
+
+                        handleSubmitKeyDown={handleUpdateBoardEnterKey}
                     >
                     </ModalBoard>
                 </div>
@@ -297,6 +311,8 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
                         handleFormClick={ev => ev.preventDefault()}
                         columnList={columnList}
                         setColumnList={setColumnList}
+
+                        handleSubmitKeyDown={handleCreateBoardEnterKey}
                     >
                     </ModalBoard>
                 </div>
