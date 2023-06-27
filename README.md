@@ -4,7 +4,7 @@
 
 ## Welcome! 👋
 
-[Frontend Mentor](https://www.frontendmentor.io) challenges help you improve my coding skills by building realistic projects.
+[Frontend Mentor](https://www.frontendmentor.io) challenges help me improve my coding skills by building realistic projects.
 
 ## The challenge
 
@@ -40,30 +40,32 @@ Users should be able to:
 
 To install and use this software package, please follow these steps:
 
-Install Node.js version 16.0.0 or higher on your machine. You can download the latest version from the official Node.js website (https://nodejs.org).
+- Install Node.js version 16.0.0 or higher on your machine. You can download the latest version from the official Node.js website (https://nodejs.org).
 
-Clone the repository or download the source code for this software package.
+- Clone the repository or download the source code for this software package.
 
-Open a terminal or command prompt and navigate to the directory where you have the source code.
+- Open a terminal or command prompt and navigate to the directory where you have the source code.
 
-Run the following command to install the required dependencies:
+- Run the following command to install the required dependencies:
 
-bash
-Copy code
+```
 npm install
+```
+
 Once the installation is complete, you are ready to use the software package.
 
 ### Usage
 To use this software package, follow these steps:
 
-Make sure you have completed the installation steps mentioned above.
+- Make sure you have completed the installation steps mentioned above.
 
-Open a terminal or command prompt and navigate to the directory where you have the source code.
+- Open a terminal or command prompt and navigate to the directory where you have the source code.
 
-Execute the following command to start the application:
+- Execute the following command to start the application:
 
-node app.js
-Replace app.js with the actual entry point file of the application.
+```
+npm start
+```
 
 The application will now start and you can interact with it as per its functionality.
 
@@ -75,17 +77,26 @@ Fork the repository and clone it to your local machine.
 
 Create a new branch for your changes:
 
+```
 git checkout -b feature/your-feature
+```
+
 Replace your-feature with a descriptive name for your feature or improvement.
 
 Make the necessary changes and test them thoroughly.
 
 Commit your changes with a meaningful commit message:
 
+```
 git commit -m "fix: Add your commit message here"
+```
+
 Push your changes to your forked repository:
 
+```
 git push origin feature/your-feature
+```
+
 Open a pull request in this repository, describing your changes in detail.
 
 License
