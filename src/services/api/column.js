@@ -11,18 +11,21 @@ const getAllBoards = () => {
     return parsedData
 }
 
-const create = (currentBoard, nameColumn) => {
+const create = (currentBoard, namesColumn) => {
     const boards = getAllBoards()
     const indexOfBoard = boards.findIndex(board => board.id === currentBoard.id)
 
+    console.log(namesColumn, 'namesColumn')
+
+    for (const eachNameColumn of namesColumn) {
         boards[indexOfBoard].columns.push({
-            name: nameColumn, 
+            name: eachNameColumn.name, 
             id: v4(),
             tasks: [{
                 id: v4(),
                 title: 'Write the task title',
                 description: 'Write the task description',
-                status: nameColumn,
+                status: eachNameColumn.name,
                 subtasks: [{
                     id: v4(),
                     isCompleted: false,
@@ -30,6 +33,7 @@ const create = (currentBoard, nameColumn) => {
                 }]
             }]
         })
+    }
     
     localStorage.setItem('data', JSON.stringify(boards))
 }
@@ -92,7 +96,7 @@ const updateById = (id, name) => {
  * 
  * @param {*} names obj
  */
-const updateAllById = (names) => {
+const updateAll = (names) => {
     const boards = getAllBoards()
     
     boards.forEach(board => {
@@ -102,7 +106,6 @@ const updateAllById = (names) => {
             for (const name of namesColumn) {
                 if (column.id === name[0]) {
                     column.name = name[1]
-                    console.log(name[1], 'name')
                     localStorage.setItem('data', JSON.stringify(boards))
                 }
             }
@@ -140,7 +143,7 @@ const apiColumn = {
     getById,
     getByName,
     updateById,
-    updateAllById,
+    updateAll,
     deleteById
 }
 

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import ModalViewTask from './ModalViewTask'
 import api from '../services/api/index'
 
-const Main = ({currentBoard, modal, setModal, currentTask, handleArticleClick, statusCurrentTask, setStatusCurrentTask, previousColumn, setPreviousColumn, setCurrentBoard, currentColumn, subtaskList, setSubtaskList, setCurrentTask, setModalEditBoard}) => {
+const Main = ({currentBoard, modal, setModal, currentTask, handleArticleClick, statusCurrentTask, setStatusCurrentTask, previousColumn, setPreviousColumn, setCurrentBoard, currentColumn, subtaskList, setSubtaskList, setCurrentTask, setModalEditBoard, allTasks, setAllTasks}) => {
 
     const [currentSubtask, setCurrentSubtask] = useState('')
 
@@ -25,6 +25,7 @@ const Main = ({currentBoard, modal, setModal, currentTask, handleArticleClick, s
         ev.preventDefault()
         let transferTestId = ev.dataTransfer.getData("test")
         console.log(transferTestId)
+        setAllTasks([...allTasks, transferTestId])
     }
 
     const listColumns = currentBoard.columns.map((column, index) => {
@@ -42,7 +43,7 @@ const Main = ({currentBoard, modal, setModal, currentTask, handleArticleClick, s
                             return (
                                 <li 
                                     draggable
-                                    onDragStart={ev => dragStarted(ev, column.id)}
+                                    onDragStart={ev => dragStarted(ev, task.id)}
                                     id={task.id} 
                                     key={index} 
                                     onClick={handleArticleClick}

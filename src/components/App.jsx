@@ -4,12 +4,11 @@ import '../styles/App.scss'
 import Header from './Header'
 import Main from './Main'
 import Footer from './Footer'
-import { v4 } from 'uuid'
 
 function App() {
 
   const [allBoards, setAllBoards] = useState([api.board.getAll()])
-  const [currentBoard, setCurrentBoard] = useState(api.board.getAll()[0])
+  const [currentBoard, setCurrentBoard] = useState(api.board.getAll()[1])
   const [currentColumn, setCurrentColumn] = useState('')
   const [inputTitleBoard, setInputTitleBoard] = useState(currentBoard.name)
   const [inputColumnNames, setInputColumnNames] = useState('')
@@ -19,8 +18,10 @@ function App() {
   const [currentTask, setCurrentTask] = useState('')
   const [statusCurrentTask, setStatusCurrentTask] = useState(currentTask.status)
   const [previousColumn, setPreviousColumn] = useState('')
-  const [columnList, setColumnList] = useState([{name: '', id: v4(), tasks: []},])
-  const [subtaskList, setSubtaskList] = useState([{title: '', id: v4()},])
+  const [columnList, setColumnList] = useState([])
+  // const [columnList, setColumnList] = useState([{name: '', id: v4(), tasks: []},])
+  const [subtaskList, setSubtaskList] = useState([])
+  const [allTasks, setAllTasks] = useState([api.task.getAll(currentBoard)])
 
   useEffect(() => {
     setPreviousColumn(api.column.getByName(currentTask.status))
@@ -48,16 +49,17 @@ function App() {
     ev.preventDefault()
     api.board.updateById(currentBoard.id, inputTitleBoard)
     api.column.updateById(currentColumn.id, inputColumnNames[currentColumn.id])
-    api.column.updateAllById(inputColumnNames)
-    setModalEditBoard(false)
-    // create a column for each element of columnList
-    columnList.forEach(eachColumn => {
-      api.column.create(currentBoard, eachColumn.name)
-    })
+    api.column.updateAll(inputColumnNames)
+    api.column.create(currentBoard, columnList)
+
     const updatedBoards = api.board.getAll()
     const indexOfBoard = updatedBoards.findIndex(board => board.id === currentBoard.id)
     setCurrentBoard(updatedBoards[indexOfBoard])
-   }
+
+    setModalEditBoard(false)
+  }
+
+  console.log(allTasks, 'allTasks')
 
   return (
     <div className='main'>
@@ -102,6 +104,8 @@ function App() {
         subtaskList={subtaskList}
         setSubtaskList={setSubtaskList}
         setModalEditBoard={setModalEditBoard}
+        allTasks={allTasks}
+        setAllTasks={setAllTasks}
       >
       </Main>
       <Footer></Footer>

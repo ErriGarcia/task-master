@@ -11,6 +11,14 @@ const getAllBoards = () => {
     return parsedData
 }
 
+const getAll = (currentBoard) => {
+    const tasks = [];
+    currentBoard.columns.forEach((column) => {
+        tasks.push(...column.tasks)
+    })
+    return tasks
+}
+
 /**
  * Create a new task
  * @param {*} currentBoard : board selected
@@ -190,6 +198,7 @@ const deleteById = (id) => {
 }
 
 const apiTask = {
+    getAll,
     create,
     getById,
     updateStatus,

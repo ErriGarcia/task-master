@@ -99,7 +99,7 @@ const ModalBoard = ({
                                             className={`input subtask ${singleInput ? null : setErrorBoardName('error-board-name')}`} 
                                             placeholder={placeholderSecondInput} 
                                             /* I need to track the event so I need the ev and index to know which input is updating */
-                                            value={singleInput.name} 
+                                            value={singleInput.name || ''} 
                                             onChange={(ev) => handleColumnInputChange(ev, index)}
                                         />
                                         <button 
@@ -112,14 +112,6 @@ const ModalBoard = ({
                                             </span>
                                         </button>
                                     </div>
-                                    {/* {setErrorBoardName('error-board-name') && (
-                                        <div className='error-board-name-message error-column'>
-                                            <span className='material-icons error-board-name-message-icon'>
-                                                error
-                                                </span>
-                                            <p>Column name is required</p>
-                                        </div>
-                                    )} */}
                                 </li>
                             )
                         })}
