@@ -110,8 +110,7 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
         api.board.deleteById(currentBoard.id)
         setModalDeleteBoard(false)
         const updatedBoards = api.board.getAll()
-        const indexOfBoard = updatedBoards.findIndex(board => board.id === currentBoard.id)
-        setCurrentBoard(updatedBoards[indexOfBoard])
+        setCurrentBoard(updatedBoards[0])
     }
 
     const handleCloseDeleteBoard = () => {
