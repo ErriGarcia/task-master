@@ -98,8 +98,8 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
         api.board.deleteById(currentBoard.id)
         setModalDeleteBoard(false)
         const updatedBoards = api.board.getAll()
-        // change to the index of currentBoard
-        setCurrentBoard(updatedBoards[0])
+        const indexOfBoard = updatedBoards.findIndex(board => board.id === currentBoard.id)
+        setCurrentBoard(updatedBoards[indexOfBoard])
     }
 
     const handleCloseDeleteBoard = () => {
@@ -118,7 +118,6 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
         api.column.deleteById(ev.target.id)
         const updatedBoards = api.board.getAll()
         const indexOfBoard = updatedBoards.findIndex(board => board.id === currentBoard.id)
-        // change to the index of currentBoard
         setCurrentBoard(updatedBoards[indexOfBoard])
     }
 
@@ -165,7 +164,7 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
                 <div className='main-header-container-logo'>
                     <img src={logo} alt='logo task master' className='main-header-container-logo-svg' onClick={handleLogoClick}/>
                     <img src={kanban} alt='kanban logo' className='main-header-container-logo-kanban' onClick={handleLogoClick}/>
-                    <div className='main-header-container-logo-container'>
+                    <div className='main-header-container-logo-container' onClick={handleClickSelectBoard}>
                         <h1 className='main-header-container-logo-container-title'>{currentBoard.name}</h1>
                         <button title='All Boards' className='main-header-container-logo-container-button-down' onClick={handleClickSelectBoard}>
                             <i className='fa fa-chevron-down'></i>

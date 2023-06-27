@@ -20,13 +20,13 @@ const create = (currentBoard, nameColumn) => {
             id: v4(),
             tasks: [{
                 id: v4(),
-                title: 'Example',
-                description: 'Example',
+                title: 'Write the task title',
+                description: 'Write the task description',
                 status: nameColumn,
                 subtasks: [{
                     id: v4(),
                     isCompleted: false,
-                    title: 'Example'
+                    title: 'Write the subtask title'
                 }]
             }]
         })

@@ -48,8 +48,15 @@
             display: flex;
             gap: 0.5rem;
 
+            &:hover {
+                cursor: pointer;
+            }
+
             &-title {
                 font-size: 1.125rem;
+                &:hover {
+                    cursor: pointer;
+                }
             }
 
             &-button-down {
@@ -93,6 +100,7 @@
 
         &-button-more {
             font-size: 1.1rem;
+            width: 2rem;
         }
     }
 
