@@ -103,16 +103,12 @@ const deleteById = (id) => {
     boards.forEach(board => {
         board.columns.forEach(column => {
             column.tasks.forEach(task => {
-                task.subtasks.forEach(subtask => {
-                    if (subtask.id === subtaskToDelete.id) {
-                        const indexSubtask = task.subtasks.indexOf(subtask)
-                        task.subtasks.splice(indexSubtask, 1)
-                        localStorage.setItem('data', JSON.stringify(boards))
-                    }
-                })
+                task.subtasks = task.subtasks.filter(subtask => subtask.id !== subtaskToDelete.id)
             })
         })
     })
+
+    localStorage.setItem('data', JSON.stringify(boards))
 }
 
 const apiSubtask = {

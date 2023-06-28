@@ -78,7 +78,7 @@ const Main = ({currentBoard, modal, setModal, currentTask, handleArticleClick, s
     return (
         <>
         <main className='main-board'>
-            {listColumns.length === 1 ? buttonAddColumn() : listColumns}
+            {listColumns.length < 1 ? buttonAddColumn() : listColumns}
 
         </main>
             {modal && (

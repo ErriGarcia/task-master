@@ -15,8 +15,6 @@ const create = (currentBoard, namesColumn) => {
     const boards = getAllBoards()
     const indexOfBoard = boards.findIndex(board => board.id === currentBoard.id)
 
-    console.log(namesColumn, 'namesColumn')
-
     for (const eachNameColumn of namesColumn) {
         boards[indexOfBoard].columns.push({
             name: eachNameColumn.name, 

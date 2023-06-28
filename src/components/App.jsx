@@ -8,7 +8,7 @@ import Footer from './Footer'
 function App() {
 
   const [allBoards, setAllBoards] = useState([api.board.getAll()])
-  const [currentBoard, setCurrentBoard] = useState(api.board.getAll()[1])
+  const [currentBoard, setCurrentBoard] = useState(api.board.getAll()[2])
   const [currentColumn, setCurrentColumn] = useState('')
   const [inputTitleBoard, setInputTitleBoard] = useState(currentBoard.name)
   const [inputColumnNames, setInputColumnNames] = useState('')

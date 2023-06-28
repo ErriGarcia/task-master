@@ -56,6 +56,7 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
     const updateTask = (ev) => {
         ev.preventDefault()
         api.task.updateById(currentTask.id, inputTitleTask, textAreaDescription)
+        console.log(currentSubtask, 'currentSubtask')
         api.subtask.updateById(currentSubtask.id, inputSubtasksNames[currentSubtask.id])
         setModal(false)
         setModalEditTask(false)
@@ -107,7 +108,6 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
     const handleStatusTaskChange = (ev) => {
         api.task.changeColumnAndStatus(currentTask.id, ev.target.value)
         const updatedBoards = api.board.getAll()
-        console.log(updatedBoards, 'updatedBoards')
         const indexOfBoard = updatedBoards.findIndex(board => board.id === currentBoard.id)
         setCurrentBoard(updatedBoards[indexOfBoard])
         setModal(false)
@@ -120,7 +120,8 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
                 key={i} 
                 className='container-view-task-subtasks-list-subtask' 
             >
-                <input type='checkbox' 
+                <input 
+                    type='checkbox' 
                     id={subtask.id} 
                     name={subtask.title}
                     checked={checkedState[i]}
@@ -150,7 +151,7 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
                     onChange={ev => {handleInputSubtaskName(ev); handleGetCurrentSubtask(ev)}}
                 />
                 <button title='Delete Subtask' className='button-delete' onClick={handleDeleteSubtask} id={subtask.id}>
-                    <span className='material-symbols-outlined' id={subtask.id}>
+                    <span className='material-symbols-outlined' onClick={handleDeleteSubtask} id={subtask.id}>
                         delete
                     </span>
                 </button>
