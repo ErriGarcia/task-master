@@ -12,7 +12,7 @@ const getAllBoards = () => {
 }
 
 const getAll = (currentBoard) => {
-    const tasks = [];
+    const tasks = []
     currentBoard.columns.forEach((column) => {
         tasks.push(...column.tasks)
     })
@@ -64,41 +64,13 @@ const getById = (id) => {
 }
 
 /**
- * 
- * @param {*} id string, id task
- * @param {*} status string, ev target value
- * @returns 
- */
-const updateStatus = (id, status) => {
-    const boards = getAllBoards()
-    const taskToUpdate = getById(id)
-
-    if (!taskToUpdate) {
-        console.error(`Can not update task with this id: ${id} not found`)
-        return
-    }
-
-    boards.forEach(board => {
-        board.columns.forEach(column => {
-            column.tasks.forEach(task => {
-                if (task.id === taskToUpdate.id) {
-                    task.status = status
-                }
-            })
-        })
-    })
-
-    localStorage.setItem('data', JSON.stringify(boards))
-}
-
-/**
  * This function update a task found by id
  * @param {*} id 
  * @param {*} title 
  * @param {*} description 
  * @returns 
  */
-const updateById = (id, title, description, status = null) => {
+const updateById = (id, title, description) => {
     const boards = getAllBoards()
     const taskToUpdate = getById(id)
 
@@ -121,53 +93,25 @@ const updateById = (id, title, description, status = null) => {
     localStorage.setItem('data', JSON.stringify(boards))
 }
 
-const changeColumn = () => {
+const changeColumnAndStatus = (id, status) => {
   const boards = getAllBoards()
+  const taskToUpdate = getById(id)
 
-  boards.forEach((board) => {
+  boards.forEach(board => {
     board.columns.forEach(column => {
-      column.tasks.forEach(task => {
-        if (task.status !== column.name) {
-          boards.forEach(otherBoard => {
-            otherBoard.columns.forEach((otherColumn) => {
-              if (otherColumn.name === task.status) {
-                otherColumn.tasks.push(task)
-              }
-            })
-          })
+        const taskIndex = column.tasks.findIndex(task => task.id === taskToUpdate.id)
+        if (taskIndex !== -1) {
+            taskToUpdate.status = status
+            const newColumn = board.columns.find(otherColumn => otherColumn.name === taskToUpdate.status)
+            if (newColumn) {
+                column.tasks.splice(taskIndex, 1)
+                newColumn.tasks.push(taskToUpdate)
+            }
         }
-      })
     })
   })
-  
+
   localStorage.setItem('data', JSON.stringify(boards))
-}
-
-const deleteFromPreviousColumn = () => {
-    const boards = getAllBoards()
-
-    boards.forEach(board => {
-        board.columns.forEach(column => {
-            column.tasks.forEach(task => {
-                if (task.status !== column.name) {
-                    const index = column.tasks.indexOf(task)
-                    // const newColumn = column
-                    boards.forEach(board => {
-                        board.columns.forEach(column => {
-                            column.tasks.forEach(task => {
-                                if (task.status !== column.name) {
-                                    const previousColumn = column
-                                    previousColumn.tasks.splice(index, 1)
-
-                                }
-                            })
-                        })
-                    })
-                }
-            })
-        })
-    })
-    localStorage.setItem('data', JSON.stringify(boards))
 }
 
 /**
@@ -201,10 +145,9 @@ const apiTask = {
     getAll,
     create,
     getById,
-    updateStatus,
+    // updateStatus,
     updateById,
-    changeColumn,
-    deleteFromPreviousColumn,
+    changeColumnAndStatus,
     deleteById
 }
 

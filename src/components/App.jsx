@@ -59,8 +59,6 @@ function App() {
     setModalEditBoard(false)
   }
 
-  console.log(allTasks, 'allTasks')
-
   return (
     <div className='main'>
       <Header 

@@ -105,11 +105,9 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
     }
 
     const handleStatusTaskChange = (ev) => {
-        api.task.updateStatus(currentTask.id, ev.target.value)
-        api.task.changeColumn()
-        api.task.deleteFromPreviousColumn()
+        api.task.changeColumnAndStatus(currentTask.id, ev.target.value)
         const updatedBoards = api.board.getAll()
-        // change to the index of currentBoard
+        console.log(updatedBoards, 'updatedBoards')
         const indexOfBoard = updatedBoards.findIndex(board => board.id === currentBoard.id)
         setCurrentBoard(updatedBoards[indexOfBoard])
         setModal(false)
