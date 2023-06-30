@@ -8,17 +8,14 @@ const Modal = ({
     placeholderTitle, 
     valueInputTitle,
     handleInputChange,
-
     labelDescription, 
     placeholderDescription, 
     valueTextAreaDescription, 
     handleTextAreaChange,  
     buttonText, 
-    handleClickForm, 
-    handleChangeSelect, 
+    handleClickForm,
     handleSubmitClick,
-    inputSubtasks, 
-    column,
+    inputSubtasks,
     subtaskList,
     setSubtaskList,
     handleSubmitKeyDown
@@ -37,8 +34,10 @@ const Modal = ({
     }
 
     const handleColumnInputChange = (ev, index) => {
+        console.log(ev.target, 'ev.target')
         const {name, value} = ev.target
         const list = [...subtaskList]
+        console.log(subtaskList, 'subtaskList')
         list[index][name] = value
         setSubtaskList(list)
     }
@@ -93,24 +92,31 @@ const Modal = ({
                 <fieldset className='fieldset'>
                     <label htmlFor='subtasks' className='label'>Subtasks</label>
                         <ul className='container-subtasks'>
-                           {inputSubtasks}
+                            {inputSubtasks}
+
                             {subtaskList.map((singleSubtask, index) => {
                                 return (
-                                    <li className='container-subtasks-list' key={index}>
-                                        <input 
-                                            type='text' 
-                                            id='Add new subtask' 
-                                            name='title' 
-                                            className='input subtask' 
-                                            placeholder='e.g. Make Coffee' 
-                                            value={singleSubtask.title}
-                                            onChange={(ev) => handleColumnInputChange(ev, index)}
-                                        />
-                                        <button title='Delete Subtask' className='button-delete' onClick={handleRemoveColumnList}>
-                                            <span className='material-symbols-outlined'>
-                                                delete
-                                            </span>
-                                        </button>
+                                    <li key={index}>
+                                        <div className='container-subtasks-list'>
+                                            <input 
+                                                type='text' 
+                                                id={singleSubtask.id} 
+                                                name='title' 
+                                                className='input subtask' 
+                                                placeholder='e.g. Make Coffee' 
+                                                value={singleSubtask.name}
+                                                onChange={(ev) => handleColumnInputChange(ev, index)}
+                                            />
+                                            <button 
+                                                title='Delete Subtask' 
+                                                className='button-delete' 
+                                                onClick={() => handleRemoveColumnList(index)}
+                                            >
+                                                <span className='material-symbols-outlined'>
+                                                    delete
+                                                </span>
+                                            </button>
+                                        </div>
                                     </li>
                                 )
                             })}

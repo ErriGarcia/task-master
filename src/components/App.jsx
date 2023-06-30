@@ -23,6 +23,8 @@ function App() {
   const [subtaskList, setSubtaskList] = useState([])
   const [allTasks, setAllTasks] = useState([api.task.getAll(currentBoard)])
 
+  console.log(columnList, 'columnList')
+
   useEffect(() => {
     setPreviousColumn(api.column.getByName(currentTask.status))
   }, [currentTask.status])
@@ -45,9 +47,13 @@ function App() {
     setCurrentTask(api.task.getById(id))
   }
 
+  console.log(inputColumnNames, 'inputColumnNames')
+
   const updateBoard = (ev) => {
     ev.preventDefault()
+    // updating board name
     api.board.updateById(currentBoard.id, inputTitleBoard)
+    // {xxxxwefrgr: Todossss, sdfrgr: Doing, id }
     api.column.updateById(currentColumn.id, inputColumnNames[currentColumn.id])
     api.column.updateAll(inputColumnNames)
     api.column.create(currentBoard, columnList)

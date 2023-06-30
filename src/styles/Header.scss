@@ -102,6 +102,11 @@
             font-size: 1.1rem;
             width: 2rem;
         }
+
+        .not-clickable {
+            cursor: auto;
+            opacity: 0.5;
+        }
     }
 
     .more-options-board-container {

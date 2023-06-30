@@ -31,7 +31,13 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
     }, [currentBoard.columns])
 
     const handleAddTask = () => {
-        setModalNewTask(true)
+        currentBoard.columns.length < 1 ? setModalNewTask(false) : setModalNewTask(true)
+        // if (currentBoard.columns.length < 1) {
+        //     console.log('ciao')
+        //     setModalNewTask(false)
+        // } else {
+        //     setModalNewTask(true)
+        // }
     }
 
     const handleCloseModal = (ev) => {
@@ -190,7 +196,7 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
 
                 </div>
                 <div className='main-header-container-buttons'>
-                    <button title='Add New Task' className='main-header-container-buttons-button-plus' onClick={handleAddTask}>
+                    <button title='Add New Task' className={`main-header-container-buttons-button-plus ${currentBoard.columns.length > 1 ? '' : 'not-clickable'}`} onClick={handleAddTask}>
                         <i className='fa-solid fa-plus'></i>
                         Add New Task
                     </button>

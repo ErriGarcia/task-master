@@ -94,7 +94,7 @@ const ModalBoard = ({
                                     <div className='container-subtasks-list'>
                                         <input 
                                             type='text' 
-                                            id='column' 
+                                            id={singleInput.id} 
                                             name='name' 
                                             className={`input subtask ${singleInput ? null : setErrorBoardName('error-board-name')}`} 
                                             placeholder={placeholderSecondInput} 
@@ -106,7 +106,7 @@ const ModalBoard = ({
                                             title={titleCloseIcon} 
                                             className='button-delete' 
                                             onClick={() => handleRemoveColumnList(index)}
-                                            >
+                                        >
                                             <span className='material-symbols-outlined'>
                                                 delete
                                             </span>

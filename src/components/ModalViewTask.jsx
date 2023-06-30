@@ -56,16 +56,16 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
     const updateTask = (ev) => {
         ev.preventDefault()
         api.task.updateById(currentTask.id, inputTitleTask, textAreaDescription)
-        console.log(currentSubtask, 'currentSubtask')
+        console.log(currentSubtask.id, 'currentSubtask.id')
         api.subtask.updateById(currentSubtask.id, inputSubtasksNames[currentSubtask.id])
-        setModal(false)
-        setModalEditTask(false)
-        subtaskList.forEach(eachSubtask => {
-            api.subtask.create(currentBoard, currentTask, eachSubtask.title)
-        })
+        api.subtask.create(currentBoard, currentTask, subtaskList)
+
         const updatedBoards = api.board.getAll()
         const indexOfBoard = updatedBoards.findIndex(board => board.id === currentBoard.id)
         setCurrentBoard(updatedBoards[indexOfBoard])
+
+        setModal(false)
+        setModalEditTask(false)
     }
 
     const handleUpdateTaskEnterKey = (ev) => {

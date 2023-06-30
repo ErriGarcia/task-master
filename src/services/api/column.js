@@ -99,6 +99,7 @@ const updateAll = (names) => {
     
     boards.forEach(board => {
         board.columns.forEach(column => {
+            // change name const object
             const object = Object.entries(names)
             const namesColumn = Object.values(object)
             for (const name of namesColumn) {
