@@ -13,12 +13,10 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
     const [moreOptionsBoard, setMoreOptionsBoard] = useState(false)
     const [modalDeleteBoard, setModalDeleteBoard] = useState(false)
     const [modalNewBoard, setModalNewBoard] = useState(false)
-    
     const [newTitleTask, setNewTitleTask] = useState('')
     const [newDescriptionTask, setNewDescriptionTask] = useState('')
     const [newNameBoard, setNewNameBoard] = useState('')
     const [newSubtaskTitle] = useState('')
-    // const [columnList, setColumnList] = useState([{name: '', id: v4(), tasks: []},])
 
     useEffect(() => {
         setAllBoards(api.board.getAll())
@@ -32,12 +30,6 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
 
     const handleAddTask = () => {
         currentBoard.columns.length < 1 ? setModalNewTask(false) : setModalNewTask(true)
-        // if (currentBoard.columns.length < 1) {
-        //     console.log('ciao')
-        //     setModalNewTask(false)
-        // } else {
-        //     setModalNewTask(true)
-        // }
     }
 
     const handleCloseModal = (ev) => {

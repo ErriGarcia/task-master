@@ -19,7 +19,6 @@ function App() {
   const [statusCurrentTask, setStatusCurrentTask] = useState(currentTask.status)
   const [previousColumn, setPreviousColumn] = useState('')
   const [columnList, setColumnList] = useState([])
-  // const [columnList, setColumnList] = useState([{name: '', id: v4(), tasks: []},])
   const [subtaskList, setSubtaskList] = useState([])
   const [allTasks, setAllTasks] = useState([api.task.getAll(currentBoard)])
 
@@ -51,9 +50,7 @@ function App() {
 
   const updateBoard = (ev) => {
     ev.preventDefault()
-    // updating board name
     api.board.updateById(currentBoard.id, inputTitleBoard)
-    // {xxxxwefrgr: Todossss, sdfrgr: Doing, id }
     api.column.updateById(currentColumn.id, inputColumnNames[currentColumn.id])
     api.column.updateAll(inputColumnNames)
     api.column.create(currentBoard, columnList)
