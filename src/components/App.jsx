@@ -9,20 +9,22 @@ function App() {
 
   const [allBoards, setAllBoards] = useState([api.board.getAll()])
   const [currentBoard, setCurrentBoard] = useState(api.board.getAll()[2])
+  const [titleBoard, setTitleBoard] = useState(currentBoard.name)
+
   const [currentColumn, setCurrentColumn] = useState('')
-  const [inputTitleBoard, setInputTitleBoard] = useState(currentBoard.name)
-  const [inputColumnNames, setInputColumnNames] = useState('')
+  const [columnNames, setColumnNames] = useState('')
+  const [previousColumn, setPreviousColumn] = useState('')
+  const [columnList, setColumnList] = useState([])
+
   const [modal, setModal] = useState(false)
   const [modalEditBoard, setModalEditBoard] = useState(false)
   const [modalSelectBoard, setModalSelectBoard] = useState(false)
+
+  const [allTasks, setAllTasks] = useState([api.task.getAll(currentBoard)])
   const [currentTask, setCurrentTask] = useState('')
   const [statusCurrentTask, setStatusCurrentTask] = useState(currentTask.status)
-  const [previousColumn, setPreviousColumn] = useState('')
-  const [columnList, setColumnList] = useState([])
+  
   const [subtaskList, setSubtaskList] = useState([])
-  const [allTasks, setAllTasks] = useState([api.task.getAll(currentBoard)])
-
-  console.log(columnList, 'columnList')
 
   useEffect(() => {
     setPreviousColumn(api.column.getByName(currentTask.status))
@@ -31,7 +33,7 @@ function App() {
   const handleClickBoard = (ev) => {
     const { id } = ev.currentTarget
     setCurrentBoard(api.board.getById(id))
-    setInputTitleBoard(api.board.getById(id).name)
+    setTitleBoard(api.board.getById(id).name)
     setModalSelectBoard(false)
   }
 
@@ -46,13 +48,11 @@ function App() {
     setCurrentTask(api.task.getById(id))
   }
 
-  console.log(inputColumnNames, 'inputColumnNames')
-
   const updateBoard = (ev) => {
     ev.preventDefault()
-    api.board.updateById(currentBoard.id, inputTitleBoard)
-    api.column.updateById(currentColumn.id, inputColumnNames[currentColumn.id])
-    api.column.updateAll(inputColumnNames)
+    api.board.updateById(currentBoard.id, titleBoard)
+    api.column.updateById(currentColumn.id, columnNames[currentColumn.id])
+    api.column.updateAll(columnNames)
     api.column.create(currentBoard, columnList)
 
     const updatedBoards = api.board.getAll()
@@ -71,15 +71,14 @@ function App() {
         handleClickBoard={handleClickBoard}
         handleGetCurrentColumn={handleGetCurrentColumn}
         updateBoard={updateBoard}
-        inputTitleBoard={inputTitleBoard}
-        setInputTitleBoard={setInputTitleBoard}
-        inputColumnNames={inputColumnNames}
-        setInputColumnNames={setInputColumnNames}
+        titleBoard={titleBoard}
+        setTitleBoard={setTitleBoard}
+        columnNames={columnNames}
+        setColumnNames={setColumnNames}
         setModal={setModal}
         modalEditBoard={modalEditBoard}
         setModalEditBoard={setModalEditBoard}
         setCurrentBoard={setCurrentBoard}
-        setCurrentColumn={setCurrentColumn}
         columnList={columnList}
         setColumnList={setColumnList}
         subtaskList={subtaskList}
@@ -91,7 +90,6 @@ function App() {
       <Main 
         currentBoard={currentBoard}
         currentColumn={currentColumn}
-        inputColumnNames={inputColumnNames}
         modal={modal}
         setModal={setModal}
         currentTask={currentTask}

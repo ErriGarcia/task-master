@@ -34,10 +34,8 @@ const Modal = ({
     }
 
     const handleColumnInputChange = (ev, index) => {
-        console.log(ev.target, 'ev.target')
         const {name, value} = ev.target
         const list = [...subtaskList]
-        console.log(subtaskList, 'subtaskList')
         list[index][name] = value
         setSubtaskList(list)
     }

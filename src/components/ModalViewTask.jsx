@@ -3,18 +3,30 @@ import Modal from './reusableComponents/Modal'
 import ModalDelete from './reusableComponents/ModalDelete'
 import api from '../services/api/index'
 
-const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCurrentSubtask, currentSubtask, setCurrentBoard, subtaskList, setSubtaskList}) => {
+const ModalViewTask = ({
+    modal, 
+    setModal, 
+    currentBoard, 
+    currentTask, 
+    handleGetCurrentSubtask, 
+    setCurrentBoard,
+    subtaskList,
+    setSubtaskList,
+    currentSubtask,
+}) => {
 
-    const [moreOptions, setMoreOptions] = useState(false)
+    const [modalMoreOptions, setModalMoreOptions] = useState(false)
     const [modalEditTask, setModalEditTask] = useState(false)
     const [modalDeleteTask, setModalDeleteTask] = useState(false)
-    const [inputTitleTask, setInputTitleTask] = useState(currentTask.title)
+    const [inputTitleTask, setInputTitleTask] = useState(currentTask.title || '')
     const [textAreaDescription, setTextAreaDescription] = useState(currentTask.description)
     const [subtasks] = useState(currentTask.subtasks || [])
     const [inputSubtasksNames, setInputSubtasksNames] = useState('')
     const [checkedState, setCheckedState] = useState(
         new Array(currentTask.subtasks.length).fill(false)
     )
+
+    console.log(subtasks, 'subtasks')
 
     useEffect(() => {
         const subtasksDetails = {}
@@ -42,7 +54,7 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
     }
 
     const handleClickMoreOptions = () => {
-        setMoreOptions(true)
+        setModalMoreOptions(true)
     }
 
     const handleClickEditTask = () => {
@@ -56,7 +68,6 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
     const updateTask = (ev) => {
         ev.preventDefault()
         api.task.updateById(currentTask.id, inputTitleTask, textAreaDescription)
-        console.log(currentSubtask.id, 'currentSubtask.id')
         api.subtask.updateById(currentSubtask.id, inputSubtasksNames[currentSubtask.id])
         api.subtask.create(currentBoard, currentTask, subtaskList)
 
@@ -149,6 +160,8 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
                     placeholder='e.g. Make Coffee' 
                     value={inputSubtasksNames[subtask.id]}
                     onChange={ev => {handleInputSubtaskName(ev); handleGetCurrentSubtask(ev)}}
+                    onClick={ev => handleGetCurrentSubtask(ev)}
+                    required
                 />
                 <button title='Delete Subtask' className='button-delete' onClick={handleDeleteSubtask} id={subtask.id}>
                     <span className='material-symbols-outlined' onClick={handleDeleteSubtask} id={subtask.id}>
@@ -174,7 +187,7 @@ const ModalViewTask = ({modal, setModal, currentBoard, currentTask, handleGetCur
                             <button title='Edit Task' className='container-view-task-header-more-options-button' onClick={handleClickMoreOptions}>
                                 <i className='fa-solid fa-ellipsis-vertical'></i>
                             </button>
-                            {moreOptions && (
+                            {modalMoreOptions && (
                                 <div className='more-options-container'>
                                     <button title='Edit task' className='more-options-container-edit-button' onClick={handleClickEditTask}>
                                         <i className='fa-regular fa-pen-to-square more-options-container-edit-button-icon'></i>

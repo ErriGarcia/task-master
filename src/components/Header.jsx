@@ -7,7 +7,28 @@ import ModalBoard from './reusableComponents/ModalBoard'
 import ModalDelete from './reusableComponents/ModalDelete'
 import api from '../services/api/index'
 
-const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handleGetCurrentColumn, updateBoard, inputTitleBoard, setInputTitleBoard, inputColumnNames, setInputColumnNames, modalEditBoard, setModalEditBoard, setColumn, setCurrentBoard, columnList, setColumnList, subtaskList, setSubtaskList, modalSelectBoard, setModalSelectBoard}) => {
+const Header = ({
+    allBoards,
+    setAllBoards, 
+    currentBoard, 
+    handleClickBoard, 
+    handleGetCurrentColumn, 
+    updateBoard, 
+    titleBoard, 
+    setTitleBoard, 
+    columnNames, 
+    setColumnNames, 
+    modalEditBoard, 
+    setModalEditBoard,
+    setCurrentBoard,
+    columnList,  
+    setColumnList, 
+    subtaskList, 
+    setSubtaskList, 
+    modalSelectBoard, 
+    setModalSelectBoard, 
+    setColumn
+}) => {
 
     const [modalNewTask, setModalNewTask] = useState(false)
     const [moreOptionsBoard, setMoreOptionsBoard] = useState(false)
@@ -24,7 +45,7 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
         for (const column of currentBoard.columns) {
             columnsDetails[column.id] = column.name
         }
-        setInputColumnNames(columnsDetails)
+        setColumnNames(columnsDetails)
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentBoard.columns])
 
@@ -117,10 +138,10 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
 
     const handleInputColumnName = (ev) => {
         const newInputColumnName = {
-            ...inputColumnNames,
+            ...columnNames,
             [ev.target.id]: ev.target.value
         }
-        setInputColumnNames(newInputColumnName)
+        setColumnNames(newInputColumnName)
     }
 
     const handleDeleteColumn = (ev) => {
@@ -149,7 +170,7 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
                     name='subtasks' 
                     className='input subtask' 
                     placeholder={column.name} 
-                    value={inputColumnNames[column.id] || column.name} 
+                    value={columnNames[column.id]} 
                     onChange={ev => {handleInputColumnName(ev); handleGetCurrentColumn(ev)}}
                     onClick={ev => handleGetCurrentColumn(ev)}
                     required
@@ -252,12 +273,12 @@ const Header = ({allBoards, setAllBoards, currentBoard, handleClickBoard, handle
                         modalTitle='Edit Board' 
                         firstInputLabelTitle='Board Name'
                         firstInputPlaceholderTitle='e.g. Portfolio'
-                        firstInputValueTitle={inputTitleBoard}
-                        handleTitleChange={ev => setInputTitleBoard(ev.target.value)}
+                        firstInputValueTitle={titleBoard}
+                        handleTitleChange={ev => setTitleBoard(ev.target.value)}
 
                         labelSecondInputs='Board Columns'
                         placeholderSecondInput='e.g. Todo'
-                        valueSecondInput={inputColumnNames}
+                        valueSecondInput={columnNames}
                         handleSecondInputChange={handleInputColumnName}
 
                         titleCloseIcon='Delete Column'
