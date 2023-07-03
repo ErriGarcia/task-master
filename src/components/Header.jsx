@@ -46,6 +46,7 @@ const Header = ({
             columnsDetails[column.id] = column.name
         }
         setColumnNames(columnsDetails)
+        setTitleBoard(currentBoard.name)
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentBoard.columns])
 
