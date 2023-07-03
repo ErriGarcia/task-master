@@ -210,7 +210,7 @@ const Header = ({
 
                 </div>
                 <div className='main-header-container-buttons'>
-                    <button title='Add New Task' className={`main-header-container-buttons-button-plus ${currentBoard.columns.length > 1 ? '' : 'not-clickable'}`} onClick={handleAddTask}>
+                    <button title='Add New Task' className={`main-header-container-buttons-button-plus ${currentBoard.columns.length > 0 ? '' : 'not-clickable'}`} onClick={handleAddTask}>
                         <i className='fa-solid fa-plus'></i>
                         Add New Task
                     </button>
