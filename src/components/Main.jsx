@@ -4,16 +4,10 @@ import api from '../services/api/index'
 
 const Main = ({
     currentBoard,
-    currentColumn,
     modal, 
     setModal, 
     currentTask, 
-    setCurrentTask,
-    handleArticleClick, 
-    statusCurrentTask, 
-    setStatusCurrentTask, 
-    previousColumn, 
-    setPreviousColumn, 
+    handleArticleClick,  
     setCurrentBoard, 
     subtaskList, 
     setSubtaskList, 

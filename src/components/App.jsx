@@ -22,7 +22,7 @@ function App() {
 
   const [allTasks, setAllTasks] = useState([api.task.getAll(currentBoard)])
   const [currentTask, setCurrentTask] = useState('')
-  const [statusCurrentTask, setStatusCurrentTask] = useState(currentTask.status)
+  // const [statusCurrentTask, setStatusCurrentTask] = useState(currentTask.status)
   
   const [subtaskList, setSubtaskList] = useState([])
 
@@ -89,16 +89,10 @@ function App() {
       </Header>
       <Main 
         currentBoard={currentBoard}
-        currentColumn={currentColumn}
         modal={modal}
         setModal={setModal}
         currentTask={currentTask}
-        setCurrentTask={setCurrentTask}
         handleArticleClick={handleArticleClick}
-        statusCurrentTask={statusCurrentTask}
-        setStatusCurrentTask={setStatusCurrentTask}
-        previousColumn={previousColumn}
-        setPreviousColumn={setPreviousColumn}
         setCurrentBoard={setCurrentBoard}
         subtaskList={subtaskList}
         setSubtaskList={setSubtaskList}
