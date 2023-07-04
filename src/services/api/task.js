@@ -145,7 +145,6 @@ const apiTask = {
     getAll,
     create,
     getById,
-    // updateStatus,
     updateById,
     changeColumnAndStatus,
     deleteById

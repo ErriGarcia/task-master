@@ -13,6 +13,7 @@ function App() {
 
   const [currentColumn, setCurrentColumn] = useState('')
   const [columnNames, setColumnNames] = useState('')
+  // eslint-disable-next-line no-unused-vars
   const [previousColumn, setPreviousColumn] = useState('')
   const [columnList, setColumnList] = useState([])
 
@@ -24,9 +25,6 @@ function App() {
   const [currentTask, setCurrentTask] = useState('')
   
   const [subtaskList, setSubtaskList] = useState([])
-
-  console.log(columnList, 'columnList')
-  console.log(columnNames, 'columnNames')
 
   useEffect(() => {
     setPreviousColumn(api.column.getByName(currentTask.status))

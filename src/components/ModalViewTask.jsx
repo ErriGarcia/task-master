@@ -26,8 +26,6 @@ const ModalViewTask = ({
         new Array(currentTask.subtasks.length).fill(false)
     )
 
-    console.log(subtasks, 'subtasks')
-
     useEffect(() => {
         const subtasksDetails = {}
         for (const subtask of currentTask.subtasks) {
