@@ -13,7 +13,6 @@ const getAll = () => {
     const parsedData = JSON.parse(dataInLocalStorage)
     return parsedData
 }
-// const getAll = () => data.boards
 
 /**
  * Create a new board
@@ -29,11 +28,6 @@ const create = (nameBoard, columns) => {
         columns: columns
     })
     localStorage.setItem('data', JSON.stringify(parsedData))
-    // data.boards.push({
-    //     name: nameBoard,
-    //     id: v4(),
-    //     columns: columns
-    // })
 }
 
 /**
@@ -41,12 +35,6 @@ const create = (nameBoard, columns) => {
  * @param {*} id number 
  */
 const getById = (id) => {
-    // const searchingBoard = data.boards.find(board => board.id === id)
-    
-    // if (searchingBoard) {
-    //     return searchingBoard
-    // }
-
     const boards = getAll()
 
     const searchingBoard = boards.find(board => board.id === id)

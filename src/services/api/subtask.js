@@ -35,20 +35,6 @@ const create = (currentBoard, currentTask, titleSubtasks) => {
             })
         })
     }
-
-    // boards[indexCurrentBoard].columns.forEach((column) => {
-    //     column.tasks.forEach((task) => {
-    //         if (task.id === currentTask.id) {
-    //             const indexCurrentTask = column.tasks.indexOf(task)
-    //             column.tasks[indexCurrentTask].subtasks.push({
-    //                 id: v4(),
-    //                 isCompleted: false,
-    //                 title: titleSubtask 
-    //             })
-    //             localStorage.setItem('data', JSON.stringify(boards))
-    //         }
-    //     })
-    // })
     localStorage.setItem('data', JSON.stringify(boards))
 }
 

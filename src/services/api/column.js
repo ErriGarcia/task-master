@@ -21,13 +21,13 @@ const create = (currentBoard, namesColumn) => {
             id: v4(),
             tasks: [{
                 id: v4(),
-                title: 'Write the task title',
-                description: 'Write the task description',
+                title: 'E.g. Write the task title',
+                description: 'E.g. Write the task description',
                 status: eachNameColumn.name,
                 subtasks: [{
                     id: v4(),
                     isCompleted: false,
-                    title: 'Write the subtask title'
+                    title: 'E.g. Write the subtask title'
                 }]
             }]
         })
@@ -86,7 +86,6 @@ const updateById = (id, name) => {
         })
     })
 
-    // columnToUpdate.name = name
     localStorage.setItem('data', JSON.stringify(boards))
 }
 
@@ -94,17 +93,17 @@ const updateById = (id, name) => {
  * 
  * @param {*} names obj
  */
-const updateAll = (names) => {
+const updateAll = (columnNames) => {
     const boards = getAllBoards()
     
     boards.forEach(board => {
         board.columns.forEach(column => {
-            // change name const object
-            const object = Object.entries(names)
-            const namesColumn = Object.values(object)
-            for (const name of namesColumn) {
-                if (column.id === name[0]) {
-                    column.name = name[1]
+            const newArrayOfIdAndNameColumn = Object.entries(columnNames)
+            for (const element of newArrayOfIdAndNameColumn) {
+                const idElement = element[0]
+                const newNameColumn = element[1]
+                if (column.id === idElement) {
+                    column.name = newNameColumn
                     localStorage.setItem('data', JSON.stringify(boards))
                 }
             }
