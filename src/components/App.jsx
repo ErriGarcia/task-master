@@ -28,6 +28,7 @@ function App() {
 
   useEffect(() => {
     setPreviousColumn(api.column.getByName(currentTask.status))
+    
   }, [currentTask.status])
 
   const handleClickBoard = (ev) => {

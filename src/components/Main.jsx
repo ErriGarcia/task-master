@@ -99,6 +99,7 @@ const Main = ({
                     currentBoard={currentBoard}
                     currentTask={currentTask}
                     currentSubtask={currentSubtask}
+                    setCurrentSubtask={setCurrentSubtask}
                     handleGetCurrentSubtask={handleGetCurrentSubtask}
                     setCurrentBoard={setCurrentBoard}
                     subtaskList={subtaskList}

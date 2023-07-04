@@ -13,6 +13,7 @@ const ModalViewTask = ({
     subtaskList,
     setSubtaskList,
     currentSubtask,
+    setCurrentSubtask
 }) => {
 
     const [modalMoreOptions, setModalMoreOptions] = useState(false)
@@ -25,6 +26,7 @@ const ModalViewTask = ({
     const [checkedState, setCheckedState] = useState(
         new Array(currentTask.subtasks.length).fill(false)
     )
+
 
     useEffect(() => {
         const subtasksDetails = {}
@@ -43,6 +45,19 @@ const ModalViewTask = ({
             }
         })
         setCheckedState(updateCheckedState)
+    }
+
+    const handleClickSubtask = (ev) => {
+        console.log(ev, 'ev')
+        const { id } = ev.target
+        const { checked } = ev.target
+        console.log(checked, 'checked')
+        // setCurrentSubtask(api.subtask.getById(id))
+        setCurrentSubtask(api.subtask.updateStatus(id, checked))
+        const updatedBoards = api.board.getAll()
+        const indexOfBoard = updatedBoards.findIndex(board => board.id === currentBoard.id)
+        setCurrentBoard(updatedBoards[indexOfBoard])
+        console.log(updatedBoards, 'updatedBoards')
     }
 
     const handleClickCloseModal = (ev) => {
@@ -135,6 +150,7 @@ const ModalViewTask = ({
                     name={subtask.title}
                     checked={checkedState[i]}
                     onChange={() => handleCheckChange(i)}
+                    onClick={handleClickSubtask}
                 >
                 </input>
                 <label 
