@@ -8,7 +8,7 @@ import Footer from './Footer'
 function App() {
 
   const [allBoards, setAllBoards] = useState([api.board.getAll()])
-  const [currentBoard, setCurrentBoard] = useState(api.board.getAll()[0])
+  const [currentBoard, setCurrentBoard] = useState(api.board.getAll()[2])
   const [titleBoard, setTitleBoard] = useState(currentBoard.name)
 
   const [currentColumn, setCurrentColumn] = useState('')
@@ -22,9 +22,11 @@ function App() {
 
   const [allTasks, setAllTasks] = useState([api.task.getAll(currentBoard)])
   const [currentTask, setCurrentTask] = useState('')
-  // const [statusCurrentTask, setStatusCurrentTask] = useState(currentTask.status)
   
   const [subtaskList, setSubtaskList] = useState([])
+
+  console.log(columnList, 'columnList')
+  console.log(columnNames, 'columnNames')
 
   useEffect(() => {
     setPreviousColumn(api.column.getByName(currentTask.status))

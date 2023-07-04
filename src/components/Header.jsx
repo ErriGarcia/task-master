@@ -272,20 +272,20 @@ const Header = ({
                 <div className='modal' onClick={handleCloseModal}>
                     <ModalBoard 
                         modalTitle='Edit Board' 
-                        firstInputLabelTitle='Board Name'
-                        firstInputPlaceholderTitle='e.g. Portfolio'
-                        firstInputValueTitle={titleBoard}
+                        labelBoardName='Board Name'
+                        placeholderBoardName='e.g. Portfolio'
+                        valueBoardName={titleBoard}
                         handleTitleChange={ev => setTitleBoard(ev.target.value)}
 
-                        labelSecondInputs='Board Columns'
-                        placeholderSecondInput='e.g. Todo'
-                        valueSecondInput={columnNames}
-                        handleSecondInputChange={handleInputColumnName}
+                        labelBoardColumns='Board Columns'
+                        placeholderNameColumn='e.g. Todo'
+                        valueColumnNames={columnNames}
+                        handleColumnsChange={handleInputColumnName}
 
                         titleCloseIcon='Delete Column'
                         handleAddSecondInputClick={ev => ev.preventDefault()}
-                        secondButtonText='Add New Column'
-                        valueMainButtonSubmit='Save Changes'
+                        secondaryButtonText='Add New Column'
+                        mainButtonText='Save Changes'
 
                         handleFormClick={ev => ev.preventDefault()}
                         columns={currentBoard.columns}
@@ -314,17 +314,17 @@ const Header = ({
                 <div className='modal' onClick={handleCloseModal}>
                     <ModalBoard 
                         modalTitle='Add New Board' 
-                        firstInputLabelTitle='Board Name' 
-                        firstInputPlaceholderTitle='e.g. Portfolio'
-                        firstInputValueTitle={newNameBoard}
+                        labelBoardName='Board Name' 
+                        placeholderBoardName='e.g. Portfolio'
+                        valueBoardName={newNameBoard}
                         handleTitleChange={ev => setNewNameBoard(ev.target.value)}
 
-                        labelSecondInputs='Board Columns'
-                        placeholderSecondInput='e.g. Todo'
+                        labelBoardColumns='Board Columns'
+                        placeholderNameColumn='e.g. Todo'
 
                         titleCloseIcon='Delete Column'
-                        secondButtonText='Add New Column'
-                        valueMainButtonSubmit='Create New Board'
+                        secondaryButtonText='Add New Column'
+                        mainButtonText='Create New Board'
 
                         handleSubmitClick={handleCreateBoardClick}
                         handleFormClick={ev => ev.preventDefault()}

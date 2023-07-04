@@ -3,15 +3,15 @@ import { v4 } from 'uuid'
 const ModalBoard = ({
     handleFormClick,
     modalTitle, 
-    firstInputLabelTitle, 
-    firstInputPlaceholderTitle,
-    firstInputValueTitle,
+    labelBoardName, 
+    placeholderBoardName,
+    valueBoardName,
     handleTitleChange,
-    labelSecondInputs,
-    placeholderSecondInput,
+    labelBoardColumns,
+    placeholderNameColumn,
     titleCloseIcon,
-    secondButtonText,
-    valueMainButtonSubmit,
+    secondaryButtonText,
+    mainButtonText,
     handleSubmitClick,
     inputColumns,
     columnList,
@@ -49,7 +49,7 @@ const ModalBoard = ({
     }
 
     const setErrorBoardName = (className) => {
-        if (!firstInputValueTitle) {
+        if (!valueBoardName) {
             return className
         } else {
             return false
@@ -61,13 +61,13 @@ const ModalBoard = ({
             <form className='modal-form' onClick={handleFormClick} onKeyDown={handleSubmitKeyDown}>
                 <h2 className='modal-form-title'>{modalTitle}</h2>
                 <fieldset className='modal-form-fieldset-title fieldset'>
-                    <label htmlFor='title' className='label'>{firstInputLabelTitle} *</label>
+                    <label htmlFor='title' className='label'>{labelBoardName} *</label>
                     <input 
                         type='text' 
                         id='title' 
                         name='title' 
-                        placeholder={firstInputPlaceholderTitle} 
-                        value={firstInputValueTitle} 
+                        placeholder={placeholderBoardName} 
+                        value={valueBoardName} 
                         onChange={handleTitleChange}
                         className={`input ${setErrorBoardName('error-board-name')}`}
                         required
@@ -83,7 +83,7 @@ const ModalBoard = ({
                 </fieldset>
                 
                 <fieldset className='fieldset'>
-                    <label htmlFor='column' className='label'>{labelSecondInputs}</label>
+                    <label htmlFor='column' className='label'>{labelBoardColumns}</label>
                     <ul className='container-subtasks'>
                         {inputColumns}
 
@@ -97,7 +97,7 @@ const ModalBoard = ({
                                             id={singleInput.id} 
                                             name='name' 
                                             className={`input subtask ${singleInput ? null : setErrorBoardName('error-board-name')}`} 
-                                            placeholder={placeholderSecondInput} 
+                                            placeholder={placeholderNameColumn} 
                                             /* I need to track the event so I need the ev and index to know which input is updating */
                                             value={singleInput.name || ''} 
                                             onChange={(ev) => handleColumnInputChange(ev, index)}
@@ -120,14 +120,14 @@ const ModalBoard = ({
                     {columnList.length < 8 && (
                         <button className='second-button' onClick={handleAddColumnClick}>
                             <i className='fa-solid fa-plus icon-plus'></i>
-                            {secondButtonText}
+                            {secondaryButtonText}
                         </button>
                     )}
                 </fieldset>
                 <input 
                     className='input-submit' 
                     type='submit' 
-                    value={valueMainButtonSubmit} 
+                    value={mainButtonText} 
                     onClick={handleSubmitClick}
                 />
             </form>
