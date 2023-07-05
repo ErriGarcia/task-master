@@ -93,6 +93,7 @@ function App() {
         modal={modal}
         setModal={setModal}
         currentTask={currentTask}
+        setCurrentTask={setCurrentTask}
         handleArticleClick={handleArticleClick}
         setCurrentBoard={setCurrentBoard}
         subtaskList={subtaskList}

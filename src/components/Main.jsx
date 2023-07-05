@@ -6,7 +6,8 @@ const Main = ({
     currentBoard,
     modal, 
     setModal, 
-    currentTask, 
+    currentTask,
+    setCurrentTask,
     handleArticleClick,  
     setCurrentBoard, 
     subtaskList, 
@@ -98,6 +99,7 @@ const Main = ({
                     setModal={setModal} 
                     currentBoard={currentBoard}
                     currentTask={currentTask}
+                    setCurrentTask={setCurrentTask}
                     currentSubtask={currentSubtask}
                     setCurrentSubtask={setCurrentSubtask}
                     handleGetCurrentSubtask={handleGetCurrentSubtask}

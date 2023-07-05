@@ -89,12 +89,9 @@ const updateById = (id, title) => {
     localStorage.setItem('data', JSON.stringify(boards))
 }
 
-const updateStatus = (id, checked) => {
+const updateStatus = (id, checkedState) => {
     const boards = getAllBoards()
     const subtaskToUpdate = getById(id)
-
-    console.log(subtaskToUpdate, 'subtaskToUpdate')
-    console.log(checked, 'checked')
 
     if (!subtaskToUpdate) {
         console.error(`Can not update subtask not found`)
@@ -107,7 +104,11 @@ const updateStatus = (id, checked) => {
                 task.subtasks.forEach(subtask => {
                     if (subtask.id === subtaskToUpdate.id) {
                         console.log('entro')
-                        subtask.isCompleted = checked
+                        if (subtask.isCompleted === false) {
+                            console.log('entro in false')
+                            subtask.isCompleted = true
+                            return
+                        }
                     }
                 })
             })

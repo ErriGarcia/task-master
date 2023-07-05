@@ -7,7 +7,8 @@ const ModalViewTask = ({
     modal, 
     setModal, 
     currentBoard, 
-    currentTask, 
+    currentTask,
+    setCurrentTask,
     handleGetCurrentSubtask, 
     setCurrentBoard,
     subtaskList,
@@ -36,29 +37,29 @@ const ModalViewTask = ({
         setInputSubtasksNames(subtasksDetails)
     }, [currentTask.subtasks, subtasks.id])
 
-    const handleCheckChange = (position) => {
-        const updateCheckedState = checkedState.map((singleCheckedState, index) => {
-            if (index === position) {
-                return !singleCheckedState
-            } else {
-                return singleCheckedState
-            }
-        })
-        setCheckedState(updateCheckedState)
-    }
+    // const handleCheckChange = (position) => {
+    //     const updateCheckedState = checkedState.map((singleCheckedState, index) => {
+    //         if (index === position) {
+    //             return !singleCheckedState
+    //         } else {
+    //             return singleCheckedState
+    //         }
+    //     })
+    //     setCheckedState(updateCheckedState)
+    // }
 
     const handleClickSubtask = (ev) => {
-        console.log(ev, 'ev')
         const { id } = ev.target
         const { checked } = ev.target
-        console.log(checked, 'checked')
-        // setCurrentSubtask(api.subtask.getById(id))
         setCurrentSubtask(api.subtask.updateStatus(id, checked))
         const updatedBoards = api.board.getAll()
         const indexOfBoard = updatedBoards.findIndex(board => board.id === currentBoard.id)
         setCurrentBoard(updatedBoards[indexOfBoard])
         console.log(updatedBoards, 'updatedBoards')
+        setCurrentTask(currentTask)
     }
+
+    console.log(currentTask, 'currentTask')
 
     const handleClickCloseModal = (ev) => {
         if (ev.target.className === 'modal') {
@@ -149,13 +150,13 @@ const ModalViewTask = ({
                     id={subtask.id} 
                     name={subtask.title}
                     checked={checkedState[i]}
-                    onChange={() => handleCheckChange(i)}
+                    onChange={handleClickSubtask}
                     onClick={handleClickSubtask}
                 >
                 </input>
                 <label 
                     htmlFor={subtask.id} 
-                    className={checkedState[i] ? 'checked' : null}
+                    className={subtask.isCompleted ? 'checked' : null}
                 >
                     {subtask.title}
                 </label>
