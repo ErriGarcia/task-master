@@ -24,10 +24,7 @@ const ModalViewTask = ({
     const [textAreaDescription, setTextAreaDescription] = useState(currentTask.description)
     const [subtasks] = useState(currentTask.subtasks || [])
     const [inputSubtasksNames, setInputSubtasksNames] = useState('')
-    const [checkedState, setCheckedState] = useState(
-        new Array(currentTask.subtasks.length).fill(false)
-    )
-
+    const [isCompleted, setIsCompleted] = useState(false)
 
     useEffect(() => {
         const subtasksDetails = {}
@@ -37,29 +34,20 @@ const ModalViewTask = ({
         setInputSubtasksNames(subtasksDetails)
     }, [currentTask.subtasks, subtasks.id])
 
-    // const handleCheckChange = (position) => {
-    //     const updateCheckedState = checkedState.map((singleCheckedState, index) => {
-    //         if (index === position) {
-    //             return !singleCheckedState
-    //         } else {
-    //             return singleCheckedState
-    //         }
-    //     })
-    //     setCheckedState(updateCheckedState)
-    // }
-
     const handleClickSubtask = (ev) => {
         const { id } = ev.target
-        const { checked } = ev.target
-        setCurrentSubtask(api.subtask.updateStatus(id, checked))
+
+        console.log(currentTask.subtasks)
+
+        setIsCompleted((api.subtask.getById(id).isCompleted))
+        console.log(isCompleted, 'isCompleted')
+
+        api.subtask.updateStatus(id, isCompleted)
+
         const updatedBoards = api.board.getAll()
         const indexOfBoard = updatedBoards.findIndex(board => board.id === currentBoard.id)
         setCurrentBoard(updatedBoards[indexOfBoard])
-        console.log(updatedBoards, 'updatedBoards')
-        setCurrentTask(currentTask)
     }
-
-    console.log(currentTask, 'currentTask')
 
     const handleClickCloseModal = (ev) => {
         if (ev.target.className === 'modal') {
@@ -149,7 +137,6 @@ const ModalViewTask = ({
                     type='checkbox' 
                     id={subtask.id} 
                     name={subtask.title}
-                    checked={checkedState[i]}
                     onChange={handleClickSubtask}
                     onClick={handleClickSubtask}
                 >
@@ -187,8 +174,8 @@ const ModalViewTask = ({
         )
     })
 
-    const listOfStatusName = currentBoard.columns.map((statusName, i) => {
-        return <option key={i} value={statusName.name}>{statusName.name}</option>
+    const listOfColumnNames = currentBoard.columns.map((column, i) => {
+        return <option key={i} value={column.name}>{column.name}</option>
     })
 
     return (
@@ -236,11 +223,10 @@ const ModalViewTask = ({
                                 name='status' 
                                 id='status' 
                                 className='container-view-task-section-select'
-                                // defaultValue={currentTask.status}
                                 value={currentTask.status} 
                                 onChange={handleStatusTaskChange}
                             >
-                                {listOfStatusName}
+                                {listOfColumnNames}
                             </select>
                         </fieldset>
                     </form>

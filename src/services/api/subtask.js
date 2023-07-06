@@ -103,9 +103,12 @@ const updateStatus = (id, checkedState) => {
             column.tasks.forEach(task => {
                 task.subtasks.forEach(subtask => {
                     if (subtask.id === subtaskToUpdate.id) {
-                        console.log('entro')
-                        if (subtask.isCompleted === false) {
-                            console.log('entro in false')
+                        if (checkedState === true) {
+                            console.log('il checkedState è true')
+                            subtask.isCompleted = false
+                            return
+                        } else if (checkedState === false) {
+                            console.log('il checkedState è false')
                             subtask.isCompleted = true
                             return
                         }
