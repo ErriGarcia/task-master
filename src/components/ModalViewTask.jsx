@@ -206,7 +206,7 @@ const ModalViewTask = ({
                             <ul className='container-view-task-subtasks-list'>
                                     {listOfSubtasks}
                             </ul>
-                            <p className='container-view-task-subtasks-note'>* Double click to deselect a task</p>
+                            <p className='container-view-task-subtasks-note'>* Double click to deselect a subtask</p>
                         </fieldset>
                         <fieldset className='container-view-task-section'>
                             <label 
