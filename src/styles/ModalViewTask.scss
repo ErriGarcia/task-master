@@ -72,6 +72,15 @@
             text-decoration: line-through;
             opacity: 0.5;
         }
+
+    }
+
+    &-subtasks-note {
+        color: $color-lines-dark-mode;
+        font-size: 0.75rem;
+        margin-top: 1rem;
+        text-decoration: underline;
+        letter-spacing: 0.04ch;
     }
 
     &-section {

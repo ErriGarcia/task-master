@@ -106,10 +106,12 @@ const updateStatus = (id, checkedState) => {
                         if (checkedState === true) {
                             console.log('il checkedState è true')
                             subtask.isCompleted = false
+                            console.log(subtask.isCompleted, 'subtask.isCompleted')
                             return
                         } else if (checkedState === false) {
                             console.log('il checkedState è false')
                             subtask.isCompleted = true
+                            console.log(subtask.isCompleted, 'subtask.isCompleted')
                             return
                         }
                     }

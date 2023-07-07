@@ -36,14 +36,9 @@ const ModalViewTask = ({
 
     const handleClickSubtask = (ev) => {
         const { id } = ev.target
-
-        console.log(currentTask.subtasks)
-
         setIsCompleted((api.subtask.getById(id).isCompleted))
-        console.log(isCompleted, 'isCompleted')
-
         api.subtask.updateStatus(id, isCompleted)
-
+        setCurrentSubtask(api.subtask.getById(id))
         const updatedBoards = api.board.getAll()
         const indexOfBoard = updatedBoards.findIndex(board => board.id === currentBoard.id)
         setCurrentBoard(updatedBoards[indexOfBoard])
@@ -211,6 +206,7 @@ const ModalViewTask = ({
                             <ul className='container-view-task-subtasks-list'>
                                     {listOfSubtasks}
                             </ul>
+                            <p className='container-view-task-subtasks-note'>* Double click to deselect a task</p>
                         </fieldset>
                         <fieldset className='container-view-task-section'>
                             <label 
