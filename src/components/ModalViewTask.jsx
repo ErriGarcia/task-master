@@ -22,9 +22,8 @@ const ModalViewTask = ({
     const [modalDeleteTask, setModalDeleteTask] = useState(false)
     const [inputTitleTask, setInputTitleTask] = useState(currentTask.title || '')
     const [textAreaDescription, setTextAreaDescription] = useState(currentTask.description)
-    const [subtasks] = useState(currentTask.subtasks || [])
-    const [inputSubtasksNames, setInputSubtasksNames] = useState('')
-    const [isCompleted, setIsCompleted] = useState(false)
+    const [subtasks, setSubtasks] = useState(currentTask.subtasks || [])
+    const [inputSubtasksNames, setInputSubtasksNames] = useState({})
 
     useEffect(() => {
         const subtasksDetails = {}
@@ -35,10 +34,15 @@ const ModalViewTask = ({
     }, [currentTask.subtasks, subtasks.id])
 
     const handleClickSubtask = (ev) => {
+        ev.preventDefault()
         const { id } = ev.target
-        setIsCompleted((api.subtask.getById(id).isCompleted))
-        api.subtask.updateStatus(id, isCompleted)
-        setCurrentSubtask(api.subtask.getById(id))
+        const currentSubtask = api.subtask.getById(id)
+        const newSubtaskStatus = !currentSubtask.isCompleted
+        api.subtask.updateStatus(id, newSubtaskStatus)
+        const indexCurrentSubtask = subtasks.findIndex(subtask => subtask.id === currentSubtask.id)
+        const updatedSubtasks = [...subtasks]
+        updatedSubtasks[indexCurrentSubtask].isCompleted = newSubtaskStatus
+        setSubtasks(updatedSubtasks)
         const updatedBoards = api.board.getAll()
         const indexOfBoard = updatedBoards.findIndex(board => board.id === currentBoard.id)
         setCurrentBoard(updatedBoards[indexOfBoard])
@@ -105,12 +109,16 @@ const ModalViewTask = ({
     }
 
     const handleDeleteSubtask = (ev) => {
-        api.subtask.deleteById(ev.target.id)
-        const newInputSubtaskName = {
-            ...inputSubtasksNames,
-            [ev.target.id]: ev.target.value
-        }
-        setInputSubtasksNames(newInputSubtaskName)
+        const { id } = ev.target
+        api.subtask.deleteById(id)
+        const newInputSubtasksNames = {...inputSubtasksNames}
+        delete newInputSubtasksNames[id]
+        setInputSubtasksNames(newInputSubtasksNames)
+        const updatedSubtasks = api.task.getById(currentTask.id).subtasks
+        setSubtasks(updatedSubtasks)
+        const updatedBoards = api.board.getAll()
+        const indexOfBoard = updatedBoards.findIndex(board => board.id === currentBoard.id)
+        setCurrentBoard(updatedBoards[indexOfBoard])
     }
 
     const handleStatusTaskChange = (ev) => {
@@ -122,7 +130,7 @@ const ModalViewTask = ({
     }
 
 
-    const listOfSubtasks = currentTask.subtasks.map((subtask, i) => {
+    const listOfSubtasks = subtasks.map((subtask, i) => {
         return (
             <li 
                 key={i} 
@@ -132,7 +140,7 @@ const ModalViewTask = ({
                     type='checkbox' 
                     id={subtask.id} 
                     name={subtask.title}
-                    onChange={handleClickSubtask}
+                    // onChange={handleClickSubtask}
                     onClick={handleClickSubtask}
                 >
                 </input>
@@ -160,8 +168,8 @@ const ModalViewTask = ({
                     onClick={ev => handleGetCurrentSubtask(ev)}
                     required
                 />
-                <button title='Delete Subtask' className='button-delete' onClick={handleDeleteSubtask} id={subtask.id}>
-                    <span className='material-symbols-outlined' onClick={handleDeleteSubtask} id={subtask.id}>
+                <button title='Delete Subtask' className='button-delete' onClick={handleDeleteSubtask}>
+                    <span className='material-symbols-outlined' id={subtask.id}>
                         delete
                     </span>
                 </button>
@@ -206,7 +214,6 @@ const ModalViewTask = ({
                             <ul className='container-view-task-subtasks-list'>
                                     {listOfSubtasks}
                             </ul>
-                            <p className='container-view-task-subtasks-note'>* Double click to deselect a subtask</p>
                         </fieldset>
                         <fieldset className='container-view-task-section'>
                             <label 

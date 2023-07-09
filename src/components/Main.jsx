@@ -24,21 +24,24 @@ const Main = ({
     }
 
     const dragStarted = (ev, id) => {
-        console.log('drag has started')
-        ev.dataTransfer.setData("test", id)
+        ev.dataTransfer.setData('id', id)
     }
 
     const draggingOver = (ev) => {
         ev.preventDefault()
-        console.log('dragging over')
     }
 
     const dragDropped = (ev) => {
         ev.preventDefault()
-        let transferTestId = ev.dataTransfer.getData("test")
-        console.log(transferTestId)
-        setAllTasks([...allTasks, transferTestId])
+        let transferTestId = ev.dataTransfer.getData('id')
+        const columnName = capitalise(ev.target.outerText.split('(')[0])
+        api.task.changeColumnAndStatus(transferTestId, columnName)
+        const updatedBoards = api.board.getAll()
+        const indexOfBoard = updatedBoards.findIndex(board => board.id === currentBoard.id)
+        setCurrentBoard(updatedBoards[indexOfBoard])
     }
+
+    const capitalise = input => `${input[0].toUpperCase()}${input.slice(1).toLowerCase()}`
 
     const listColumns = currentBoard.columns.map((column, index) => {
         return (

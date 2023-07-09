@@ -35,6 +35,27 @@ const create = (currentBoard, currentTask, titleSubtasks) => {
             })
         })
     }
+
+    localStorage.setItem('data', JSON.stringify(boards))
+}
+
+const createSubtasksInNewTask = (currentBoard, titleSubtasks) => {
+    const boards = getAllBoards()
+    const indexCurrentBoard = boards.findIndex(board => board.id === currentBoard.id)
+
+    for (const eachTitleSubtask of titleSubtasks) {
+        boards[indexCurrentBoard].columns.forEach(column => {
+            column.tasks.forEach(task => {
+                const indexCurrentTask = column.tasks.indexOf(task)
+                column.tasks[indexCurrentTask].subtasks.push({
+                    id: v4(),
+                    isCompleted: false,
+                    title: eachTitleSubtask.title
+                })
+            })
+        })
+    }
+
     localStorage.setItem('data', JSON.stringify(boards))
 }
 
@@ -103,17 +124,7 @@ const updateStatus = (id, checkedState) => {
             column.tasks.forEach(task => {
                 task.subtasks.forEach(subtask => {
                     if (subtask.id === subtaskToUpdate.id) {
-                        if (checkedState === true) {
-                            console.log('il checkedState è true')
-                            subtask.isCompleted = false
-                            console.log(subtask.isCompleted, 'subtask.isCompleted')
-                            return
-                        } else if (checkedState === false) {
-                            console.log('il checkedState è false')
-                            subtask.isCompleted = true
-                            console.log(subtask.isCompleted, 'subtask.isCompleted')
-                            return
-                        }
+                        subtask.isCompleted = checkedState
                     }
                 })
             })
@@ -140,16 +151,23 @@ const deleteById = (id) => {
     boards.forEach(board => {
         board.columns.forEach(column => {
             column.tasks.forEach(task => {
-                task.subtasks = task.subtasks.filter(subtask => subtask.id !== subtaskToDelete.id)
+                task.subtasks.forEach(subtask => {
+                    if (subtask.id === subtaskToDelete.id) {
+                        const indexSubtask = task.subtasks.indexOf(subtask)
+                        task.subtasks.splice(indexSubtask, 1)
+                    }
+                })
             })
         })
     })
 
     localStorage.setItem('data', JSON.stringify(boards))
+
 }
 
 const apiSubtask = {
     create,
+    createSubtasksInNewTask,
     getById,
     updateById,
     updateStatus,

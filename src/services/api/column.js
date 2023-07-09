@@ -11,6 +11,11 @@ const getAllBoards = () => {
     return parsedData
 }
 
+/**
+ * 
+ * @param {*} currentBoard string
+ * @param {*} namesColumn array
+ */
 const create = (currentBoard, namesColumn) => {
     const boards = getAllBoards()
     const indexOfBoard = boards.findIndex(board => board.id === currentBoard.id)
@@ -52,6 +57,11 @@ const getById = (id) => {
     }
 }
 
+/**
+ * 
+ * @param {*} name string
+ * @returns 
+ */
 const getByName = (name) => {
     const boards = getAllBoards()
     for (const board of boards) {

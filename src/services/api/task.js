@@ -27,23 +27,23 @@ const getAll = (currentBoard) => {
  * @param {*} statusTask : column selected, for now it's just column [0]
  * @returns 
  */
-const create = (currentBoard, titleTask, descriptionTask, subtaskTask, statusTask) => {
+const create = (currentBoard, titleTask, descriptionTask, subtasks, statusTask) => {
     const boards = getAllBoards()
     const indexOfBoard = boards.findIndex(board => board.id === currentBoard.id)
-
-    boards[indexOfBoard].columns[0].tasks.push({
+    
+    const newTask = {
         id: v4(),
         title: titleTask, 
         description: descriptionTask,
-        subtasks: [{
-            id: v4(),
-            isCompleted: false,
-            title: subtaskTask
-        }],
+        subtasks,
         status: statusTask
-    })
+        }
+
+    boards[indexOfBoard].columns[0].tasks.push(newTask)
     
     localStorage.setItem('data', JSON.stringify(boards))
+
+    return newTask
 }
 
 /**

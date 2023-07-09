@@ -37,7 +37,6 @@ const Header = ({
     const [newTitleTask, setNewTitleTask] = useState('')
     const [newDescriptionTask, setNewDescriptionTask] = useState('')
     const [newNameBoard, setNewNameBoard] = useState('')
-    const [newSubtaskTitle] = useState('')
 
     useEffect(() => {
         setAllBoards(api.board.getAll())
@@ -94,7 +93,9 @@ const Header = ({
         if (!newTitleTask) {
             setModalNewTask(true)
         } else {
-            api.task.create(currentBoard, newTitleTask, newDescriptionTask, newSubtaskTitle, "Todo")
+            const statusTask = currentBoard.columns[0]
+            const currentTask = api.task.create(currentBoard, newTitleTask, newDescriptionTask, [], statusTask)
+            api.subtask.create(currentBoard, currentTask,  subtaskList)
             setModalNewTask(false)
             const updatedBoards = api.board.getAll()
             const indexOfBoard = updatedBoards.findIndex(board => board.id === currentBoard.id)
