@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "./static/css/main.e859cdb9.css",
+    "main.js": "./static/js/main.bf266c86.js",
+    "static/media/kanban.svg": "./static/media/kanban.d2415325864224d2ab54534368fbfa6a.svg",
+    "index.html": "./index.html",
+    "static/media/logo-mobile.svg": "./static/media/logo-mobile.e60c2fbc3dcefa4256e0569ffba5e523.svg",
+    "main.e859cdb9.css.map": "./static/css/main.e859cdb9.css.map",
+    "main.bf266c86.js.map": "./static/js/main.bf266c86.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e859cdb9.css",
+    "static/js/main.bf266c86.js"
+  ]
+}
