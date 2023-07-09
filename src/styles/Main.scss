@@ -4,6 +4,8 @@
     gap: 1.5rem;
     min-height: 34rem;
     height: 100%;
+    width: auto;
+    overflow-y: hidden;
 
     @include tablet {
         min-height: 35rem;

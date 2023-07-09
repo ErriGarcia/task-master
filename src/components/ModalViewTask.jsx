@@ -8,13 +8,11 @@ const ModalViewTask = ({
     setModal, 
     currentBoard, 
     currentTask,
-    setCurrentTask,
     handleGetCurrentSubtask, 
     setCurrentBoard,
     subtaskList,
     setSubtaskList,
-    currentSubtask,
-    setCurrentSubtask
+    currentSubtask
 }) => {
 
     const [modalMoreOptions, setModalMoreOptions] = useState(false)
@@ -140,7 +138,6 @@ const ModalViewTask = ({
                     type='checkbox' 
                     id={subtask.id} 
                     name={subtask.title}
-                    // onChange={handleClickSubtask}
                     onClick={handleClickSubtask}
                 >
                 </input>
@@ -164,8 +161,8 @@ const ModalViewTask = ({
                     className='input subtask' 
                     placeholder='e.g. Make Coffee' 
                     value={inputSubtasksNames[subtask.id]}
-                    onChange={ev => {handleInputSubtaskName(ev); handleGetCurrentSubtask(ev)}}
-                    onClick={ev => handleGetCurrentSubtask(ev)}
+                    onChange={handleInputSubtaskName}
+                    onClick={handleGetCurrentSubtask}
                     required
                 />
                 <button title='Delete Subtask' className='button-delete' onClick={handleDeleteSubtask}>

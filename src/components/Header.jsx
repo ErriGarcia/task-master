@@ -11,8 +11,7 @@ const Header = ({
     allBoards,
     setAllBoards, 
     currentBoard, 
-    handleClickBoard, 
-    handleGetCurrentColumn, 
+    handleClickBoard,
     updateBoard, 
     titleBoard, 
     setTitleBoard, 
@@ -173,8 +172,7 @@ const Header = ({
                     className='input subtask' 
                     placeholder={column.name} 
                     value={columnNames[column.id]} 
-                    onChange={ev => {handleInputColumnName(ev); handleGetCurrentColumn(ev)}}
-                    onClick={ev => handleGetCurrentColumn(ev)}
+                    onChange={handleInputColumnName}
                     required
                 />
                 <button title='Delete Column' className='button-delete' onClick={handleDeleteColumn} id={column.id}>
